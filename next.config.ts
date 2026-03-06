@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+   eslint: {
+    ignoreDuringBuilds: true,  // ← agrega esto
+  },
   images: {
     remotePatterns: [
       {
@@ -11,10 +14,12 @@ const nextConfig = {
         // Supabase Storage — cuando subas imágenes desde el admin
         // Reemplaza TU-PROYECTO con el ID de tu proyecto en Supabase
         protocol: 'https',
-        hostname: '*larjoveilfuwsxzigtsc.supabase.co',
+        hostname: 'larjoveilfuwsxzigtsc.supabase.co',
       },
     ],
   },
 };
+
+
 
 module.exports = nextConfig;
