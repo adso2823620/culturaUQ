@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { Card, CardContent } from '@/components/ui/card';
 import PageLayout from '@/components/PageLayout';
