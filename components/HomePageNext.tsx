@@ -193,7 +193,7 @@ export default function HomePageNext() {
           </div>
           <nav className="hidden md:flex space-x-8">
             <Link 
-              href="/labter-cultural"
+              href="/labter"
               className="text-white/70 hover:text-[#F47920] transition-all duration-300"
             >
               LABTER CULTURAL
