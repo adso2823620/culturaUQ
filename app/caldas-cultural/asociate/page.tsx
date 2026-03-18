@@ -16,9 +16,9 @@ const TABS = [
     sublabel: 'Organización nueva',
     descripcion: 'Registra tu organización en el directorio cultural de Caldas.',
     icon: UserPlus,
-    accent: '#F47920',
-    accentBg: 'bg-[#F47920]',
-    accentText: 'text-[#F47920]',
+    accent: '#e63947',
+    accentBg: 'bg-[#e63947]',
+    accentText: 'text-[#e63947]',
   },
   {
     id: 'actualiza' as Tab,
@@ -26,9 +26,9 @@ const TABS = [
     sublabel: 'Ya estás registrado',
     descripcion: 'Edita tus datos, foto y redes. Solo necesitas tu correo registrado.',
     icon: RefreshCw,
-    accent: '#3B82F6',
-    accentBg: 'bg-[#3B82F6]',
-    accentText: 'text-[#3B82F6]',
+    accent: '#0f4c75',
+    accentBg: 'bg-[#0f4c75]',
+    accentText: 'text-[#0f4c75]',
   },
   {
     id: 'eventos' as Tab,
@@ -50,22 +50,22 @@ export default function AsociatePage() {
     <PageLayout letter="A" letterPosition="top-right">
 
       {/* ── HERO ────────────────────────────────────────────────────── */}
-      <div className="relative bg-[#1E2B5C] overflow-hidden">
+      <div className="relative bg-[#2a9d8f] overflow-hidden">
 
         {/* Patrón puntitos */}
         <div className="absolute inset-0 opacity-[0.04]"
           style={{ backgroundImage: `radial-gradient(circle, #ffffff 1px, transparent 1px)`, backgroundSize: '28px 28px' }}
         />
         {/* Orbes */}
-        <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-[#F47920]/10 blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-16 -left-16 w-72 h-72 rounded-full bg-[#3B82F6]/10 blur-3xl pointer-events-none" />
+        <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-[#e63947]/10 blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-16 -left-16 w-72 h-72 rounded-full bg-[#0f4c75]/10 blur-3xl pointer-events-none" />
 
         <div className="relative max-w-5xl mx-auto px-6 pt-16 pb-12">
 
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#F47920]/15 border border-[#F47920]/25 rounded-full mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#F47920] animate-pulse" />
-            <span className="text-[#F47920] text-xs tracking-widest font-semibold uppercase">Caldas Cultural</span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#e63947]/15 border border-[#e63947]/25 rounded-full mb-6">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#e63947] animate-pulse" />
+            <span className="text-[#e63947] text-xs tracking-widest font-semibold uppercase">Caldas Cultural</span>
           </div>
 
           <h1 className="text-5xl sm:text-6xl font-bold text-white mb-4 leading-tight">Asóciate</h1>

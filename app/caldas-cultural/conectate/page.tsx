@@ -20,20 +20,20 @@ type CatConfig = {
 };
 
 const CATEGORIAS_CONFIG: Record<string, CatConfig> = {
-  'Cultura':        { gradiente: 'from-[#1E2B5C] to-[#2d3f8a]',  badge: 'bg-blue-100 text-blue-800',    acento: '#3B82F6', patron: 'circulos'   },
-  'Arte':           { gradiente: 'from-[#F47920] to-[#b85c18]',   badge: 'bg-orange-100 text-orange-800', acento: '#fbbf24', patron: 'ondas'      },
-  'Patrimonio':     { gradiente: 'from-[#065F46] to-[#1E2B5C]',   badge: 'bg-emerald-100 text-emerald-800',acento: '#34d399', patron: 'hexagonos'  },
-  'Música y Danza': { gradiente: 'from-[#6D28D9] to-[#1E2B5C]',   badge: 'bg-purple-100 text-purple-800', acento: '#a78bfa', patron: 'ondas'      },
-  'Convocatorias':  { gradiente: 'from-[#BE185D] to-[#1E2B5C]',   badge: 'bg-pink-100 text-pink-800',     acento: '#f9a8d4', patron: 'puntos'     },
-  'Escénicas':      { gradiente: 'from-[#B45309] to-[#1E2B5C]',   badge: 'bg-amber-100 text-amber-800',   acento: '#fcd34d', patron: 'lineas'     },
-  'Artesanías':     { gradiente: 'from-[#0F766E] to-[#1E2B5C]',   badge: 'bg-teal-100 text-teal-800',     acento: '#5eead4', patron: 'rombos'     },
+  'Cultura':        { gradiente: 'from-[#2a9d8f] to-[#2d3f8a]',  badge: 'bg-blue-100 text-blue-800',    acento: '#0f4c75', patron: 'circulos'   },
+  'Arte':           { gradiente: 'from-[#e63947] to-[#b85c18]',   badge: 'bg-orange-100 text-orange-800', acento: '#fbbf24', patron: 'ondas'      },
+  'Patrimonio':     { gradiente: 'from-[#065F46] to-[#2a9d8f]',   badge: 'bg-emerald-100 text-emerald-800',acento: '#34d399', patron: 'hexagonos'  },
+  'Música y Danza': { gradiente: 'from-[#6D28D9] to-[#2a9d8f]',   badge: 'bg-purple-100 text-purple-800', acento: '#a78bfa', patron: 'ondas'      },
+  'Convocatorias':  { gradiente: 'from-[#BE185D] to-[#2a9d8f]',   badge: 'bg-pink-100 text-pink-800',     acento: '#f9a8d4', patron: 'puntos'     },
+  'Escénicas':      { gradiente: 'from-[#B45309] to-[#2a9d8f]',   badge: 'bg-amber-100 text-amber-800',   acento: '#fcd34d', patron: 'lineas'     },
+  'Artesanías':     { gradiente: 'from-[#0F766E] to-[#2a9d8f]',   badge: 'bg-teal-100 text-teal-800',     acento: '#5eead4', patron: 'rombos'     },
   'Festivales':     { gradiente: 'from-[#DC2626] to-[#7C3AED]',   badge: 'bg-red-100 text-red-800',       acento: '#fca5a5', patron: 'cruces'     },
-  'Nacional':       { gradiente: 'from-[#374151] to-[#1E2B5C]',   badge: 'bg-gray-100 text-gray-700',     acento: '#9CA3AF', patron: 'triangulos' },
+  'Nacional':       { gradiente: 'from-[#374151] to-[#2a9d8f]',   badge: 'bg-gray-100 text-gray-700',     acento: '#9CA3AF', patron: 'triangulos' },
   'evento':         { gradiente: 'from-[#065F46] to-[#1E3a2a]',   badge: 'bg-emerald-100 text-emerald-800',acento: '#34d399', patron: 'circulos'   },
 };
 
 const DEFAULT_CONFIG: CatConfig = {
-  gradiente: 'from-[#1E2B5C] to-[#374151]',
+  gradiente: 'from-[#2a9d8f] to-[#374151]',
   badge: 'bg-gray-100 text-gray-700',
   acento: '#6B7280',
   patron: 'puntos',
@@ -215,8 +215,8 @@ function NoticiaCard({ noticia, size = 'normal' }: { noticia: NoticiaItem; size?
         </span>
 
         {/* Título */}
-        <h3 className={`font-semibold text-[#1E2B5C] leading-snug line-clamp-2
-          group-hover:text-[#F47920] transition-colors duration-200
+        <h3 className={`font-semibold text-[#2a9d8f] leading-snug line-clamp-2
+          group-hover:text-[#e63947] transition-colors duration-200
           ${esGrande ? 'text-lg' : 'text-sm'}`}>
           {noticia.titulo}
         </h3>
@@ -288,7 +288,7 @@ function EventoCard({ evento, onOpen }: { evento: EventoDetalle; onOpen: () => v
           {evento.area_artistica ?? 'Evento cultural'}
         </span>
 
-        <h3 className="text-sm font-semibold text-[#1E2B5C] line-clamp-2 leading-snug
+        <h3 className="text-sm font-semibold text-[#2a9d8f] line-clamp-2 leading-snug
           group-hover:text-emerald-700 transition-colors duration-200">
           {evento.titulo}
         </h3>
@@ -429,12 +429,12 @@ export default function ConectatePage() {
 
         {/* ── Header ── */}
         <div className="mb-10">
-          <div className="inline-block px-6 py-2 bg-[#3B82F6]/10 rounded-full mb-5">
-            <span className="text-[#3B82F6] text-sm tracking-widest">CALDAS CULTURAL</span>
+          <div className="inline-block px-6 py-2 bg-[#0f4c75]/10 rounded-full mb-5">
+            <span className="text-[#0f4c75] text-sm tracking-widest">CALDAS CULTURAL</span>
           </div>
           <div className="flex items-end justify-between flex-wrap gap-4">
             <div>
-              <h1 className="text-5xl mb-3 text-[#1E2B5C]">Conéctate</h1>
+              <h1 className="text-5xl mb-3 text-[#2a9d8f]">Conéctate</h1>
               <p className="text-lg text-[#6B7280] max-w-2xl leading-relaxed">
                 Lo que está pasando en el sector cultural de Caldas y Colombia, actualizado cada hora.
               </p>
@@ -470,7 +470,7 @@ export default function ConectatePage() {
                 className={`flex-shrink-0 px-4 py-2 rounded-full text-sm transition-all duration-200 ${
                   isActive
                     ? 'text-white shadow-md'
-                    : 'border border-gray-200 text-[#6B7280] hover:border-[#1E2B5C]/40 hover:text-[#1E2B5C] bg-white'
+                    : 'border border-gray-200 text-[#6B7280] hover:border-[#2a9d8f]/40 hover:text-[#2a9d8f] bg-white'
                 }`}
                 style={isActive && cfg ? { background: `linear-gradient(135deg, var(--tw-gradient-from), var(--tw-gradient-to))` } : undefined}
               >
@@ -509,22 +509,22 @@ export default function ConectatePage() {
             <div className="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-5">
               <Rss className="w-9 h-9 text-red-400" />
             </div>
-            <h3 className="text-xl text-[#1E2B5C] mb-2">No se pudo cargar el contenido</h3>
+            <h3 className="text-xl text-[#2a9d8f] mb-2">No se pudo cargar el contenido</h3>
             <p className="text-[#6B7280] text-sm mb-5">Hubo un problema al obtener las noticias.</p>
             <button onClick={cargar}
-              className="px-5 py-2 bg-[#1E2B5C] text-white rounded-full text-sm hover:bg-[#1E2B5C]/90 transition-colors">
+              className="px-5 py-2 bg-[#2a9d8f] text-white rounded-full text-sm hover:bg-[#2a9d8f]/90 transition-colors">
               Reintentar
             </button>
           </div>
 
         ) : grilla.length === 0 ? (
           <div className="text-center py-24">
-            <div className="w-20 h-20 bg-[#3B82F6]/10 rounded-full flex items-center justify-center mx-auto mb-5">
-              <Rss className="w-9 h-9 text-[#3B82F6]" />
+            <div className="w-20 h-20 bg-[#0f4c75]/10 rounded-full flex items-center justify-center mx-auto mb-5">
+              <Rss className="w-9 h-9 text-[#0f4c75]" />
             </div>
-            <h3 className="text-xl text-[#1E2B5C] mb-2">Sin resultados en esta categoría</h3>
+            <h3 className="text-xl text-[#2a9d8f] mb-2">Sin resultados en esta categoría</h3>
             <button onClick={() => setFiltro('Todas')}
-              className="mt-3 px-5 py-2 bg-[#3B82F6] text-white rounded-full text-sm hover:bg-[#3B82F6]/90 transition-colors">
+              className="mt-3 px-5 py-2 bg-[#0f4c75] text-white rounded-full text-sm hover:bg-[#0f4c75]/90 transition-colors">
               Ver todo
             </button>
           </div>

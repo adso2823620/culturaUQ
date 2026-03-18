@@ -19,15 +19,15 @@ type TipoConfig = {
 type PatronTipo = 'circulos' | 'lineas' | 'hexagonos' | 'ondas' | 'puntos' | 'cruces' | 'triangulos' | 'rombos';
 
 const TIPOS_CONFIG: Record<TipoConvocatoria | 'default', TipoConfig> = {
-  'Beca':          { gradiente: 'from-[#1E2B5C] to-[#2d3f8a]', badge: 'bg-blue-100 text-blue-800',     acento: '#3B82F6', patron: 'hexagonos',  icono: '🎓' },
-  'Estímulo':      { gradiente: 'from-[#F47920] to-[#b85c18]', badge: 'bg-orange-100 text-orange-800', acento: '#fbbf24', patron: 'ondas',      icono: '⭐' },
-  'Formación':     { gradiente: 'from-[#065F46] to-[#1E2B5C]', badge: 'bg-emerald-100 text-emerald-800',acento: '#34d399', patron: 'puntos',     icono: '📚' },
-  'Licitación':    { gradiente: 'from-[#374151] to-[#1E2B5C]', badge: 'bg-gray-100 text-gray-700',     acento: '#9CA3AF', patron: 'lineas',     icono: '📋' },
-  'Residencia':    { gradiente: 'from-[#6D28D9] to-[#1E2B5C]', badge: 'bg-purple-100 text-purple-800', acento: '#a78bfa', patron: 'circulos',   icono: '🏡' },
+  'Beca':          { gradiente: 'from-[#2a9d8f] to-[#2d3f8a]', badge: 'bg-blue-100 text-blue-800',     acento: '#0f4c75', patron: 'hexagonos',  icono: '🎓' },
+  'Estímulo':      { gradiente: 'from-[#e63947] to-[#b85c18]', badge: 'bg-orange-100 text-orange-800', acento: '#fbbf24', patron: 'ondas',      icono: '⭐' },
+  'Formación':     { gradiente: 'from-[#065F46] to-[#2a9d8f]', badge: 'bg-emerald-100 text-emerald-800',acento: '#34d399', patron: 'puntos',     icono: '📚' },
+  'Licitación':    { gradiente: 'from-[#374151] to-[#2a9d8f]', badge: 'bg-gray-100 text-gray-700',     acento: '#9CA3AF', patron: 'lineas',     icono: '📋' },
+  'Residencia':    { gradiente: 'from-[#6D28D9] to-[#2a9d8f]', badge: 'bg-purple-100 text-purple-800', acento: '#a78bfa', patron: 'circulos',   icono: '🏡' },
   'Premio':        { gradiente: 'from-[#B45309] to-[#92400E]', badge: 'bg-amber-100 text-amber-800',   acento: '#fcd34d', patron: 'rombos',     icono: '🏆' },
-  'Concertación':  { gradiente: 'from-[#BE185D] to-[#1E2B5C]', badge: 'bg-pink-100 text-pink-800',     acento: '#f9a8d4', patron: 'triangulos', icono: '🤝' },
-  'Convocatoria':  { gradiente: 'from-[#0F766E] to-[#1E2B5C]', badge: 'bg-teal-100 text-teal-800',     acento: '#5eead4', patron: 'cruces',     icono: '📢' },
-  'default':       { gradiente: 'from-[#1E2B5C] to-[#374151]', badge: 'bg-gray-100 text-gray-700',     acento: '#6B7280', patron: 'puntos',     icono: '📌' },
+  'Concertación':  { gradiente: 'from-[#BE185D] to-[#2a9d8f]', badge: 'bg-pink-100 text-pink-800',     acento: '#f9a8d4', patron: 'triangulos', icono: '🤝' },
+  'Convocatoria':  { gradiente: 'from-[#0F766E] to-[#2a9d8f]', badge: 'bg-teal-100 text-teal-800',     acento: '#5eead4', patron: 'cruces',     icono: '📢' },
+  'default':       { gradiente: 'from-[#2a9d8f] to-[#374151]', badge: 'bg-gray-100 text-gray-700',     acento: '#6B7280', patron: 'puntos',     icono: '📌' },
 };
 
 function getCfg(tipo: TipoConvocatoria): TipoConfig {
@@ -38,9 +38,9 @@ function getCfg(tipo: TipoConvocatoria): TipoConfig {
 // BADGES DE ÁMBITO
 // ─────────────────────────────────────────────────────────────────────────────
 const AMBITO_STYLE: Record<string, string> = {
-  'Local':          'bg-[#F47920]/10 text-[#F47920]',
-  'Departamental':  'bg-[#1E2B5C]/10 text-[#1E2B5C]',
-  'Nacional':       'bg-[#3B82F6]/10 text-[#3B82F6]',
+  'Local':          'bg-[#e63947]/10 text-[#e63947]',
+  'Departamental':  'bg-[#2a9d8f]/10 text-[#2a9d8f]',
+  'Nacional':       'bg-[#0f4c75]/10 text-[#0f4c75]',
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -193,8 +193,8 @@ function ConvocatoriaCard({ item, grande = false }: { item: ConvocatoriaItem; gr
         </div>
 
         {/* Título */}
-        <h3 className={`font-semibold text-[#1E2B5C] leading-snug line-clamp-2
-          group-hover:text-[#F47920] transition-colors duration-200
+        <h3 className={`font-semibold text-[#2a9d8f] leading-snug line-clamp-2
+          group-hover:text-[#e63947] transition-colors duration-200
           ${grande ? 'text-lg' : 'text-sm'}`}>
           {item.titulo}
         </h3>
@@ -309,35 +309,31 @@ export default function ConvocatoriasPage() {
 
   // ─────────────────────────────────────────────────────────────────────────────
   return (
-    <PageLayout letter="P" letterPosition="top-right">
-      <div className="max-w-7xl mx-auto px-6 py-12">
+    <PageLayout letter="P" letterPosition="top-right" bgImage="imgfondo.png">
+      <div className="max-w-7xl mx-auto px-6 py-16">
 
-        {/* ── Header ── */}
-        <div className="mb-10">
-          <div className="inline-block px-6 py-2 bg-[#F47920]/10 rounded-full mb-5">
-            <span className="text-[#F47920] text-sm tracking-widest">PORTAL DE CONVOCATORIAS</span>
-          </div>
-          <div className="flex items-end justify-between flex-wrap gap-4">
-            <div>
-              <h1 className="text-5xl mb-3 text-[#1E2B5C]">Participa y Postula</h1>
-              <p className="text-lg text-[#6B7280] max-w-2xl leading-relaxed">
-                Convocatorias culturales de Manizales, Caldas y Colombia. Becas, estímulos,
-                formación, licitaciones artísticas y más — actualizadas cada 2 horas.
-              </p>
-            </div>
-            {/* Indicador live */}
-            <div className="flex items-center gap-2 text-xs text-[#9CA3AF]">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#F47920] opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#F47920]" />
-              </span>
-              {horaActualizado ? `Actualizado ${horaActualizado}` : 'En vivo'}
-              <button onClick={cargar} disabled={loading}
-                className="ml-1 p-1.5 rounded-lg hover:bg-gray-100 transition-colors disabled:opacity-40"
-                title="Actualizar">
-                <RefreshCw className={`w-3.5 h-3.5 text-[#6B7280] ${loading ? 'animate-spin' : ''}`} />
-              </button>
-            </div>
+        {/* ── Hero — patrón Labter ── */}
+        <div className="mb-12 text-center">
+          <span className="inline-block bg-[#e63947]/10 text-[#e63947] text-xs tracking-widest px-4 py-1.5 rounded-full mb-4">
+            PORTAL DE CONVOCATORIAS
+          </span>
+          <h1 className="text-5xl font-bold text-[#2a9d8f] mb-5">Participa y Postula</h1>
+          <p className="text-[#6B7280] text-lg max-w-2xl mx-auto leading-relaxed">
+            Convocatorias culturales de Manizales, Caldas y Colombia. Becas, estímulos,
+            formación, licitaciones artísticas y más — actualizadas cada 2 horas.
+          </p>
+          {/* Indicador live — centrado debajo de la descripción */}
+          <div className="flex items-center justify-center gap-2 text-xs text-[#9CA3AF] mt-4">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#e63947] opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#e63947]" />
+            </span>
+            {horaActualizado ? `Actualizado ${horaActualizado}` : 'En vivo'}
+            <button onClick={cargar} disabled={loading}
+              className="ml-1 p-1.5 rounded-lg hover:bg-gray-100 transition-colors disabled:opacity-40"
+              title="Actualizar">
+              <RefreshCw className={`w-3.5 h-3.5 text-[#6B7280] ${loading ? 'animate-spin' : ''}`} />
+            </button>
           </div>
         </div>
 
@@ -349,8 +345,8 @@ export default function ConvocatoriasPage() {
             placeholder="Buscar por nombre, entidad o palabra clave..."
             value={busqueda}
             onChange={e => setBusqueda(e.target.value)}
-            className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 text-sm text-[#1E2B5C]
-              placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#F47920] bg-white
+            className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 text-sm text-[#2a9d8f]
+              placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#e63947] bg-white
               transition-colors duration-200"
           />
         </div>
@@ -369,13 +365,13 @@ export default function ConvocatoriasPage() {
                   transition-all duration-200 ${
                   activo
                     ? 'text-white shadow-md'
-                    : 'border border-gray-200 text-[#6B7280] hover:border-[#F47920]/40 hover:text-[#1E2B5C] bg-white'
+                    : 'border border-gray-200 text-[#6B7280] hover:border-[#e63947]/40 hover:text-[#2a9d8f] bg-white'
                 }`}
                 style={activo && cfg ? {
                   background: `linear-gradient(135deg, ${cfg.acento}33, ${cfg.acento}66)`,
                   borderColor: cfg.acento,
-                  color: activo ? '#1E2B5C' : undefined,
-                } : activo ? { background: '#1E2B5C' } : undefined}
+                  color: activo ? '#2a9d8f' : undefined,
+                } : activo ? { background: '#2a9d8f' } : undefined}
               >
                 <span>{f.icono}</span>
                 <span>{f.label}</span>
@@ -398,8 +394,8 @@ export default function ConvocatoriasPage() {
               onClick={() => setAmbitoFiltro(a)}
               className={`px-3 py-1.5 rounded-full text-xs transition-all duration-200 ${
                 ambitoFiltro === a
-                  ? 'bg-[#1E2B5C] text-white'
-                  : 'border border-gray-200 text-[#6B7280] hover:border-[#1E2B5C]/30 bg-white'
+                  ? 'bg-[#2a9d8f] text-white'
+                  : 'border border-gray-200 text-[#6B7280] hover:border-[#2a9d8f]/30 bg-white'
               }`}
             >
               {a}
@@ -428,25 +424,25 @@ export default function ConvocatoriasPage() {
             <div className="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-5">
               <AlertCircle className="w-9 h-9 text-red-400" />
             </div>
-            <h3 className="text-xl text-[#1E2B5C] mb-2">No se pudo cargar las convocatorias</h3>
+            <h3 className="text-xl text-[#2a9d8f] mb-2">No se pudo cargar las convocatorias</h3>
             <p className="text-[#6B7280] text-sm mb-5">Hubo un problema al obtener la información.</p>
             <button onClick={cargar}
-              className="px-5 py-2 bg-[#1E2B5C] text-white rounded-full text-sm hover:bg-[#1E2B5C]/90 transition-colors">
+              className="px-5 py-2 bg-[#2a9d8f] text-white rounded-full text-sm hover:bg-[#2a9d8f]/90 transition-colors">
               Reintentar
             </button>
           </div>
 
         ) : filtrados.length === 0 ? (
           <div className="text-center py-24">
-            <div className="w-20 h-20 bg-[#F47920]/10 rounded-full flex items-center justify-center mx-auto mb-5">
-              <Search className="w-9 h-9 text-[#F47920]" />
+            <div className="w-20 h-20 bg-[#e63947]/10 rounded-full flex items-center justify-center mx-auto mb-5">
+              <Search className="w-9 h-9 text-[#e63947]" />
             </div>
-            <h3 className="text-xl text-[#1E2B5C] mb-2">Sin resultados</h3>
+            <h3 className="text-xl text-[#2a9d8f] mb-2">Sin resultados</h3>
             <p className="text-[#6B7280] text-sm mb-5">
               {busqueda ? `No encontramos convocatorias para "${busqueda}"` : 'Intenta con otros filtros.'}
             </p>
             <button onClick={() => { setTipoFiltro('Todas'); setAmbitoFiltro('Todos'); setBusqueda(''); }}
-              className="px-5 py-2 bg-[#F47920] text-white rounded-full text-sm hover:bg-[#F47920]/90 transition-colors">
+              className="px-5 py-2 bg-[#e63947] text-white rounded-full text-sm hover:bg-[#e63947]/90 transition-colors">
               Limpiar filtros
             </button>
           </div>
@@ -462,28 +458,6 @@ export default function ConvocatoriasPage() {
           </div>
         )}
 
-        {/* ── Banner CTA — publicar convocatoria ── */}
-        {!loading && !error && (
-          <div className="mt-14 rounded-2xl bg-gradient-to-r from-[#1E2B5C] to-[#2d3f8a] p-8 md:p-12 relative overflow-hidden">
-            <div className="absolute inset-0 opacity-5">
-              <PatronSVG tipo="hexagonos" color="#ffffff" />
-            </div>
-            <div className="relative text-center text-white">
-              <p className="text-3xl mb-3">📢 ¿Tienes una convocatoria para difundir?</p>
-              <p className="text-white/70 mb-6 max-w-xl mx-auto leading-relaxed">
-                Si eres una entidad, institución o colectivo cultural y quieres que tu convocatoria
-                llegue a toda la comunidad cultural de Caldas, contáctanos.
-              </p>
-              <a
-                href="/contacto"
-                className="inline-block px-7 py-3 border border-white/40 text-white rounded-full text-sm
-                  hover:bg-white hover:text-[#1E2B5C] transition-all duration-200"
-              >
-                Publicar convocatoria gratuitamente
-              </a>
-            </div>
-          </div>
-        )}
 
         {/* ── Footer RSS ── */}
         {!loading && !error && items.length > 0 && (

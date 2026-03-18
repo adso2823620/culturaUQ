@@ -4,9 +4,35 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from './ui/button';
+import { supabase } from '@/lib/supabase';
 
 export default function HomePageNext() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [stats, setStats] = useState({ organizaciones: 0, municipios: 0, eventos: 0, sectores: 0 });
+
+  // Fetch stats reales desde Supabase
+  useEffect(() => {
+    async function fetchStats() {
+      const [resOrgs, resEventos] = await Promise.allSettled([
+        supabase.from('organizaciones_culturales').select('municipio, sector_cultural').eq('activa', true),
+        supabase.from('eventos_culturales').select('id', { count: 'exact', head: true }).eq('estado', 'aprobado').eq('activo', true),
+      ]);
+
+      if (resOrgs.status === 'fulfilled' && !resOrgs.value.error) {
+        const data = resOrgs.value.data ?? [];
+        setStats(prev => ({
+          ...prev,
+          organizaciones: data.length,
+          municipios: new Set(data.map(d => d.municipio).filter(Boolean)).size,
+          sectores: new Set(data.map(d => d.sector_cultural).filter(Boolean)).size,
+        }));
+      }
+      if (resEventos.status === 'fulfilled' && !resEventos.value.error) {
+        setStats(prev => ({ ...prev, eventos: resEventos.value.count ?? 0 }));
+      }
+    }
+    fetchStats();
+  }, []);
 
   const slides = [
     {
@@ -18,7 +44,7 @@ export default function HomePageNext() {
       image: '/catedral.jpg',
       category: "Formación",
       color: "from-orange-600/20 to-orange-400/20",
-      route: "/labter-cultural"
+      route: "/labter"
     },
     {
       id: 2,
@@ -103,17 +129,17 @@ export default function HomePageNext() {
   return (
     <div className="relative min-h-screen overflow-hidden">
       {/* Orange & Navy Cultural Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#1E2B5C] via-[#1E3A8A] to-[#1E2B5C]">
+      <div className="absolute inset-0 bg-gradient-to-br from-[#2a9d8f] via-[#1E3A8A] to-[#2a9d8f]">
         {/* Cultural Lighting Effects */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-radial from-[#F47920]/30 via-[#FB923C]/15 to-transparent rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute top-20 right-1/4 w-80 h-80 bg-gradient-radial from-[#3B82F6]/25 via-[#3B82F6]/12 to-transparent rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute bottom-20 left-1/3 w-72 h-72 bg-gradient-radial from-[#F47920]/25 via-[#FB923C]/12 to-transparent rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute top-1/2 right-1/6 w-64 h-64 bg-gradient-radial from-[#3B82F6]/20 via-[#DBEAFE]/10 to-transparent rounded-full blur-3xl animate-pulse" style={{ animationDelay: '3s' }}></div>
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-radial from-[#e63947]/30 via-[#FB923C]/15 to-transparent rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute top-20 right-1/4 w-80 h-80 bg-gradient-radial from-[#0f4c75]/25 via-[#0f4c75]/12 to-transparent rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute bottom-20 left-1/3 w-72 h-72 bg-gradient-radial from-[#e63947]/25 via-[#FB923C]/12 to-transparent rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/2 right-1/6 w-64 h-64 bg-gradient-radial from-[#0f4c75]/20 via-[#DBEAFE]/10 to-transparent rounded-full blur-3xl animate-pulse" style={{ animationDelay: '3s' }}></div>
         
         {/* Cultural Venue Elements */}
         <div className="absolute inset-0 opacity-15">
-          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#F47920]/10 to-transparent"></div>
-          <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#1E2B5C]/40 to-transparent"></div>
+          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#e63947]/10 to-transparent"></div>
+          <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#2a9d8f]/40 to-transparent"></div>
         </div>
 
         {/* Glitter Effects */}
@@ -189,18 +215,18 @@ export default function HomePageNext() {
       <div className="relative z-50 glass-effect-orange border-b border-orange-300/20">
         <div className="flex items-center justify-between px-8 py-6">
           <div className="text-2xl text-white">
-            <span className="text-[#F47920]">Cultura</span> Caldas
+            <span className="text-[#e63947]">Cultura</span> Caldas
           </div>
           <nav className="hidden md:flex space-x-8">
             <Link 
               href="/labter"
-              className="text-white/70 hover:text-[#F47920] transition-all duration-300"
+              className="text-white/70 hover:text-[#e63947] transition-all duration-300"
             >
               LABTER CULTURAL
             </Link>
             <Link 
               href="/caldas-cultural"
-              className="text-white/90 hover:text-[#F47920] border-b-2 border-[#F47920] pb-1 transition-all duration-300"
+              className="text-white/90 hover:text-[#e63947] border-b-2 border-[#e63947] pb-1 transition-all duration-300"
             >
               CALDAS CULTURAL
             </Link>
@@ -217,13 +243,7 @@ export default function HomePageNext() {
               CONEXION CULTURAL
             </Link>
           </nav>
-          <Link href="/contacts">
-            <Button 
-              className="bg-gradient-to-r from-[#F47920] to-[#FB923C] hover:from-[#F47920]/80 hover:to-[#FB923C]/80 text-white px-8 py-3 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl"
-            >
-              CONTACTO
-            </Button>
-          </Link>
+
         </div>
       </div>
 
@@ -234,24 +254,24 @@ export default function HomePageNext() {
           onClick={prevSlide}
           className="absolute left-12 z-40 group"
         >
-          <div className="glass-effect-orange w-20 h-20 rounded-full flex items-center justify-center text-white hover:bg-orange-500/20 transition-all duration-300 shadow-2xl group-hover:shadow-[#F47920]/20 group-hover:border-[#F47920]/30">
+          <div className="glass-effect-orange w-20 h-20 rounded-full flex items-center justify-center text-white hover:bg-orange-500/20 transition-all duration-300 shadow-2xl group-hover:shadow-[#e63947]/20 group-hover:border-[#e63947]/30">
             <svg className="w-10 h-10 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </div>
-          <div className="absolute inset-0 bg-gradient-to-r from-[#F47920]/20 to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#e63947]/20 to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         </button>
 
         <button
           onClick={nextSlide}
           className="absolute right-12 z-40 group"
         >
-          <div className="glass-effect-orange w-20 h-20 rounded-full flex items-center justify-center text-white hover:bg-orange-500/20 transition-all duration-300 shadow-2xl group-hover:shadow-[#F47920]/20 group-hover:border-[#F47920]/30">
+          <div className="glass-effect-orange w-20 h-20 rounded-full flex items-center justify-center text-white hover:bg-orange-500/20 transition-all duration-300 shadow-2xl group-hover:shadow-[#e63947]/20 group-hover:border-[#e63947]/30">
             <svg className="w-10 h-10 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </div>
-          <div className="absolute inset-0 bg-gradient-to-l from-[#F47920]/20 to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <div className="absolute inset-0 bg-gradient-to-l from-[#e63947]/20 to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         </button>
 
         {/* Carousel Cards */}
@@ -277,9 +297,9 @@ export default function HomePageNext() {
                       sizes="500px"
                     />
                     
-                    {/* Orange-toned Glassmorphism Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#1E2B5C]/80 via-[#1E3A8A]/20 to-transparent" />
-                    <div className={`absolute inset-0 bg-gradient-to-br ${slide.color} opacity-60`} />
+                    {/* Overlay — imagen suave, texto protagonista */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#2a9d8f]/95 via-[#1E3A8A]/60 to-black/30" />
+                    <div className={`absolute inset-0 bg-gradient-to-br ${slide.color} opacity-75`} />
                     
                     {/* Category Tag with Orange Glassmorphism */}
                     <div className="absolute top-8 left-8">
@@ -292,13 +312,13 @@ export default function HomePageNext() {
 
                     {/* Enhanced Content */}
                     <div className="absolute bottom-8 left-8 right-8 text-white">
-                      <h2 className="text-4xl mb-3 leading-tight text-shadow-soft">
+                      <h2 className="text-4xl font-semibold mb-3 leading-tight drop-shadow-lg">
                         {slide.title}
                       </h2>
-                      <h3 className="text-xl text-[#F47920] mb-4 tracking-wide">
+                      <h3 className="text-xl text-[#e63947] mb-4 tracking-wide font-medium drop-shadow-md">
                         {slide.subtitle}
                       </h3>
-                      <p className="text-gray-200 text-lg leading-relaxed max-w-md">
+                      <p className="text-white text-lg leading-relaxed max-w-md drop-shadow-sm">
                         {slide.description}
                       </p>
                       
@@ -312,11 +332,11 @@ export default function HomePageNext() {
 
                     {/* Center Highlight Effect */}
                     {isCenter && (
-                      <div className="absolute inset-0 border-2 border-[#F47920]/50 rounded-3xl animate-pulse-orange"></div>
+                      <div className="absolute inset-0 border-2 border-[#e63947]/50 rounded-3xl animate-pulse-orange"></div>
                     )}
 
                     {/* Hover Interaction */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#F47920]/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#e63947]/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
                       <div className="glass-effect-orange w-24 h-24 rounded-full flex items-center justify-center transform scale-90 group-hover:scale-100 transition-transform duration-300">
                         <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -340,7 +360,7 @@ export default function HomePageNext() {
                   onClick={() => goToSlide(index)}
                   className={`transition-all duration-300 ${
                     index === currentSlide
-                      ? 'w-8 h-3 bg-[#F47920] rounded-full animate-pulse-orange'
+                      ? 'w-8 h-3 bg-[#e63947] rounded-full animate-pulse-orange'
                       : 'w-3 h-3 bg-white/40 hover:bg-white/60 rounded-full'
                   }`}
                 />
@@ -356,20 +376,28 @@ export default function HomePageNext() {
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               <div className="text-white group cursor-pointer">
-                <div className="text-3xl text-[#F47920] mb-2 group-hover:scale-110 transition-transform duration-300 drop-shadow-lg">1.200+</div>
-                <div className="text-white/80 tracking-wide">Eventos Culturales</div>
+                <div className="text-3xl text-[#e63947] mb-2 group-hover:scale-110 transition-transform duration-300 drop-shadow-lg">
+                  {stats.organizaciones > 0 ? `${stats.organizaciones}+` : '—'}
+                </div>
+                <div className="text-white/80 tracking-wide">Organizaciones Culturales</div>
               </div>
               <div className="text-white group cursor-pointer">
-                <div className="text-3xl text-[#F47920] mb-2 group-hover:scale-110 transition-transform duration-300 drop-shadow-lg">300+</div>
-                <div className="text-white/80 tracking-wide">Artistas Locales</div>
+                <div className="text-3xl text-[#e63947] mb-2 group-hover:scale-110 transition-transform duration-300 drop-shadow-lg">
+                  {stats.municipios > 0 ? stats.municipios : '—'}
+                </div>
+                <div className="text-white/80 tracking-wide">Municipios con Presencia</div>
               </div>
               <div className="text-white group cursor-pointer">
-                <div className="text-3xl text-[#F47920] mb-2 group-hover:scale-110 transition-transform duration-300 drop-shadow-lg">50+</div>
-                <div className="text-white/80 tracking-wide">Espacios Culturales</div>
+                <div className="text-3xl text-[#e63947] mb-2 group-hover:scale-110 transition-transform duration-300 drop-shadow-lg">
+                  {stats.sectores > 0 ? stats.sectores : '—'}
+                </div>
+                <div className="text-white/80 tracking-wide">Sectores Culturales</div>
               </div>
               <div className="text-white group cursor-pointer">
-                <div className="text-3xl text-[#F47920] mb-2 group-hover:scale-110 transition-transform duration-300 drop-shadow-lg">24/7</div>
-                <div className="text-white/80 tracking-wide">Información Disponible</div>
+                <div className="text-3xl text-[#e63947] mb-2 group-hover:scale-110 transition-transform duration-300 drop-shadow-lg">
+                  {stats.eventos > 0 ? `${stats.eventos}` : '—'}
+                </div>
+                <div className="text-white/80 tracking-wide">Eventos en Agenda</div>
               </div>
             </div>
           </div>

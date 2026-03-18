@@ -37,23 +37,23 @@ const getBaseTemplate = (title: string, content: string): string => `
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f5f5f5; }
     .container { max-width: 600px; margin: 0 auto; background-color: white; }
-    .header { background: linear-gradient(135deg, #F47920 0%, #1E2B5C 100%); padding: 28px 20px; text-align: center; }
+    .header { background: linear-gradient(135deg, #e63947 0%, #2a9d8f 100%); padding: 28px 20px; text-align: center; }
     .header-title { color: white; font-size: 22px; font-weight: 700; letter-spacing: 1px; }
     .header-sub { color: rgba(255,255,255,0.8); font-size: 12px; margin-top: 6px; letter-spacing: 3px; }
     .content { padding: 36px 30px; }
-    .title { font-size: 20px; color: #1E2B5C; margin-bottom: 14px; font-weight: 700; }
+    .title { font-size: 20px; color: #2a9d8f; margin-bottom: 14px; font-weight: 700; }
     .message { font-size: 15px; color: #444; line-height: 1.65; margin-bottom: 24px; }
-    .info-box { background-color: #fff7f0; border-left: 4px solid #F47920; padding: 18px 20px; margin: 20px 0; border-radius: 4px; }
+    .info-box { background-color: #fff7f0; border-left: 4px solid #e63947; padding: 18px 20px; margin: 20px 0; border-radius: 4px; }
     .info-row { display: flex; margin-bottom: 10px; font-size: 14px; }
     .info-row:last-child { margin-bottom: 0; }
-    .info-label { font-weight: 700; color: #1E2B5C; min-width: 180px; }
+    .info-label { font-weight: 700; color: #2a9d8f; min-width: 180px; }
     .info-value { color: #333; }
-    .btn { display: inline-block; background: linear-gradient(135deg, #F47920 0%, #d4621a 100%); color: white !important; padding: 14px 32px; text-decoration: none; border-radius: 6px; font-weight: 700; font-size: 15px; margin-top: 10px; }
-    .btn-navy { display: inline-block; background: linear-gradient(135deg, #1E2B5C 0%, #2d3f7a 100%); color: white !important; padding: 14px 32px; text-decoration: none; border-radius: 6px; font-weight: 700; font-size: 15px; margin-top: 10px; }
-    .alert-info { background-color: #eff6ff; border-left: 4px solid #3B82F6; padding: 14px 18px; margin: 16px 0; border-radius: 4px; color: #1e40af; font-size: 14px; line-height: 1.6; }
-    .divider { height: 1px; background: linear-gradient(to right, transparent, #F47920, transparent); margin: 28px 0; }
-    .footer { background-color: #1E2B5C; color: white; padding: 28px 20px; text-align: center; }
-    .footer-title { font-size: 16px; margin-bottom: 6px; color: #F47920; font-weight: 700; }
+    .btn { display: inline-block; background: linear-gradient(135deg, #e63947 0%, #d4621a 100%); color: white !important; padding: 14px 32px; text-decoration: none; border-radius: 6px; font-weight: 700; font-size: 15px; margin-top: 10px; }
+    .btn-navy { display: inline-block; background: linear-gradient(135deg, #2a9d8f 0%, #2d3f7a 100%); color: white !important; padding: 14px 32px; text-decoration: none; border-radius: 6px; font-weight: 700; font-size: 15px; margin-top: 10px; }
+    .alert-info { background-color: #eff6ff; border-left: 4px solid #0f4c75; padding: 14px 18px; margin: 16px 0; border-radius: 4px; color: #1e40af; font-size: 14px; line-height: 1.6; }
+    .divider { height: 1px; background: linear-gradient(to right, transparent, #e63947, transparent); margin: 28px 0; }
+    .footer { background-color: #2a9d8f; color: white; padding: 28px 20px; text-align: center; }
+    .footer-title { font-size: 16px; margin-bottom: 6px; color: #e63947; font-weight: 700; }
     .footer-text { font-size: 13px; color: rgba(255,255,255,0.7); margin: 4px 0; }
     .footer-note { margin-top: 14px; font-size: 11px; color: rgba(255,255,255,0.4); }
   </style>
@@ -191,7 +191,7 @@ const getCodigoVerificacionTemplate = (data: Record<string, any>): string =>
       <div style="text-align:center; margin: 32px 0;">
         <div style="
           display: inline-block;
-          background: linear-gradient(135deg, #1E2B5C 0%, #2d3f7a 100%);
+          background: linear-gradient(135deg, #2a9d8f 0%, #2d3f7a 100%);
           color: white;
           font-size: 42px;
           font-weight: 900;
@@ -212,7 +212,7 @@ const getCodigoVerificacionTemplate = (data: Record<string, any>): string =>
 
       <div style="font-size:13px; color:#999; text-align:center; line-height:1.6;">
         Si tienes problemas para actualizar tu información, escríbenos a<br>
-        <span style="color:#1E2B5C;">${Deno.env.get("GMAIL_USER")}</span>
+        <span style="color:#2a9d8f;">${Deno.env.get("GMAIL_USER")}</span>
       </div>
     </div>`);
 
@@ -243,7 +243,7 @@ const getMagicLinkTemplate = (data: Record<string, any>): string => {
       <div class="divider"></div>
       <div style="font-size:12px; color:#999; text-align:center;">
         Si el botón no funciona, copia y pega este enlace en tu navegador:<br>
-        <span style="color:#1E2B5C; word-break:break-all;">${data.magic_link}</span>
+        <span style="color:#2a9d8f; word-break:break-all;">${data.magic_link}</span>
       </div>
     </div>`);
 };

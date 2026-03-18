@@ -58,7 +58,7 @@ function OrgCard({ org }: { org: Organizacion }) {
   const inicial    = org.razon_social.charAt(0).toUpperCase();
 
   return (
-    <div className="bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-lg hover:border-[#F47920]/30 transition-all duration-300 group flex flex-col">
+    <div className="bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-lg hover:border-[#e63947]/30 transition-all duration-300 group flex flex-col">
 
       {/* ── Zona de imagen (con foto o fallback) ── */}
       <div className="relative h-36 flex-shrink-0">
@@ -73,7 +73,7 @@ function OrgCard({ org }: { org: Organizacion }) {
           />
         ) : (
           // FALLBACK: fondo degradado navy-azul con la inicial grande
-          <div className="w-full h-full bg-gradient-to-br from-[#1E2B5C] to-[#3B82F6] flex items-center justify-center">
+          <div className="w-full h-full bg-gradient-to-br from-[#2a9d8f] to-[#0f4c75] flex items-center justify-center">
             <span className="text-6xl font-bold text-white/20 select-none">{inicial}</span>
             {/* patrón de puntos decorativo */}
             <svg className="absolute inset-0 w-full h-full opacity-10" xmlns="http://www.w3.org/2000/svg">
@@ -105,21 +105,21 @@ function OrgCard({ org }: { org: Organizacion }) {
       {/* ── Contenido ── */}
       <div className="p-4 flex flex-col flex-1">
         {/* Nombre */}
-        <h3 className="text-sm font-semibold text-[#1E2B5C] group-hover:text-[#F47920] transition-colors mb-2 line-clamp-2 leading-snug">
+        <h3 className="text-sm font-semibold text-[#2a9d8f] group-hover:text-[#e63947] transition-colors mb-2 line-clamp-2 leading-snug">
           {org.razon_social}
         </h3>
 
         {/* Municipio */}
         <div className="flex items-center gap-1.5 text-xs text-[#6B7280] mb-1">
-          <MapPin className="w-3.5 h-3.5 text-[#F47920] flex-shrink-0" />
+          <MapPin className="w-3.5 h-3.5 text-[#e63947] flex-shrink-0" />
           <span>{org.municipio}{org.direccion ? ` · ${org.direccion}` : ''}</span>
         </div>
 
         {/* Teléfono */}
         {org.telefono_1 && (
           <a href={`tel:${org.telefono_1}`}
-            className="flex items-center gap-1.5 text-xs text-[#6B7280] hover:text-[#F47920] transition-colors mb-2">
-            <Phone className="w-3.5 h-3.5 text-[#F47920] flex-shrink-0" />
+            className="flex items-center gap-1.5 text-xs text-[#6B7280] hover:text-[#e63947] transition-colors mb-2">
+            <Phone className="w-3.5 h-3.5 text-[#e63947] flex-shrink-0" />
             {org.telefono_1}
           </a>
         )}
@@ -152,7 +152,7 @@ function OrgCard({ org }: { org: Organizacion }) {
             )}
             {org.correo && (
               <a href={`mailto:${org.correo}`}
-                className="ml-auto text-xs text-[#9CA3AF] hover:text-[#F47920] flex items-center gap-1 transition-colors">
+                className="ml-auto text-xs text-[#9CA3AF] hover:text-[#e63947] flex items-center gap-1 transition-colors">
                 <Mail className="w-3.5 h-3.5" /> Contacto
               </a>
             )}
@@ -225,19 +225,19 @@ function OrganizacionesContent() {
 
         {/* Header */}
         <div className="mb-10">
-          <Link href="/" className="inline-flex items-center gap-2 text-sm text-[#6B7280] hover:text-[#F47920] mb-6 transition-colors">
+          <Link href="/" className="inline-flex items-center gap-2 text-sm text-[#6B7280] hover:text-[#e63947] mb-6 transition-colors">
             <ChevronLeft className="w-4 h-4" /> Volver al inicio
           </Link>
-          <div className="inline-block px-5 py-1.5 bg-[#F47920]/10 rounded-full mb-4">
-            <span className="text-[#F47920] text-sm tracking-widest">DIRECTORIO CULTURAL</span>
+          <div className="inline-block px-5 py-1.5 bg-[#e63947]/10 rounded-full mb-4">
+            <span className="text-[#e63947] text-sm tracking-widest">DIRECTORIO CULTURAL</span>
           </div>
-          <h1 className="text-4xl md:text-5xl text-[#1E2B5C] mb-3">
+          <h1 className="text-4xl md:text-5xl text-[#2a9d8f] mb-3">
             {sector !== 'todos' ? sectorActual?.label : 'Organizaciones Culturales'}
           </h1>
           <p className="text-[#6B7280]">
             {cargando
               ? 'Cargando...'
-              : <><span className="text-[#F47920] font-semibold">{total}</span> organizaciones encontradas</>
+              : <><span className="text-[#e63947] font-semibold">{total}</span> organizaciones encontradas</>
             }
           </p>
         </div>
@@ -252,25 +252,25 @@ function OrganizacionesContent() {
                 placeholder="Buscar organización..."
                 value={busqueda}
                 onChange={(e) => setBusqueda(e.target.value)}
-                className="w-full pl-9 pr-4 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F47920]/30"
+                className="w-full pl-9 pr-4 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#e63947]/30"
               />
             </div>
             <select value={municipio} onChange={(e) => setMunicipio(e.target.value)}
-              className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F47920]/30 text-[#374151]">
+              className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#e63947]/30 text-[#374151]">
               {MUNICIPIOS.map((m) => (
                 <option key={m} value={m}>{m === 'Todos' ? '📍 Todos los municipios' : m}</option>
               ))}
             </select>
             <select value={sector}
               onChange={(e) => { setSector(e.target.value); router.push(`/organizaciones?sector=${e.target.value}`); }}
-              className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F47920]/30 text-[#374151]">
+              className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#e63947]/30 text-[#374151]">
               {SECTORES_OPCIONES.map((s) => (
                 <option key={s.slug} value={s.slug}>{s.label}</option>
               ))}
             </select>
           </div>
           {hasFiltros && (
-            <button onClick={limpiar} className="mt-3 flex items-center gap-1 text-xs text-[#F47920] hover:underline">
+            <button onClick={limpiar} className="mt-3 flex items-center gap-1 text-xs text-[#e63947] hover:underline">
               <X className="w-3 h-3" /> Limpiar filtros
             </button>
           )}
@@ -283,8 +283,8 @@ function OrganizacionesContent() {
               onClick={() => { setSector(s.slug); router.push(`/organizaciones?sector=${s.slug}`); }}
               className={`px-4 py-1.5 rounded-full text-sm transition-all duration-200 ${
                 sector === s.slug
-                  ? 'bg-[#F47920] text-white shadow-sm'
-                  : 'bg-white border border-gray-200 text-[#6B7280] hover:border-[#F47920] hover:text-[#F47920]'
+                  ? 'bg-[#e63947] text-white shadow-sm'
+                  : 'bg-white border border-gray-200 text-[#6B7280] hover:border-[#e63947] hover:text-[#e63947]'
               }`}>
               {s.label}
             </button>
@@ -304,9 +304,9 @@ function OrganizacionesContent() {
         {!cargando && organizaciones.length === 0 && (
           <div className="text-center py-20">
             <div className="text-6xl mb-4">🔍</div>
-            <h3 className="text-xl text-[#1E2B5C] mb-2">Sin resultados</h3>
+            <h3 className="text-xl text-[#2a9d8f] mb-2">Sin resultados</h3>
             <p className="text-[#6B7280] mb-5">No encontramos organizaciones con esos filtros.</p>
-            <button onClick={limpiar} className="text-sm text-[#F47920] hover:underline">Ver todas</button>
+            <button onClick={limpiar} className="text-sm text-[#e63947] hover:underline">Ver todas</button>
           </div>
         )}
 
@@ -320,7 +320,7 @@ function OrganizacionesContent() {
             {totalPaginas > 1 && (
               <div className="flex items-center justify-center gap-3">
                 <button onClick={() => setPagina((p) => Math.max(0, p - 1))} disabled={pagina === 0}
-                  className="flex items-center gap-1 px-4 py-2 text-sm rounded-xl border border-gray-200 disabled:opacity-40 hover:border-[#F47920] hover:text-[#F47920] transition-colors">
+                  className="flex items-center gap-1 px-4 py-2 text-sm rounded-xl border border-gray-200 disabled:opacity-40 hover:border-[#e63947] hover:text-[#e63947] transition-colors">
                   <ChevronLeft className="w-4 h-4" /> Anterior
                 </button>
                 <div className="flex gap-1">
@@ -330,7 +330,7 @@ function OrganizacionesContent() {
                     return (
                       <button key={p} onClick={() => setPagina(p)}
                         className={`w-9 h-9 rounded-xl text-sm transition-colors ${
-                          p === pagina ? 'bg-[#F47920] text-white' : 'border border-gray-200 text-[#6B7280] hover:border-[#F47920] hover:text-[#F47920]'
+                          p === pagina ? 'bg-[#e63947] text-white' : 'border border-gray-200 text-[#6B7280] hover:border-[#e63947] hover:text-[#e63947]'
                         }`}>
                         {p + 1}
                       </button>
@@ -338,7 +338,7 @@ function OrganizacionesContent() {
                   })}
                 </div>
                 <button onClick={() => setPagina((p) => Math.min(totalPaginas - 1, p + 1))} disabled={pagina >= totalPaginas - 1}
-                  className="flex items-center gap-1 px-4 py-2 text-sm rounded-xl border border-gray-200 disabled:opacity-40 hover:border-[#F47920] hover:text-[#F47920] transition-colors">
+                  className="flex items-center gap-1 px-4 py-2 text-sm rounded-xl border border-gray-200 disabled:opacity-40 hover:border-[#e63947] hover:text-[#e63947] transition-colors">
                   Siguiente <ChevronRight className="w-4 h-4" />
                 </button>
               </div>

@@ -82,19 +82,19 @@ export default function DirectorioCultural() {
 
       {/* Encabezado */}
       <div className="text-center mb-10">
-        <div className="inline-block px-5 py-1.5 bg-[#F47920]/10 rounded-full mb-4">
-          <span className="text-[#F47920] text-sm tracking-widest">DIRECTORIO CULTURAL</span>
+        <div className="inline-block px-5 py-1.5 bg-[#e63947]/10 rounded-full mb-4">
+          <span className="text-[#e63947] text-sm tracking-widest">DIRECTORIO CULTURAL</span>
         </div>
-        <h2 className="text-4xl text-[#1E2B5C] mb-3">
+        <h2 className="text-4xl text-[#2a9d8f] mb-3">
           Organizaciones Culturales de Caldas
         </h2>
         <p className="text-[#6B7280]">
-          <span className="text-[#F47920] font-semibold">{total}</span> organizaciones registradas en el departamento
+          <span className="text-[#e63947] font-semibold">{total}</span> organizaciones registradas en el departamento
         </p>
       </div>
 
       {/* Buscador + Filtros */}
-      <div className="bg-white rounded-2xl shadow-sm border border-[#F47920]/20 p-5 mb-8">
+      <div className="bg-white rounded-2xl shadow-sm border border-[#e63947]/20 p-5 mb-8">
         <div className="grid md:grid-cols-3 gap-4">
 
           {/* Buscador */}
@@ -105,7 +105,7 @@ export default function DirectorioCultural() {
               placeholder="Buscar organización..."
               value={busqueda}
               onChange={(e) => setBusqueda(e.target.value)}
-              className="w-full pl-9 pr-4 py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F47920]/40"
+              className="w-full pl-9 pr-4 py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#e63947]/40"
             />
           </div>
 
@@ -113,7 +113,7 @@ export default function DirectorioCultural() {
           <select
             value={municipio}
             onChange={(e) => setMunicipio(e.target.value)}
-            className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F47920]/40 text-[#374151]"
+            className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#e63947]/40 text-[#374151]"
           >
             {MUNICIPIOS.map((m) => (
               <option key={m} value={m}>{m === 'Todos' ? '📍 Todos los municipios' : m}</option>
@@ -124,7 +124,7 @@ export default function DirectorioCultural() {
           <select
             value={sector}
             onChange={(e) => setSector(e.target.value)}
-            className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F47920]/40 text-[#374151]"
+            className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#e63947]/40 text-[#374151]"
           >
             {SECTORES.map((s) => (
               <option key={s} value={s}>{s === 'Todos' ? '🎨 Todos los sectores' : s}</option>
@@ -136,7 +136,7 @@ export default function DirectorioCultural() {
         {(busqueda || municipio !== 'Todos' || sector !== 'Todos') && (
           <button
             onClick={() => { setBusqueda(''); setMunicipio('Todos'); setSector('Todos'); }}
-            className="mt-3 text-xs text-[#F47920] hover:underline"
+            className="mt-3 text-xs text-[#e63947] hover:underline"
           >
             ✕ Limpiar filtros
           </button>
@@ -159,7 +159,7 @@ export default function DirectorioCultural() {
           <p className="text-[#6B7280]">No encontramos organizaciones con esos filtros.</p>
           <button
             onClick={() => { setBusqueda(''); setMunicipio('Todos'); setSector('Todos'); }}
-            className="mt-4 text-sm text-[#F47920] hover:underline"
+            className="mt-4 text-sm text-[#e63947] hover:underline"
           >
             Ver todas las organizaciones
           </button>
@@ -181,7 +181,7 @@ export default function DirectorioCultural() {
               <button
                 onClick={() => setPagina((p) => Math.max(0, p - 1))}
                 disabled={pagina === 0}
-                className="px-4 py-2 text-sm rounded-lg border border-gray-200 disabled:opacity-40 hover:border-[#F47920] hover:text-[#F47920] transition-colors"
+                className="px-4 py-2 text-sm rounded-lg border border-gray-200 disabled:opacity-40 hover:border-[#e63947] hover:text-[#e63947] transition-colors"
               >
                 ← Anterior
               </button>
@@ -191,7 +191,7 @@ export default function DirectorioCultural() {
               <button
                 onClick={() => setPagina((p) => Math.min(totalPaginas - 1, p + 1))}
                 disabled={pagina >= totalPaginas - 1}
-                className="px-4 py-2 text-sm rounded-lg border border-gray-200 disabled:opacity-40 hover:border-[#F47920] hover:text-[#F47920] transition-colors"
+                className="px-4 py-2 text-sm rounded-lg border border-gray-200 disabled:opacity-40 hover:border-[#e63947] hover:text-[#e63947] transition-colors"
               >
                 Siguiente →
               </button>
@@ -208,12 +208,12 @@ function OrgCard({ org }: { org: Organizacion }) {
   const tieneRedes = org.instagram || org.facebook || org.youtube;
 
   return (
-    <div className="bg-white border border-[#F47920]/15 rounded-2xl p-5 hover:shadow-lg hover:border-[#F47920]/40 transition-all duration-300 group flex flex-col">
+    <div className="bg-white border border-[#e63947]/15 rounded-2xl p-5 hover:shadow-lg hover:border-[#e63947]/40 transition-all duration-300 group flex flex-col">
 
       {/* Header */}
       <div className="flex items-start justify-between gap-3 mb-3">
-        <div className="w-10 h-10 rounded-full bg-[#F47920]/10 flex items-center justify-center flex-shrink-0">
-          <span className="text-[#F47920] text-sm font-bold">
+        <div className="w-10 h-10 rounded-full bg-[#e63947]/10 flex items-center justify-center flex-shrink-0">
+          <span className="text-[#e63947] text-sm font-bold">
             {org.razon_social.charAt(0)}
           </span>
         </div>
@@ -225,18 +225,18 @@ function OrgCard({ org }: { org: Organizacion }) {
       </div>
 
       {/* Nombre */}
-      <h3 className="text-sm font-semibold text-[#1E2B5C] group-hover:text-[#F47920] transition-colors mb-2 line-clamp-2 flex-1">
+      <h3 className="text-sm font-semibold text-[#2a9d8f] group-hover:text-[#e63947] transition-colors mb-2 line-clamp-2 flex-1">
         {org.razon_social}
       </h3>
 
       {/* Municipio + Sector */}
       <div className="space-y-1 mb-4">
         <div className="flex items-center gap-1.5 text-xs text-[#6B7280]">
-          <MapPin className="w-3.5 h-3.5 text-[#F47920] flex-shrink-0" />
+          <MapPin className="w-3.5 h-3.5 text-[#e63947] flex-shrink-0" />
           <span>{org.municipio}</span>
         </div>
         {org.sector_cultural && (
-          <div className="text-xs text-[#3B82F6] bg-[#3B82F6]/8 rounded-md px-2 py-1 line-clamp-1">
+          <div className="text-xs text-[#0f4c75] bg-[#0f4c75]/8 rounded-md px-2 py-1 line-clamp-1">
             {org.sector_cultural.replace('Cultural – ', '').replace('Cultural y ', '')}
           </div>
         )}
@@ -270,7 +270,7 @@ function OrgCard({ org }: { org: Organizacion }) {
           )}
           {org.correo && (
             <a href={`mailto:${org.correo}`}
-              className="ml-auto text-xs text-[#6B7280] hover:text-[#F47920] flex items-center gap-1 transition-colors">
+              className="ml-auto text-xs text-[#6B7280] hover:text-[#e63947] flex items-center gap-1 transition-colors">
               <ExternalLink className="w-3 h-3" /> Contacto
             </a>
           )}

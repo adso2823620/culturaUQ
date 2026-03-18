@@ -11,7 +11,7 @@ const categorias = [
     title: 'Capacitaciones',
     description: 'Grabaciones completas de las sesiones de formación del sector cultural de Caldas.',
     icon: <Video className="w-8 h-8" />,
-    accent: '#F47920',
+    accent: '#e63947',
     bg: 'from-orange-500/10 to-orange-300/5',
     border: 'border-orange-200',
   },
@@ -20,7 +20,7 @@ const categorias = [
     title: 'Presentaciones',
     description: 'Diapositivas y slides utilizados en cada sesión de formación.',
     icon: <FileText className="w-8 h-8" />,
-    accent: '#3B82F6',
+    accent: '#0f4c75',
     bg: 'from-blue-500/10 to-blue-300/5',
     border: 'border-blue-200',
   },
@@ -29,7 +29,7 @@ const categorias = [
     title: 'Material de Apoyo',
     description: 'Guías, lecturas y recursos complementarios de las capacitaciones.',
     icon: <BookOpen className="w-8 h-8" />,
-    accent: '#F47920',
+    accent: '#e63947',
     bg: 'from-orange-400/10 to-orange-200/5',
     border: 'border-orange-200',
   },
@@ -38,7 +38,7 @@ const categorias = [
     title: 'Bibliografía',
     description: 'Fuentes bibliográficas y lecturas recomendadas del programa.',
     icon: <Book className="w-8 h-8" />,
-    accent: '#3B82F6',
+    accent: '#0f4c75',
     bg: 'from-blue-400/10 to-blue-200/5',
     border: 'border-blue-200',
   },
@@ -47,7 +47,7 @@ const categorias = [
     title: 'Propuestas',
     description: 'Propuestas de proyectos culturales desarrolladas durante el programa.',
     icon: <ClipboardList className="w-8 h-8" />,
-    accent: '#F47920',
+    accent: '#e63947',
     bg: 'from-orange-500/10 to-orange-300/5',
     border: 'border-orange-200',
   },
@@ -60,10 +60,10 @@ export default function LabterPage() {
 
         {/* Hero */}
         <div className="mb-16 text-center">
-          <span className="inline-block bg-[#F47920]/10 text-[#F47920] text-xs tracking-widest px-4 py-1.5 rounded-full mb-4">
+          <span className="inline-block bg-[#e63947]/10 text-[#e63947] text-xs tracking-widest px-4 py-1.5 rounded-full mb-4">
             MÓDULO DE FORMACIÓN
           </span>
-          <h1 className="text-5xl font-bold text-[#1E2B5C] mb-5">Labter Cultural</h1>
+          <h1 className="text-5xl font-bold text-[#2a9d8f] mb-5">Labter Cultural</h1>
           <p className="text-[#6B7280] text-lg max-w-2xl mx-auto leading-relaxed">
             Fortalece tus habilidades en el sector cultural con recursos de formación
             especializados: videos, documentos, referencias y mucho más.
@@ -99,10 +99,10 @@ export default function LabterPage() {
 
                 {/* Texto */}
                 <h2
-                  className="text-xl font-semibold text-[#1E2B5C] mb-2 group-hover:transition-colors duration-300"
+                  className="text-xl font-semibold text-[#2a9d8f] mb-2 group-hover:transition-colors duration-300"
                   style={{ color: undefined }}
                 >
-                  <span className="group-hover:text-[#F47920] transition-colors duration-300">
+                  <span className="group-hover:text-[#e63947] transition-colors duration-300">
                     {cat.title}
                   </span>
                 </h2>

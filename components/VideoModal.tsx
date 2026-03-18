@@ -47,7 +47,7 @@ export default function VideoModal({ url, titulo, onClose }: VideoModalProps) {
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-4xl bg-[#1E2B5C] rounded-2xl overflow-hidden shadow-2xl"
+        className="relative w-full max-w-4xl bg-[#2a9d8f] rounded-2xl overflow-hidden shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}

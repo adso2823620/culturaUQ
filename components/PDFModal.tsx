@@ -30,7 +30,7 @@ export default function PDFModal({ url, titulo, onClose }: PDFModalProps) {
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-4xl h-full max-h-[90vh] bg-[#1E2B5C] rounded-2xl overflow-hidden shadow-2xl flex flex-col"
+        className="relative w-full max-w-4xl h-full max-h-[90vh] bg-[#2a9d8f] rounded-2xl overflow-hidden shadow-2xl flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between px-5 py-3 border-b border-white/10 flex-shrink-0">

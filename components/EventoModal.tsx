@@ -135,21 +135,21 @@ export default function EventoModal({ evento, onClose }: Props) {
               sizes="672px"
             />
           ) : (
-            <div className="w-full h-full bg-[#1E2B5C] flex items-center justify-center">
+            <div className="w-full h-full bg-[#2a9d8f] flex items-center justify-center">
               <span className="text-white/20 text-8xl font-bold select-none">
                 {evento.titulo.charAt(0).toUpperCase()}
               </span>
             </div>
           )}
           {/* Gradiente inferior */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#1E2B5C]/80 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#2a9d8f]/80 via-transparent to-transparent" />
 
           {/* Badge acceso */}
           <div className="absolute top-4 left-4">
             <span className={`px-3 py-1 rounded-full text-xs font-medium text-white ${
               evento.tipo_acceso === 'gratuito' ? 'bg-green-500' :
-              evento.tipo_acceso === 'con_costo' ? 'bg-[#F47920]' :
-              'bg-[#3B82F6]'
+              evento.tipo_acceso === 'con_costo' ? 'bg-[#e63947]' :
+              'bg-[#0f4c75]'
             }`}>
               {labelAcceso(evento.tipo_acceso)}
             </span>
@@ -186,12 +186,12 @@ export default function EventoModal({ evento, onClose }: Props) {
           {(evento.area_artistica || evento.tipo_evento) && (
             <div className="flex flex-wrap gap-2">
               {evento.area_artistica && (
-                <span className="px-3 py-1 bg-[#3B82F6]/10 text-[#3B82F6] rounded-full text-xs">
+                <span className="px-3 py-1 bg-[#0f4c75]/10 text-[#0f4c75] rounded-full text-xs">
                   {evento.area_artistica}
                 </span>
               )}
               {evento.tipo_evento && (
-                <span className="px-3 py-1 bg-[#F47920]/10 text-[#F47920] rounded-full text-xs capitalize">
+                <span className="px-3 py-1 bg-[#e63947]/10 text-[#e63947] rounded-full text-xs capitalize">
                   {evento.tipo_evento.replace(/_/g, ' ')}
                 </span>
               )}
@@ -204,11 +204,11 @@ export default function EventoModal({ evento, onClose }: Props) {
           )}
 
           {/* ── Fecha, hora, lugar ── */}
-          <div className="bg-[#F47920]/5 border border-[#F47920]/15 rounded-xl p-4 space-y-3">
+          <div className="bg-[#e63947]/5 border border-[#e63947]/15 rounded-xl p-4 space-y-3">
             <div className="flex items-start gap-3">
-              <Calendar className="w-4 h-4 text-[#F47920] mt-0.5 flex-shrink-0" />
+              <Calendar className="w-4 h-4 text-[#e63947] mt-0.5 flex-shrink-0" />
               <div>
-                <p className="text-sm text-[#1E2B5C] font-medium">
+                <p className="text-sm text-[#2a9d8f] font-medium">
                   {formatFecha(evento.fecha_inicio)}
                   {evento.fecha_fin && evento.fecha_fin !== evento.fecha_inicio &&
                     ` — ${formatFecha(evento.fecha_fin)}`}
@@ -223,17 +223,17 @@ export default function EventoModal({ evento, onClose }: Props) {
 
             {evento.hora_inicio && (
               <div className="flex items-center gap-3">
-                <Clock className="w-4 h-4 text-[#F47920] flex-shrink-0" />
-                <p className="text-sm text-[#1E2B5C]">{formatHora(evento.hora_inicio)}</p>
+                <Clock className="w-4 h-4 text-[#e63947] flex-shrink-0" />
+                <p className="text-sm text-[#2a9d8f]">{formatHora(evento.hora_inicio)}</p>
               </div>
             )}
 
             {(evento.modalidad !== 'virtual') && evento.municipio && (
               <div className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-[#F47920] mt-0.5 flex-shrink-0" />
+                <MapPin className="w-4 h-4 text-[#e63947] mt-0.5 flex-shrink-0" />
                 <div>
                   {evento.lugar_nombre && (
-                    <p className="text-sm text-[#1E2B5C] font-medium">{evento.lugar_nombre}</p>
+                    <p className="text-sm text-[#2a9d8f] font-medium">{evento.lugar_nombre}</p>
                   )}
                   {evento.direccion && (
                     <p className="text-xs text-[#6B7280]">{evento.direccion}</p>
@@ -246,12 +246,12 @@ export default function EventoModal({ evento, onClose }: Props) {
             {(evento.modalidad === 'virtual' || evento.modalidad === 'hibrido') &&
               evento.enlace_acceso && (
               <div className="flex items-center gap-3">
-                <Link2 className="w-4 h-4 text-[#F47920] flex-shrink-0" />
+                <Link2 className="w-4 h-4 text-[#e63947] flex-shrink-0" />
                 <a
                   href={evento.enlace_acceso}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-[#3B82F6] hover:underline flex items-center gap-1"
+                  className="text-sm text-[#0f4c75] hover:underline flex items-center gap-1"
                 >
                   Unirse al evento <ExternalLink className="w-3 h-3" />
                 </a>
@@ -261,12 +261,12 @@ export default function EventoModal({ evento, onClose }: Props) {
 
           {/* ── Acceso y cupos ── */}
           <div className="grid grid-cols-2 gap-3">
-            <div className="bg-[#1E2B5C]/5 rounded-xl p-4">
+            <div className="bg-[#2a9d8f]/5 rounded-xl p-4">
               <div className="flex items-center gap-2 mb-1">
-                <DollarSign className="w-4 h-4 text-[#1E2B5C]" />
+                <DollarSign className="w-4 h-4 text-[#2a9d8f]" />
                 <span className="text-xs text-[#6B7280] uppercase tracking-wide">Acceso</span>
               </div>
-              <p className="text-sm text-[#1E2B5C] font-medium">{labelAcceso(evento.tipo_acceso)}</p>
+              <p className="text-sm text-[#2a9d8f] font-medium">{labelAcceso(evento.tipo_acceso)}</p>
               {evento.valor_entrada && (
                 <p className="text-xs text-[#6B7280] mt-0.5">{evento.valor_entrada}</p>
               )}
@@ -278,12 +278,12 @@ export default function EventoModal({ evento, onClose }: Props) {
             </div>
 
             {evento.num_cupos && (
-              <div className="bg-[#1E2B5C]/5 rounded-xl p-4">
+              <div className="bg-[#2a9d8f]/5 rounded-xl p-4">
                 <div className="flex items-center gap-2 mb-1">
-                  <Users className="w-4 h-4 text-[#1E2B5C]" />
+                  <Users className="w-4 h-4 text-[#2a9d8f]" />
                   <span className="text-xs text-[#6B7280] uppercase tracking-wide">Cupos</span>
                 </div>
-                <p className="text-sm text-[#1E2B5C] font-medium">{evento.num_cupos} cupos</p>
+                <p className="text-sm text-[#2a9d8f] font-medium">{evento.num_cupos} cupos</p>
               </div>
             )}
           </div>
@@ -294,7 +294,7 @@ export default function EventoModal({ evento, onClose }: Props) {
               <p className="text-xs text-[#6B7280] uppercase tracking-wide mb-2">Dirigido a</p>
               <div className="flex flex-wrap gap-2">
                 {evento.publicos.map((p) => (
-                  <span key={p} className="px-3 py-1 bg-[#1E2B5C]/8 text-[#1E2B5C] rounded-full text-xs border border-[#1E2B5C]/15">
+                  <span key={p} className="px-3 py-1 bg-[#2a9d8f]/8 text-[#2a9d8f] rounded-full text-xs border border-[#2a9d8f]/15">
                     {labelPublico(p)}
                   </span>
                 ))}
@@ -304,7 +304,7 @@ export default function EventoModal({ evento, onClose }: Props) {
 
           {/* ── Texto invitación ── */}
           {evento.texto_invitacion && (
-            <div className="border-l-4 border-[#F47920] pl-4">
+            <div className="border-l-4 border-[#e63947] pl-4">
               <p className="text-sm text-[#6B7280] italic leading-relaxed">
                 "{evento.texto_invitacion}"
               </p>
@@ -314,11 +314,11 @@ export default function EventoModal({ evento, onClose }: Props) {
           {/* ── Organización ── */}
           <div className="border-t border-gray-100 pt-5">
             <div className="flex items-start gap-3">
-              <div className="w-10 h-10 rounded-full bg-[#1E2B5C]/10 flex items-center justify-center flex-shrink-0">
-                <Building2 className="w-5 h-5 text-[#1E2B5C]" />
+              <div className="w-10 h-10 rounded-full bg-[#2a9d8f]/10 flex items-center justify-center flex-shrink-0">
+                <Building2 className="w-5 h-5 text-[#2a9d8f]" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-semibold text-[#1E2B5C]">{evento.nombre_organizacion}</p>
+                <p className="text-sm font-semibold text-[#2a9d8f]">{evento.nombre_organizacion}</p>
                 {evento.tipo_organizacion_evento && (
                   <p className="text-xs text-[#6B7280]">{evento.tipo_organizacion_evento}</p>
                 )}
@@ -334,15 +334,15 @@ export default function EventoModal({ evento, onClose }: Props) {
 
           {/* ── Contacto ── */}
           {(evento.nombre_contacto || evento.telefono_contacto || evento.correo_contacto) && (
-            <div className="bg-[#3B82F6]/5 border border-[#3B82F6]/15 rounded-xl p-4 space-y-2">
+            <div className="bg-[#0f4c75]/5 border border-[#0f4c75]/15 rounded-xl p-4 space-y-2">
               <p className="text-xs text-[#6B7280] uppercase tracking-wide mb-2">Información de contacto</p>
               {evento.nombre_contacto && (
-                <p className="text-sm text-[#1E2B5C] font-medium">{evento.nombre_contacto}</p>
+                <p className="text-sm text-[#2a9d8f] font-medium">{evento.nombre_contacto}</p>
               )}
               {evento.telefono_contacto && (
                 <div className="flex items-center gap-2">
-                  <Phone className="w-3.5 h-3.5 text-[#3B82F6]" />
-                  <a href={`tel:${evento.telefono_contacto}`} className="text-sm text-[#3B82F6] hover:underline">
+                  <Phone className="w-3.5 h-3.5 text-[#0f4c75]" />
+                  <a href={`tel:${evento.telefono_contacto}`} className="text-sm text-[#0f4c75] hover:underline">
                     {evento.telefono_contacto}
                   </a>
                 </div>
@@ -350,7 +350,7 @@ export default function EventoModal({ evento, onClose }: Props) {
               {evento.correo_contacto && (
                 <div className="flex items-center gap-2">
                   <span className="text-xs text-[#6B7280]">✉</span>
-                  <a href={`mailto:${evento.correo_contacto}`} className="text-sm text-[#3B82F6] hover:underline break-all">
+                  <a href={`mailto:${evento.correo_contacto}`} className="text-sm text-[#0f4c75] hover:underline break-all">
                     {evento.correo_contacto}
                   </a>
                 </div>

@@ -317,10 +317,10 @@ export default function ActualizaInfoForm() {
   if (stage === 'email') return (
     <div className="max-w-md mx-auto px-6 py-16">
       <div className="text-center mb-10">
-        <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#1E2B5C] mb-5">
+        <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#2a9d8f] mb-5">
           <Mail className="w-6 h-6 text-white" />
         </div>
-        <h2 className="text-2xl font-bold text-[#1E2B5C] mb-2">Actualiza tu información</h2>
+        <h2 className="text-2xl font-bold text-[#2a9d8f] mb-2">Actualiza tu información</h2>
         <p className="text-sm text-gray-500 leading-relaxed max-w-xs mx-auto">
           Ingresa el correo con el que registraste tu organización y te enviaremos un código de verificación.
         </p>
@@ -333,14 +333,14 @@ export default function ActualizaInfoForm() {
             onChange={(e) => { setEmailInput(e.target.value); setError(''); }}
             onKeyDown={(e) => e.key === 'Enter' && handleEnviarCodigo()}
             placeholder="contacto@tuorganizacion.com"
-            className="mt-1.5 h-11 rounded-xl border-gray-200 focus:border-[#F47920] focus:ring-[#F47920]/20"
+            className="mt-1.5 h-11 rounded-xl border-gray-200 focus:border-[#e63947] focus:ring-[#e63947]/20"
           />
         </div>
         {error && <ErrorBox msg={error} />}
         <Button
           onClick={handleEnviarCodigo}
           disabled={loading || !emailInput.trim()}
-          className="w-full h-11 bg-[#F47920] hover:bg-[#d4621a] rounded-xl font-semibold"
+          className="w-full h-11 bg-[#e63947] hover:bg-[#d4621a] rounded-xl font-semibold"
         >
           {loading
             ? <span className="flex items-center gap-2"><div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />Verificando...</span>
@@ -357,12 +357,12 @@ export default function ActualizaInfoForm() {
   if (stage === 'codigo') return (
     <div className="max-w-md mx-auto px-6 py-16">
       <div className="text-center mb-10">
-        <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#F47920] mb-5">
+        <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#e63947] mb-5">
           <KeyRound className="w-6 h-6 text-white" />
         </div>
-        <h2 className="text-2xl font-bold text-[#1E2B5C] mb-2">Revisa tu correo</h2>
+        <h2 className="text-2xl font-bold text-[#2a9d8f] mb-2">Revisa tu correo</h2>
         <p className="text-sm text-gray-500 leading-relaxed max-w-xs mx-auto">
-          Enviamos un código a <span className="font-semibold text-[#1E2B5C]">{correoVerificado}</span>.
+          Enviamos un código a <span className="font-semibold text-[#2a9d8f]">{correoVerificado}</span>.
           Revisa también la carpeta de spam.
         </p>
       </div>
@@ -374,7 +374,7 @@ export default function ActualizaInfoForm() {
             onChange={(e) => { setCodigoInput(e.target.value.replace(/\D/g, '').slice(0, 6)); setError(''); }}
             onKeyDown={(e) => e.key === 'Enter' && handleVerificarCodigo()}
             placeholder="000000" maxLength={6}
-            className="mt-1.5 h-14 text-center text-3xl tracking-[0.6em] font-mono rounded-xl border-gray-200 focus:border-[#F47920]"
+            className="mt-1.5 h-14 text-center text-3xl tracking-[0.6em] font-mono rounded-xl border-gray-200 focus:border-[#e63947]"
           />
           <p className="text-xs text-gray-400 mt-1.5 text-center">Expira en 15 minutos</p>
         </div>
@@ -382,7 +382,7 @@ export default function ActualizaInfoForm() {
         <Button
           onClick={handleVerificarCodigo}
           disabled={loading || codigoInput.length !== 6}
-          className="w-full h-11 bg-[#F47920] hover:bg-[#d4621a] rounded-xl font-semibold"
+          className="w-full h-11 bg-[#e63947] hover:bg-[#d4621a] rounded-xl font-semibold"
         >
           {loading
             ? <span className="flex items-center gap-2"><div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />Verificando...</span>
@@ -395,9 +395,9 @@ export default function ActualizaInfoForm() {
             <ChevronLeft className="w-3.5 h-3.5" /> Cambiar correo
           </button>
           {countdown > 0
-            ? <span className="text-sm text-gray-400">Reenviar en <span className="font-semibold text-[#1E2B5C]">{countdown}s</span></span>
+            ? <span className="text-sm text-gray-400">Reenviar en <span className="font-semibold text-[#2a9d8f]">{countdown}s</span></span>
             : <button onClick={() => { setStage('email'); setCodigoInput(''); setError(''); }}
-                className="text-sm text-[#F47920] hover:text-[#d4621a] flex items-center gap-1 transition-colors">
+                className="text-sm text-[#e63947] hover:text-[#d4621a] flex items-center gap-1 transition-colors">
                 <RefreshCw className="w-3.5 h-3.5" /> Nuevo código
               </button>
           }
@@ -433,7 +433,7 @@ export default function ActualizaInfoForm() {
             <div key={s.number} className="flex items-center flex-1 last:flex-none">
               <div className="flex flex-col items-center">
                 <div className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-200 ${
-                  isCompleted ? 'bg-[#F47920]' : isActive ? 'bg-[#1E2B5C]' : 'bg-gray-100'
+                  isCompleted ? 'bg-[#e63947]' : isActive ? 'bg-[#2a9d8f]' : 'bg-gray-100'
                 }`}>
                   {isCompleted
                     ? <CheckCircle2 className="w-4 h-4 text-white" />
@@ -441,12 +441,12 @@ export default function ActualizaInfoForm() {
                   }
                 </div>
                 <span className={`text-xs mt-1 hidden sm:block font-medium ${
-                  isActive ? 'text-[#1E2B5C]' : isCompleted ? 'text-[#F47920]' : 'text-gray-400'
+                  isActive ? 'text-[#2a9d8f]' : isCompleted ? 'text-[#e63947]' : 'text-gray-400'
                 }`}>{s.label}</span>
               </div>
               {i < FORM_STEPS.length - 1 && (
                 <div className={`flex-1 h-px mx-3 mb-4 transition-all ${
-                  formStep > s.number ? 'bg-[#F47920]' : 'bg-gray-200'
+                  formStep > s.number ? 'bg-[#e63947]' : 'bg-gray-200'
                 }`} />
               )}
             </div>
@@ -460,7 +460,7 @@ export default function ActualizaInfoForm() {
           {/* PASO 1 */}
           {formStep === 1 && (
             <div className="space-y-5">
-              <h3 className="text-base font-semibold text-[#1E2B5C] pb-3 border-b border-gray-100">Datos de la Organización</h3>
+              <h3 className="text-base font-semibold text-[#2a9d8f] pb-3 border-b border-gray-100">Datos de la Organización</h3>
               <div>
                 <Label htmlFor="u-rs" className="text-sm font-medium text-gray-700">Razón Social *</Label>
                 <Input id="u-rs" value={form.razon_social} onChange={set('razon_social')} className="mt-1.5 rounded-xl" />
@@ -494,7 +494,7 @@ export default function ActualizaInfoForm() {
           {/* PASO 2 */}
           {formStep === 2 && (
             <div className="space-y-5">
-              <h3 className="text-base font-semibold text-[#1E2B5C] pb-3 border-b border-gray-100">Ubicación y Contacto</h3>
+              <h3 className="text-base font-semibold text-[#2a9d8f] pb-3 border-b border-gray-100">Ubicación y Contacto</h3>
               <div>
                 <Label className="text-sm font-medium text-gray-700">Municipio *</Label>
                 <Select value={form.municipio} onValueChange={setSelect('municipio')}>
@@ -557,18 +557,18 @@ export default function ActualizaInfoForm() {
           {/* PASO 3 */}
           {formStep === 3 && (
             <div className="space-y-5">
-              <h3 className="text-base font-semibold text-[#1E2B5C] pb-3 border-b border-gray-100">Foto y Redes Sociales</h3>
+              <h3 className="text-base font-semibold text-[#2a9d8f] pb-3 border-b border-gray-100">Foto y Redes Sociales</h3>
               <div>
                 <Label className="text-sm font-medium text-gray-700">
                   Foto{' '}<span className="text-xs text-gray-400 font-normal">JPG o PNG · máx. 2MB</span>
                 </Label>
                 {!fotoPreview ? (
                   <label htmlFor="u-foto" className={`mt-2 flex flex-col items-center justify-center w-full h-36 border-2 border-dashed rounded-xl cursor-pointer transition-all ${
-                    uploadingFoto ? 'border-[#F47920] bg-[#F47920]/5' : 'border-gray-200 hover:border-[#F47920]/60 hover:bg-orange-50'
+                    uploadingFoto ? 'border-[#e63947] bg-[#e63947]/5' : 'border-gray-200 hover:border-[#e63947]/60 hover:bg-orange-50'
                   }`}>
                     {uploadingFoto
-                      ? <div className="flex flex-col items-center gap-2 text-[#F47920]">
-                          <div className="w-7 h-7 border-2 border-[#F47920] border-t-transparent rounded-full animate-spin" />
+                      ? <div className="flex flex-col items-center gap-2 text-[#e63947]">
+                          <div className="w-7 h-7 border-2 border-[#e63947] border-t-transparent rounded-full animate-spin" />
                           <span className="text-sm">Subiendo...</span>
                         </div>
                       : <div className="flex flex-col items-center gap-1.5 text-gray-400">
@@ -617,11 +617,11 @@ export default function ActualizaInfoForm() {
             )}
             {formStep < 3
               ? <Button onClick={() => setFormStep(formStep + 1)} disabled={!canNextForm()}
-                  className="bg-[#1E2B5C] hover:bg-[#2d3f7a] rounded-xl px-6">
+                  className="bg-[#2a9d8f] hover:bg-[#2d3f7a] rounded-xl px-6">
                   Siguiente <ChevronRight className="w-4 h-4 ml-1" />
                 </Button>
               : <Button onClick={handleGuardar} disabled={loading || uploadingFoto}
-                  className="bg-[#F47920] hover:bg-[#d4621a] rounded-xl px-8 font-semibold">
+                  className="bg-[#e63947] hover:bg-[#d4621a] rounded-xl px-8 font-semibold">
                   {loading
                     ? <span className="flex items-center gap-2"><div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />Guardando...</span>
                     : 'Guardar cambios'}
@@ -642,10 +642,10 @@ export default function ActualizaInfoForm() {
       <div className="inline-flex items-center justify-center w-20 h-20 bg-green-100 rounded-2xl mx-auto mb-6">
         <CheckCircle2 className="w-10 h-10 text-green-500" />
       </div>
-      <h2 className="text-2xl font-bold text-[#1E2B5C] mb-3">¡Información actualizada!</h2>
+      <h2 className="text-2xl font-bold text-[#2a9d8f] mb-3">¡Información actualizada!</h2>
       <p className="text-gray-500 leading-relaxed mb-8">
         Los cambios de{' '}
-        <span className="font-semibold text-[#1E2B5C]">{orgNombre}</span>{' '}
+        <span className="font-semibold text-[#2a9d8f]">{orgNombre}</span>{' '}
         ya están visibles en el directorio cultural de Caldas.
       </p>
       <Button variant="outline" onClick={resetFlow} className="border-gray-200 text-gray-600 rounded-xl">

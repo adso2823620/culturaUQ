@@ -120,7 +120,7 @@ function Chip({ label, active, onClick }: { label: string; active: boolean; onCl
     <button type="button" onClick={onClick}
       className={`px-3 py-1.5 rounded-xl text-xs font-medium border transition-all ${
         active
-          ? 'bg-[#1E2B5C] border-[#1E2B5C] text-white'
+          ? 'bg-[#2a9d8f] border-[#2a9d8f] text-white'
           : 'border-gray-200 text-gray-500 hover:border-gray-300 hover:bg-gray-50'
       }`}>
       {active && <span className="mr-1">✓</span>}{label}
@@ -261,7 +261,7 @@ export default function RegistraEventoForm() {
   );
 
   const SectionTitle = ({ children }: { children: React.ReactNode }) => (
-    <h3 className="text-base font-semibold text-[#1E2B5C] pb-3 border-b border-gray-100 mb-5">{children}</h3>
+    <h3 className="text-base font-semibold text-[#2a9d8f] pb-3 border-b border-gray-100 mb-5">{children}</h3>
   );
 
   // ── Éxito ─────────────────────────────────────────────────────────
@@ -270,9 +270,9 @@ export default function RegistraEventoForm() {
       <div className="inline-flex items-center justify-center w-20 h-20 bg-green-100 rounded-2xl mx-auto mb-6">
         <CheckCircle2 className="w-10 h-10 text-green-500" />
       </div>
-      <h2 className="text-2xl font-bold text-[#1E2B5C] mb-3">¡Evento registrado!</h2>
+      <h2 className="text-2xl font-bold text-[#2a9d8f] mb-3">¡Evento registrado!</h2>
       <p className="text-gray-500 leading-relaxed mb-3">
-        <span className="font-semibold text-[#1E2B5C]">"{form.titulo}"</span> fue enviado y está pendiente de aprobación.
+        <span className="font-semibold text-[#2a9d8f]">"{form.titulo}"</span> fue enviado y está pendiente de aprobación.
       </p>
       <div className="flex items-start gap-2.5 p-4 bg-blue-50 border border-blue-100 rounded-xl text-sm text-blue-700 text-left mb-8">
         <Info className="w-4 h-4 mt-0.5 shrink-0" />
@@ -306,7 +306,7 @@ export default function RegistraEventoForm() {
             <div key={s.number} className="flex items-center flex-1 last:flex-none">
               <div className="flex flex-col items-center">
                 <div className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-200 ${
-                  isCompleted ? 'bg-[#F47920]' : isActive ? 'bg-[#1E2B5C]' : 'bg-gray-100'
+                  isCompleted ? 'bg-[#e63947]' : isActive ? 'bg-[#2a9d8f]' : 'bg-gray-100'
                 }`}>
                   {isCompleted
                     ? <CheckCircle2 className="w-4 h-4 text-white" />
@@ -314,11 +314,11 @@ export default function RegistraEventoForm() {
                   }
                 </div>
                 <span className={`text-xs mt-1 hidden sm:block font-medium ${
-                  isActive ? 'text-[#1E2B5C]' : isCompleted ? 'text-[#F47920]' : 'text-gray-400'
+                  isActive ? 'text-[#2a9d8f]' : isCompleted ? 'text-[#e63947]' : 'text-gray-400'
                 }`}>{s.label}</span>
               </div>
               {i < FORM_STEPS.length - 1 && (
-                <div className={`flex-1 h-px mx-2 mb-4 transition-all ${step > s.number ? 'bg-[#F47920]' : 'bg-gray-200'}`} />
+                <div className={`flex-1 h-px mx-2 mb-4 transition-all ${step > s.number ? 'bg-[#e63947]' : 'bg-gray-200'}`} />
               )}
             </div>
           );
@@ -386,7 +386,7 @@ export default function RegistraEventoForm() {
                 <Label htmlFor="e-desc" className="text-sm font-medium text-gray-700">Descripción general</Label>
                 <textarea id="e-desc" value={form.descripcion} onChange={set('descripcion')}
                   placeholder="Cuéntanos de qué trata el evento..." rows={3}
-                  className="mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#F47920]/20 focus:border-[#F47920] resize-none" />
+                  className="mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#e63947]/20 focus:border-[#e63947] resize-none" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
@@ -430,7 +430,7 @@ export default function RegistraEventoForm() {
                       onClick={() => setForm((p) => ({ ...p, modalidad: value }))}
                       className={`py-2.5 rounded-xl border-2 text-sm font-medium transition-all ${
                         form.modalidad === value
-                          ? 'border-[#1E2B5C] bg-[#1E2B5C] text-white'
+                          ? 'border-[#2a9d8f] bg-[#2a9d8f] text-white'
                           : 'border-gray-200 text-gray-500 hover:border-gray-300'
                       }`}>{label}
                     </button>
@@ -481,7 +481,7 @@ export default function RegistraEventoForm() {
                       onClick={() => setForm((p) => ({ ...p, tipo_acceso: value }))}
                       className={`py-2.5 px-3 rounded-xl border-2 text-sm font-medium text-left transition-all ${
                         form.tipo_acceso === value
-                          ? 'border-[#1E2B5C] bg-[#1E2B5C] text-white'
+                          ? 'border-[#2a9d8f] bg-[#2a9d8f] text-white'
                           : 'border-gray-200 text-gray-500 hover:border-gray-300'
                       }`}>{label}
                     </button>
@@ -577,7 +577,7 @@ export default function RegistraEventoForm() {
 
               {/* Material */}
               <div className="pt-4 border-t border-gray-100 space-y-4">
-                <p className="text-base font-semibold text-[#1E2B5C]">Material de divulgación</p>
+                <p className="text-base font-semibold text-[#2a9d8f]">Material de divulgación</p>
                 <div>
                   <Label className="text-sm font-medium text-gray-700">
                     Flyer o imagen del evento{' '}
@@ -585,11 +585,11 @@ export default function RegistraEventoForm() {
                   </Label>
                   {!fotoPreview ? (
                     <label htmlFor="e-foto" className={`mt-2 flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-xl cursor-pointer transition-all ${
-                      uploadingFoto ? 'border-[#F47920] bg-[#F47920]/5' : 'border-gray-200 hover:border-[#F47920]/60 hover:bg-orange-50'
+                      uploadingFoto ? 'border-[#e63947] bg-[#e63947]/5' : 'border-gray-200 hover:border-[#e63947]/60 hover:bg-orange-50'
                     }`}>
                       {uploadingFoto
-                        ? <div className="flex flex-col items-center gap-2 text-[#F47920]">
-                            <div className="w-6 h-6 border-2 border-[#F47920] border-t-transparent rounded-full animate-spin" />
+                        ? <div className="flex flex-col items-center gap-2 text-[#e63947]">
+                            <div className="w-6 h-6 border-2 border-[#e63947] border-t-transparent rounded-full animate-spin" />
                             <span className="text-sm">Subiendo...</span>
                           </div>
                         : <div className="flex flex-col items-center gap-1.5 text-gray-400">
@@ -617,13 +617,13 @@ export default function RegistraEventoForm() {
                   </Label>
                   <textarea id="e-inv" value={form.texto_invitacion} onChange={set('texto_invitacion')}
                     placeholder="¡Te invitamos a... ! Un espacio para..." rows={2}
-                    className="mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#F47920]/20 focus:border-[#F47920] resize-none" />
+                    className="mt-1.5 w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#e63947]/20 focus:border-[#e63947] resize-none" />
                 </div>
               </div>
 
               {/* Autorizaciones */}
               <div className="pt-4 border-t border-gray-100 space-y-3">
-                <p className="text-base font-semibold text-[#1E2B5C]">Autorizaciones</p>
+                <p className="text-base font-semibold text-[#2a9d8f]">Autorizaciones</p>
                 {[
                   { field: 'autoriza_datos'    as const, label: 'Autorizo el tratamiento de mis datos personales según la Ley 1581 de 2012 *' },
                   { field: 'autoriza_difusion' as const, label: 'Autorizo divulgar esta información en plataformas, redes sociales y medios aliados' },
@@ -632,7 +632,7 @@ export default function RegistraEventoForm() {
                   <label key={field} className="flex items-start gap-3 cursor-pointer group">
                     <div onClick={() => setForm((p) => ({ ...p, [field]: !p[field] }))}
                       className={`mt-0.5 w-5 h-5 rounded border-2 flex items-center justify-center shrink-0 transition-all ${
-                        form[field] ? 'bg-[#1E2B5C] border-[#1E2B5C]' : 'border-gray-300 group-hover:border-gray-400'
+                        form[field] ? 'bg-[#2a9d8f] border-[#2a9d8f]' : 'border-gray-300 group-hover:border-gray-400'
                       }`}>
                       {form[field] && <CheckCircle2 className="w-3 h-3 text-white" />}
                     </div>
@@ -655,11 +655,11 @@ export default function RegistraEventoForm() {
             )}
             {step < 5
               ? <Button onClick={() => { if (canNext()) { setStep(step + 1); setError(''); } }} disabled={!canNext()}
-                  className="bg-[#1E2B5C] hover:bg-[#2d3f7a] text-white rounded-xl px-6">
+                  className="bg-[#2a9d8f] hover:bg-[#2d3f7a] text-white rounded-xl px-6">
                   Siguiente <ChevronRight className="w-4 h-4 ml-1" />
                 </Button>
               : <Button onClick={handleSubmit} disabled={loading || uploadingFoto || !form.autoriza_datos}
-                  className="bg-[#F47920] hover:bg-[#d4621a] text-white rounded-xl px-8 font-semibold">
+                  className="bg-[#e63947] hover:bg-[#d4621a] text-white rounded-xl px-8 font-semibold">
                   {loading
                     ? <span className="flex items-center gap-2">
                         <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />

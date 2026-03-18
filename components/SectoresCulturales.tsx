@@ -137,18 +137,18 @@ export default function SectoresCulturales() {
 
         {/* Encabezado */}
         <div className="text-center mb-14">
-          <div className="inline-flex items-center gap-2 px-5 py-1.5 bg-[#F47920]/10 rounded-full mb-5">
-            <span className="w-2 h-2 rounded-full bg-[#F47920] animate-pulse" />
-            <span className="text-[#F47920] text-sm tracking-widest font-medium">ORGANIZACIONES CULTURALES</span>
+          <div className="inline-flex items-center gap-2 px-5 py-1.5 bg-[#e63947]/10 rounded-full mb-5">
+            <span className="w-2 h-2 rounded-full bg-[#e63947] animate-pulse" />
+            <span className="text-[#e63947] text-sm tracking-widest font-medium">ORGANIZACIONES CULTURALES</span>
           </div>
-          <h2 className="text-4xl md:text-5xl text-[#1E2B5C] mb-4">
+          <h2 className="text-4xl md:text-5xl text-[#2a9d8f] mb-4">
             El ecosistema cultural de Caldas
           </h2>
           <p className="text-[#6B7280] text-lg max-w-2xl mx-auto">
             {cargando ? (
               <span className="inline-block w-32 h-5 bg-gray-200 rounded animate-pulse" />
             ) : (
-              <><span className="text-[#F47920] font-bold">{total}</span> organizaciones activas en todo el departamento</>
+              <><span className="text-[#e63947] font-bold">{total}</span> organizaciones activas en todo el departamento</>
             )}
           </p>
         </div>
@@ -171,7 +171,7 @@ export default function SectoresCulturales() {
                 </div>
 
                 {/* Nombre */}
-                <h3 className="text-sm font-semibold text-[#1E2B5C] mb-2 leading-tight">
+                <h3 className="text-sm font-semibold text-[#2a9d8f] mb-2 leading-tight">
                   {sector.label}
                 </h3>
 
@@ -188,7 +188,7 @@ export default function SectoresCulturales() {
                 </div>
 
                 {/* Hover arrow */}
-                <div className="mt-3 text-xs text-[#9CA3AF] group-hover:text-[#F47920] transition-colors flex items-center gap-1">
+                <div className="mt-3 text-xs text-[#9CA3AF] group-hover:text-[#e63947] transition-colors flex items-center gap-1">
                   Ver listado
                   <span className="group-hover:translate-x-1 transition-transform inline-block">→</span>
                 </div>
@@ -201,7 +201,7 @@ export default function SectoresCulturales() {
         <div className="text-center">
           <Link
             href="/organizaciones"
-            className="inline-flex items-center gap-2 px-8 py-3 bg-[#1E2B5C] text-white rounded-full hover:bg-[#F47920] transition-colors duration-300 text-sm font-medium"
+            className="inline-flex items-center gap-2 px-8 py-3 bg-[#2a9d8f] text-white rounded-full hover:bg-[#e63947] transition-colors duration-300 text-sm font-medium"
           >
             Ver todas las organizaciones
             <span>→</span>

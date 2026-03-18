@@ -143,10 +143,10 @@ function CategoriaContent({ categoria }: { categoria: string }) {
           className="object-cover"
           sizes="(max-width: 1200px) 100vw, 1200px"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#1E2B5C]/90 via-[#1E3A8A]/70 to-transparent flex items-center">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#2a9d8f]/90 via-[#1E3A8A]/70 to-transparent flex items-center">
           <div className="px-12 text-white">
             <div className="flex items-center gap-4 mb-3">
-              <div className="w-14 h-14 bg-[#F47920]/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-[#F47920] border border-[#F47920]/30">
+              <div className="w-14 h-14 bg-[#e63947]/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-[#e63947] border border-[#e63947]/30">
                 {config.icon}
               </div>
               <div>
@@ -184,13 +184,13 @@ function CategoriaContent({ categoria }: { categoria: string }) {
           {capacitaciones.map((cap) => (
             <Card
               key={cap.id}
-              className="border-[#F47920]/20 hover:shadow-xl hover:border-[#F47920]/50 transition-all duration-300 overflow-hidden group"
+              className="border-[#e63947]/20 hover:shadow-xl hover:border-[#e63947]/50 transition-all duration-300 overflow-hidden group"
             >
               <CardContent className="p-0">
                 <div className="flex flex-col sm:flex-row">
 
                   {/* Imagen — object-contain para mostrar completa sobre fondo navy */}
-                  <div className="relative w-full sm:w-72 min-h-[220px] bg-[#1E2B5C] flex-shrink-0 overflow-hidden flex items-center justify-center">
+                  <div className="relative w-full sm:w-72 min-h-[220px] bg-[#2a9d8f] flex-shrink-0 overflow-hidden flex items-center justify-center">
                     {cap.imagen_url ? (
                       <Image
                         src={cap.imagen_url}
@@ -200,8 +200,8 @@ function CategoriaContent({ categoria }: { categoria: string }) {
                         sizes="288px"
                       />
                     ) : (
-                      <div className="w-16 h-16 rounded-full bg-[#F47920]/20 flex items-center justify-center">
-                        <Play className="w-8 h-8 text-[#F47920] ml-1" />
+                      <div className="w-16 h-16 rounded-full bg-[#e63947]/20 flex items-center justify-center">
+                        <Play className="w-8 h-8 text-[#e63947] ml-1" />
                       </div>
                     )}
                   </div>
@@ -209,10 +209,10 @@ function CategoriaContent({ categoria }: { categoria: string }) {
                   {/* Info + archivos */}
                   <div className="flex-1 p-7 flex flex-col justify-between">
                     <div>
-                      <span className="inline-block text-xs text-[#F47920] bg-[#F47920]/10 px-3 py-1 rounded-full mb-3">
+                      <span className="inline-block text-xs text-[#e63947] bg-[#e63947]/10 px-3 py-1 rounded-full mb-3">
                         {config.title}
                       </span>
-                      <h3 className="text-xl font-semibold text-[#1E2B5C] mb-2 group-hover:text-[#F47920] transition-colors duration-300">
+                      <h3 className="text-xl font-semibold text-[#2a9d8f] mb-2 group-hover:text-[#e63947] transition-colors duration-300">
                         {cap.titulo}
                       </h3>
                       {cap.descripcion && (
@@ -242,7 +242,7 @@ function CategoriaContent({ categoria }: { categoria: string }) {
                             <Button
                               key={archivo.id}
                               size="sm"
-                              className="bg-[#F47920] hover:bg-[#d4681a] text-white shadow-sm"
+                              className="bg-[#e63947] hover:bg-[#d4681a] text-white shadow-sm"
                               onClick={() => setVideoActivo({
                                 url: archivo.url,
                                 titulo: archivo.titulo_archivo ?? cap.titulo,
@@ -256,7 +256,7 @@ function CategoriaContent({ categoria }: { categoria: string }) {
                               <Button
                                 size="sm"
                                 variant="outline"
-                                className="border-[#1E2B5C]/20 text-[#1E2B5C] hover:bg-[#1E2B5C]/5 hover:border-[#1E2B5C]/40"
+                                className="border-[#2a9d8f]/20 text-[#2a9d8f] hover:bg-[#2a9d8f]/5 hover:border-[#2a9d8f]/40"
                                 onClick={() => setPdfActivo({
                                   url: archivo.url,
                                   titulo: archivo.titulo_archivo ?? 'Documento',
@@ -268,7 +268,7 @@ function CategoriaContent({ categoria }: { categoria: string }) {
                               <Button
                                 size="sm"
                                 variant="outline"
-                                className="border-[#1E2B5C]/20 text-[#1E2B5C] hover:bg-[#1E2B5C]/5 hover:border-[#1E2B5C]/40 px-2.5"
+                                className="border-[#2a9d8f]/20 text-[#2a9d8f] hover:bg-[#2a9d8f]/5 hover:border-[#2a9d8f]/40 px-2.5"
                                 asChild
                               >
                                 <a href={archivo.url} download target="_blank" rel="noopener noreferrer">
@@ -290,10 +290,10 @@ function CategoriaContent({ categoria }: { categoria: string }) {
           {/* Estado vacío */}
           {capacitaciones.length === 0 && (
             <div className="text-center py-24">
-              <div className="w-20 h-20 bg-[#F47920]/10 rounded-full flex items-center justify-center mx-auto mb-5 text-[#F47920]">
+              <div className="w-20 h-20 bg-[#e63947]/10 rounded-full flex items-center justify-center mx-auto mb-5 text-[#e63947]">
                 {config.icon}
               </div>
-              <h3 className="text-2xl font-semibold text-[#1E2B5C] mb-2">Próximamente</h3>
+              <h3 className="text-2xl font-semibold text-[#2a9d8f] mb-2">Próximamente</h3>
               <p className="text-[#6B7280]">Estamos preparando el contenido de esta sección.</p>
             </div>
           )}

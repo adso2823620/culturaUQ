@@ -10,22 +10,22 @@ import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 
 const contactInfo = [
   {
-    icon: <MapPin className="w-6 h-6 text-[#F47920]" />,
+    icon: <MapPin className="w-6 h-6 text-[#e63947]" />,
     title: 'Dirección',
     details: ['Calle 20 #22-45', 'Manizales, Caldas'],
   },
   {
-    icon: <Phone className="w-6 h-6 text-[#F47920]" />,
+    icon: <Phone className="w-6 h-6 text-[#e63947]" />,
     title: 'Teléfono',
     details: ['+57 (6) 887 9300', '+57 (6) 887 9301'],
   },
   {
-    icon: <Mail className="w-6 h-6 text-[#F47920]" />,
+    icon: <Mail className="w-6 h-6 text-[#e63947]" />,
     title: 'Email',
     details: ['cultura@caldas.gov.co', 'info@culturacaldas.gov.co'],
   },
   {
-    icon: <Clock className="w-6 h-6 text-[#F47920]" />,
+    icon: <Clock className="w-6 h-6 text-[#e63947]" />,
     title: 'Horario de Atención',
     details: ['Lun-Vie: 8:00 - 17:00', 'Sáb: 9:00 - 13:00'],
   },
@@ -38,10 +38,10 @@ export default function ContactoPage() {
 
         {/* Header */}
         <div className="text-center mb-14">
-          <div className="inline-block px-6 py-2 bg-[#F47920]/10 rounded-full mb-6">
-            <span className="text-[#F47920] text-sm tracking-widest">CONTACTO</span>
+          <div className="inline-block px-6 py-2 bg-[#e63947]/10 rounded-full mb-6">
+            <span className="text-[#e63947] text-sm tracking-widest">CONTACTO</span>
           </div>
-          <h1 className="text-5xl mb-4 text-[#1E2B5C]">Contáctanos</h1>
+          <h1 className="text-5xl mb-4 text-[#2a9d8f]">Contáctanos</h1>
           <p className="text-xl text-[#6B7280] max-w-2xl mx-auto">
             ¿Tienes preguntas o quieres participar? Estamos aquí para ayudarte.
           </p>
@@ -51,15 +51,15 @@ export default function ContactoPage() {
 
           {/* Info de contacto */}
           <div>
-            <h2 className="text-2xl mb-6 text-[#1E2B5C]">Información de Contacto</h2>
+            <h2 className="text-2xl mb-6 text-[#2a9d8f]">Información de Contacto</h2>
             <div className="space-y-4">
               {contactInfo.map((item, i) => (
-                <Card key={i} className="border-[#F47920]/20 hover:shadow-md transition-shadow">
+                <Card key={i} className="border-[#e63947]/20 hover:shadow-md transition-shadow">
                   <CardContent className="p-5">
                     <div className="flex items-start gap-4">
                       <div className="mt-0.5">{item.icon}</div>
                       <div>
-                        <h3 className="text-base font-medium mb-1 text-[#1E2B5C]">{item.title}</h3>
+                        <h3 className="text-base font-medium mb-1 text-[#2a9d8f]">{item.title}</h3>
                         {item.details.map((d, j) => (
                           <p key={j} className="text-[#6B7280] text-sm">{d}</p>
                         ))}
@@ -73,8 +73,8 @@ export default function ContactoPage() {
 
           {/* Formulario */}
           <div>
-            <h2 className="text-2xl mb-6 text-[#1E2B5C]">Envíanos un Mensaje</h2>
-            <Card className="border-[#F47920]/20">
+            <h2 className="text-2xl mb-6 text-[#2a9d8f]">Envíanos un Mensaje</h2>
+            <Card className="border-[#e63947]/20">
               <CardContent className="p-6">
                 <form className="space-y-4">
                   <div>

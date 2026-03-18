@@ -40,8 +40,8 @@ function labelAcceso(tipo: string) {
 
 function colorAcceso(tipo: string) {
   if (tipo === 'gratuito') return 'bg-green-500';
-  if (tipo === 'con_costo') return 'bg-[#F47920]';
-  return 'bg-[#3B82F6]';
+  if (tipo === 'con_costo') return 'bg-[#e63947]';
+  return 'bg-[#0f4c75]';
 }
 
 // ── Skeleton ─────────────────────────────────────────────────────────────────
@@ -154,31 +154,31 @@ function AgendaContent() {
 
       {/* ── Header ── */}
       <div className="mb-10">
-        <div className="inline-block px-6 py-2 bg-[#F47920]/10 rounded-full mb-5">
-          <span className="text-[#F47920] text-sm tracking-widest">CALDAS CULTURAL</span>
+        <div className="inline-block px-6 py-2 bg-[#e63947]/10 rounded-full mb-5">
+          <span className="text-[#e63947] text-sm tracking-widest">CALDAS CULTURAL</span>
         </div>
-        <h1 className="text-5xl mb-4 text-[#1E2B5C]">Agenda Cultural</h1>
+        <h1 className="text-5xl mb-4 text-[#2a9d8f]">Agenda Cultural</h1>
         <p className="text-lg text-[#6B7280] max-w-2xl leading-relaxed">
           Eventos culturales aprobados en Caldas. Haz clic en cualquier evento para ver los detalles completos.
         </p>
       </div>
 
       {/* ── Barra de filtros ── */}
-      <div className="bg-white rounded-2xl shadow-sm border border-[#F47920]/20 p-5 mb-8">
+      <div className="bg-white rounded-2xl shadow-sm border border-[#e63947]/20 p-5 mb-8">
         {/* Navegación de mes */}
         <div className="flex items-center justify-between mb-5">
           <button
             onClick={mesAnterior}
-            className="flex items-center gap-1 text-sm text-[#1E2B5C] hover:text-[#F47920] transition-colors px-3 py-1.5 rounded-lg hover:bg-[#F47920]/5"
+            className="flex items-center gap-1 text-sm text-[#2a9d8f] hover:text-[#e63947] transition-colors px-3 py-1.5 rounded-lg hover:bg-[#e63947]/5"
           >
             <ChevronLeft className="w-4 h-4" /> Anterior
           </button>
-          <h2 className="text-xl text-[#1E2B5C] font-medium">
+          <h2 className="text-xl text-[#2a9d8f] font-medium">
             {MESES_LARGO[mes]} {anio}
           </h2>
           <button
             onClick={mesSiguiente}
-            className="flex items-center gap-1 text-sm text-[#1E2B5C] hover:text-[#F47920] transition-colors px-3 py-1.5 rounded-lg hover:bg-[#F47920]/5"
+            className="flex items-center gap-1 text-sm text-[#2a9d8f] hover:text-[#e63947] transition-colors px-3 py-1.5 rounded-lg hover:bg-[#e63947]/5"
           >
             Siguiente <ChevronRight className="w-4 h-4" />
           </button>
@@ -191,7 +191,7 @@ function AgendaContent() {
             <select
               value={filtroArea}
               onChange={e => setFiltroArea(e.target.value)}
-              className="text-sm border border-gray-200 rounded-lg px-3 py-2 text-[#1E2B5C] focus:outline-none focus:border-[#F47920] bg-white"
+              className="text-sm border border-gray-200 rounded-lg px-3 py-2 text-[#2a9d8f] focus:outline-none focus:border-[#e63947] bg-white"
             >
               <option value="todos">Todas las áreas</option>
               {areas.map(a => <option key={a} value={a}>{a}</option>)}
@@ -203,7 +203,7 @@ function AgendaContent() {
             <select
               value={filtroMunicipio}
               onChange={e => setFiltroMunicipio(e.target.value)}
-              className="text-sm border border-gray-200 rounded-lg px-3 py-2 text-[#1E2B5C] focus:outline-none focus:border-[#F47920] bg-white"
+              className="text-sm border border-gray-200 rounded-lg px-3 py-2 text-[#2a9d8f] focus:outline-none focus:border-[#e63947] bg-white"
             >
               <option value="todos">Todos los municipios</option>
               {municipios.map(m => <option key={m} value={m}>{m}</option>)}
@@ -214,7 +214,7 @@ function AgendaContent() {
           <select
             value={filtroModalidad}
             onChange={e => setFiltroModalidad(e.target.value)}
-            className="text-sm border border-gray-200 rounded-lg px-3 py-2 text-[#1E2B5C] focus:outline-none focus:border-[#F47920] bg-white"
+            className="text-sm border border-gray-200 rounded-lg px-3 py-2 text-[#2a9d8f] focus:outline-none focus:border-[#e63947] bg-white"
           >
             <option value="todos">Todas las modalidades</option>
             <option value="presencial">Presencial</option>
@@ -228,7 +228,7 @@ function AgendaContent() {
               type="checkbox"
               checked={soloGratis}
               onChange={e => setSoloGratis(e.target.checked)}
-              className="w-4 h-4 accent-[#F47920]"
+              className="w-4 h-4 accent-[#e63947]"
             />
             Solo gratuitos
           </label>
@@ -255,7 +255,7 @@ function AgendaContent() {
             <Card
               key={evento.id}
               onClick={() => setEventoSeleccionado(evento)}
-              className="border-[#F47920]/20 hover:shadow-xl hover:border-[#F47920]/40 transition-all duration-300 overflow-hidden group cursor-pointer rounded-2xl"
+              className="border-[#e63947]/20 hover:shadow-xl hover:border-[#e63947]/40 transition-all duration-300 overflow-hidden group cursor-pointer rounded-2xl"
             >
               {/* Imagen */}
               <div className="relative h-44 overflow-hidden">
@@ -268,7 +268,7 @@ function AgendaContent() {
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 ) : (
-                  <div className="w-full h-full bg-[#1E2B5C] flex items-center justify-center">
+                  <div className="w-full h-full bg-[#2a9d8f] flex items-center justify-center">
                     <span className="text-white/20 text-6xl font-bold select-none">
                       {evento.titulo.charAt(0).toUpperCase()}
                     </span>
@@ -298,19 +298,19 @@ function AgendaContent() {
                 {/* Chips */}
                 <div className="flex flex-wrap gap-1.5 mb-3">
                   {evento.area_artistica && (
-                    <span className="px-2 py-0.5 bg-[#3B82F6]/10 text-[#3B82F6] rounded-md text-xs">
+                    <span className="px-2 py-0.5 bg-[#0f4c75]/10 text-[#0f4c75] rounded-md text-xs">
                       {evento.area_artistica}
                     </span>
                   )}
                   {evento.tipo_evento && (
-                    <span className="px-2 py-0.5 bg-[#F47920]/10 text-[#F47920] rounded-md text-xs capitalize">
+                    <span className="px-2 py-0.5 bg-[#e63947]/10 text-[#e63947] rounded-md text-xs capitalize">
                       {evento.tipo_evento.replace(/_/g, ' ')}
                     </span>
                   )}
                 </div>
 
                 {/* Título */}
-                <h3 className="text-base font-semibold text-[#1E2B5C] mb-2 group-hover:text-[#F47920] transition-colors line-clamp-2 leading-snug">
+                <h3 className="text-base font-semibold text-[#2a9d8f] mb-2 group-hover:text-[#e63947] transition-colors line-clamp-2 leading-snug">
                   {evento.titulo}
                 </h3>
 
@@ -324,18 +324,18 @@ function AgendaContent() {
                 {/* Meta */}
                 <div className="space-y-1.5 text-xs text-[#6B7280]">
                   <div className="flex items-center gap-2">
-                    <Calendar className="w-3.5 h-3.5 text-[#F47920] flex-shrink-0" />
+                    <Calendar className="w-3.5 h-3.5 text-[#e63947] flex-shrink-0" />
                     {formatFechaCorta(evento.fecha_inicio)}
                     {evento.hora_inicio && (
                       <span className="flex items-center gap-1">
-                        <Clock className="w-3 h-3 text-[#F47920]" />
+                        <Clock className="w-3 h-3 text-[#e63947]" />
                         {formatHora(evento.hora_inicio)}
                       </span>
                     )}
                   </div>
                   {evento.modalidad !== 'virtual' && evento.municipio && (
                     <div className="flex items-center gap-2">
-                      <MapPin className="w-3.5 h-3.5 text-[#F47920] flex-shrink-0" />
+                      <MapPin className="w-3.5 h-3.5 text-[#e63947] flex-shrink-0" />
                       <span className="line-clamp-1">
                         {evento.lugar_nombre ? `${evento.lugar_nombre}, ` : ''}{evento.municipio}
                       </span>
@@ -343,14 +343,14 @@ function AgendaContent() {
                   )}
                   {evento.modalidad === 'virtual' && (
                     <div className="flex items-center gap-2">
-                      <Link2 className="w-3.5 h-3.5 text-[#F47920] flex-shrink-0" />
+                      <Link2 className="w-3.5 h-3.5 text-[#e63947] flex-shrink-0" />
                       <span>Evento virtual</span>
                     </div>
                   )}
                 </div>
 
                 {/* Ver más */}
-                <div className="mt-4 text-[#F47920] text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="mt-4 text-[#e63947] text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   Ver detalles completos →
                 </div>
               </CardContent>
@@ -360,10 +360,10 @@ function AgendaContent() {
       ) : (
         /* Estado vacío */
         <div className="text-center py-20">
-          <div className="w-20 h-20 bg-[#F47920]/10 rounded-full flex items-center justify-center mx-auto mb-5">
-            <Calendar className="w-10 h-10 text-[#F47920]" />
+          <div className="w-20 h-20 bg-[#e63947]/10 rounded-full flex items-center justify-center mx-auto mb-5">
+            <Calendar className="w-10 h-10 text-[#e63947]" />
           </div>
-          <h3 className="text-2xl text-[#1E2B5C] mb-2">
+          <h3 className="text-2xl text-[#2a9d8f] mb-2">
             No hay eventos programados
           </h3>
           <p className="text-[#6B7280] mb-5">
@@ -379,7 +379,7 @@ function AgendaContent() {
                 setFiltroModalidad('todos');
                 setSoloGratis(false);
               }}
-              className="px-5 py-2 bg-[#F47920] text-white rounded-full text-sm hover:bg-[#F47920]/90 transition-colors"
+              className="px-5 py-2 bg-[#e63947] text-white rounded-full text-sm hover:bg-[#e63947]/90 transition-colors"
             >
               Limpiar filtros
             </button>

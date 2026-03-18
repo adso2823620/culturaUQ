@@ -146,14 +146,14 @@ export default function InscribeteForm() {
   if (submitted) {
     return (
       <div className="max-w-2xl mx-auto px-6 py-20 text-center">
-        <div className="w-24 h-24 bg-[#F47920]/10 rounded-full flex items-center justify-center mx-auto mb-6">
-          <CheckCircle2 className="w-12 h-12 text-[#F47920]" />
+        <div className="w-24 h-24 bg-[#e63947]/10 rounded-full flex items-center justify-center mx-auto mb-6">
+          <CheckCircle2 className="w-12 h-12 text-[#e63947]" />
         </div>
-        <h2 className="text-4xl mb-4 text-[#1E2B5C]">¡Solicitud Enviada!</h2>
+        <h2 className="text-4xl mb-4 text-[#2a9d8f]">¡Solicitud Enviada!</h2>
         <p className="text-lg text-[#6B7280] leading-relaxed max-w-md mx-auto mb-8">
           Tu organización ha sido registrada y está pendiente de aprobación.
           El equipo de Cultura Caldas revisará la información y te contactará
-          al correo <strong className="text-[#1E2B5C]">{form.correo}</strong>.
+          al correo <strong className="text-[#2a9d8f]">{form.correo}</strong>.
         </p>
         <Button onClick={() => { setForm(initialForm); setStep(1); setSubmitted(false); setFotoPreview(null); }}>
           Registrar otra organización
@@ -167,7 +167,7 @@ export default function InscribeteForm() {
 
       {/* Header */}
       <div className="mb-10">
-        <h2 className="text-3xl mb-3 text-[#1E2B5C]">Inscríbete</h2>
+        <h2 className="text-3xl mb-3 text-[#2a9d8f]">Inscríbete</h2>
         <p className="text-[#6B7280] leading-relaxed">
           Registra tu organización en el directorio cultural de Caldas.
           Tu solicitud será revisada por nuestro equipo.
@@ -184,19 +184,19 @@ export default function InscribeteForm() {
             <div key={s.number} className="flex items-center flex-1 last:flex-none">
               <div className="flex flex-col items-center">
                 <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
-                  isCompleted ? 'bg-[#F47920] text-white'
-                  : isActive  ? 'bg-[#1E2B5C] text-white'
+                  isCompleted ? 'bg-[#e63947] text-white'
+                  : isActive  ? 'bg-[#2a9d8f] text-white'
                               : 'bg-gray-100 text-gray-400'
                 }`}>
                   {isCompleted ? <CheckCircle2 className="w-5 h-5" /> : <Icon className="w-4 h-4" />}
                 </div>
                 <span className={`text-xs mt-1 text-center hidden sm:block ${
-                  isActive ? 'text-[#1E2B5C] font-semibold' : 'text-gray-400'
+                  isActive ? 'text-[#2a9d8f] font-semibold' : 'text-gray-400'
                 }`}>{s.label}</span>
               </div>
               {i < STEPS.length - 1 && (
                 <div className={`flex-1 h-0.5 mx-2 mb-4 transition-all duration-300 ${
-                  step > s.number ? 'bg-[#F47920]' : 'bg-gray-200'
+                  step > s.number ? 'bg-[#e63947]' : 'bg-gray-200'
                 }`} />
               )}
             </div>
@@ -204,13 +204,13 @@ export default function InscribeteForm() {
         })}
       </div>
 
-      <Card className="border border-[#F47920]/20">
+      <Card className="border border-[#e63947]/20">
         <CardContent className="p-8">
 
           {/* ── PASO 1 ── */}
           {step === 1 && (
             <div className="space-y-5">
-              <h3 className="text-xl text-[#1E2B5C] mb-6 pb-2 border-b border-[#F47920]/20">
+              <h3 className="text-xl text-[#2a9d8f] mb-6 pb-2 border-b border-[#e63947]/20">
                 Datos de la Organización
               </h3>
               <div>
@@ -245,7 +245,7 @@ export default function InscribeteForm() {
           {/* ── PASO 2 ── */}
           {step === 2 && (
             <div className="space-y-5">
-              <h3 className="text-xl text-[#1E2B5C] mb-6 pb-2 border-b border-[#F47920]/20">
+              <h3 className="text-xl text-[#2a9d8f] mb-6 pb-2 border-b border-[#e63947]/20">
                 Ubicación y Contacto
               </h3>
               <div>
@@ -286,18 +286,18 @@ export default function InscribeteForm() {
           {/* ── PASO 3 ── */}
           {step === 3 && (
             <div className="space-y-6">
-              <h3 className="text-xl text-[#1E2B5C] mb-6 pb-2 border-b border-[#F47920]/20">
+              <h3 className="text-xl text-[#2a9d8f] mb-6 pb-2 border-b border-[#e63947]/20">
                 Foto y Redes Sociales
               </h3>
               <div>
                 <Label>Foto de la Organización <span className="text-xs text-[#6B7280] font-normal">(JPG o PNG, máx. 2MB)</span></Label>
                 {!fotoPreview ? (
                   <label htmlFor="foto-upload" className={`mt-2 flex flex-col items-center justify-center w-full h-40 border-2 border-dashed rounded-xl cursor-pointer transition-colors duration-200 ${
-                    uploadingFoto ? 'border-[#F47920]/50 bg-[#F47920]/5' : 'border-gray-200 bg-gray-50 hover:border-[#F47920]/50 hover:bg-[#F47920]/5'
+                    uploadingFoto ? 'border-[#e63947]/50 bg-[#e63947]/5' : 'border-gray-200 bg-gray-50 hover:border-[#e63947]/50 hover:bg-[#e63947]/5'
                   }`}>
                     {uploadingFoto ? (
-                      <div className="flex flex-col items-center gap-2 text-[#F47920]">
-                        <div className="w-8 h-8 border-2 border-[#F47920] border-t-transparent rounded-full animate-spin" />
+                      <div className="flex flex-col items-center gap-2 text-[#e63947]">
+                        <div className="w-8 h-8 border-2 border-[#e63947] border-t-transparent rounded-full animate-spin" />
                         <span className="text-sm">Subiendo imagen...</span>
                       </div>
                     ) : (
@@ -310,7 +310,7 @@ export default function InscribeteForm() {
                     <input id="foto-upload" type="file" accept="image/*" className="hidden" onChange={handleFotoChange} disabled={uploadingFoto} />
                   </label>
                 ) : (
-                  <div className="mt-2 relative w-full h-40 rounded-xl overflow-hidden border border-[#F47920]/30">
+                  <div className="mt-2 relative w-full h-40 rounded-xl overflow-hidden border border-[#e63947]/30">
                     <Image src={fotoPreview} alt="Preview" fill className="object-cover" />
                     <button onClick={handleQuitarFoto} className="absolute top-2 right-2 w-7 h-7 bg-black/60 hover:bg-black/80 text-white rounded-full flex items-center justify-center transition-colors">
                       <X className="w-4 h-4" />
@@ -326,14 +326,14 @@ export default function InscribeteForm() {
               <div><Label htmlFor="youtube">YouTube</Label><Input id="youtube" value={form.youtube} onChange={set('youtube')} placeholder="https://youtube.com/@tuorganizacion" /></div>
 
               {/* Resumen */}
-              <div className="p-5 bg-[#F47920]/5 rounded-xl border border-[#F47920]/20">
-                <p className="text-sm font-semibold text-[#1E2B5C] mb-3">Resumen de tu solicitud:</p>
+              <div className="p-5 bg-[#e63947]/5 rounded-xl border border-[#e63947]/20">
+                <p className="text-sm font-semibold text-[#2a9d8f] mb-3">Resumen de tu solicitud:</p>
                 <div className="space-y-1.5 text-sm text-[#6B7280]">
-                  <p><span className="text-[#1E2B5C] font-medium">Organización:</span> {form.razon_social}</p>
-                  <p><span className="text-[#1E2B5C] font-medium">Sector:</span> {form.sector_cultural}</p>
-                  <p><span className="text-[#1E2B5C] font-medium">Municipio:</span> {form.municipio}</p>
-                  <p><span className="text-[#1E2B5C] font-medium">Correo:</span> {form.correo}</p>
-                  <p><span className="text-[#1E2B5C] font-medium">Foto:</span>{' '}
+                  <p><span className="text-[#2a9d8f] font-medium">Organización:</span> {form.razon_social}</p>
+                  <p><span className="text-[#2a9d8f] font-medium">Sector:</span> {form.sector_cultural}</p>
+                  <p><span className="text-[#2a9d8f] font-medium">Municipio:</span> {form.municipio}</p>
+                  <p><span className="text-[#2a9d8f] font-medium">Correo:</span> {form.correo}</p>
+                  <p><span className="text-[#2a9d8f] font-medium">Foto:</span>{' '}
                     {form.foto_url ? <span className="text-green-600">✓ Cargada</span> : <span className="text-gray-400">Sin foto</span>}
                   </p>
                 </div>
@@ -346,7 +346,7 @@ export default function InscribeteForm() {
           {/* Navegación */}
           <div className={`flex mt-8 ${step > 1 ? 'justify-between' : 'justify-end'}`}>
             {step > 1 && (
-              <Button variant="outline" onClick={() => setStep(step - 1)} disabled={loading} className="border-[#1E2B5C]/30 text-[#1E2B5C]">
+              <Button variant="outline" onClick={() => setStep(step - 1)} disabled={loading} className="border-[#2a9d8f]/30 text-[#2a9d8f]">
                 <ChevronLeft className="w-4 h-4 mr-1" /> Anterior
               </Button>
             )}
