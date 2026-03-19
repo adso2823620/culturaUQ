@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-
+import ConditionalNavigation from '@/components/ConditionalNavigation'
 
 
 export const metadata = {
@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body>
-        <Navigation />
+        <ConditionalNavigation />
         {children}
        
       </body>

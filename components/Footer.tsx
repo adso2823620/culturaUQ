@@ -55,10 +55,8 @@ export default function Footer() {
 
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
-            {/* Logo Fundación de Caldas — ícono institucional */}
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-xl bg-white/15 border border-white/20 flex items-center justify-center flex-shrink-0">
-                {/* Ícono representativo — montaña + sol (Caldas) */}
                 <svg viewBox="0 0 32 32" fill="none" className="w-6 h-6" xmlns="http://www.w3.org/2000/svg">
                   <path d="M4 24 L10 14 L16 18 L22 10 L28 24 Z" fill="white" fillOpacity="0.9" />
                   <circle cx="16" cy="7" r="3" fill="#e63947" />
@@ -141,15 +139,37 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* ── Franja inferior — copyright ── */}
+      {/* ── Franja inferior — copyright + acceso admin ── */}
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
           <p className="text-white/45 text-xs">
             © {new Date().getFullYear()} Cultura Caldas · Fundación de Caldas
           </p>
-          <p className="text-white/45 text-xs">
-            Manizales, Colombia
-          </p>
+          <div className="flex items-center gap-4">
+            <p className="text-white/45 text-xs">
+              Manizales, Colombia
+            </p>
+            {/* Acceso admin discreto */}
+            <Link
+              href="/admin"
+              className="flex items-center gap-1.5 text-white/25 hover:text-white/60 transition-colors duration-200 group"
+              title="Acceso administrador"
+            >
+              <svg
+                className="w-3.5 h-3.5 group-hover:scale-110 transition-transform duration-200"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                viewBox="0 0 24 24"
+              >
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+              </svg>
+              <span className="text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                Admin
+              </span>
+            </Link>
+          </div>
         </div>
       </div>
 

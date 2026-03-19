@@ -7,9 +7,12 @@ import { Card, CardContent } from '@/components/ui/card';
 import PageLayout from '@/components/PageLayout';
 import EventoModal, { type EventoDetalle } from '@/components/EventoModal';
 import { supabase } from '@/lib/supabase';
-import { Calendar, Clock, MapPin, Link2, ChevronLeft, ChevronRight } from 'lucide-react';
+import {
+  Calendar, Clock, MapPin, Link2, ChevronLeft, ChevronRight,
+  Music, BookOpen, Users, Mic2, Globe, Star
+} from 'lucide-react';
 
-// ── Helpers ──────────────────────────────────────────────────────────────────
+// ── Helpers ───────────────────────────────────────────────────────────────────
 const MESES_LARGO = [
   'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
   'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
@@ -44,7 +47,23 @@ function colorAcceso(tipo: string) {
   return 'bg-[#0f4c75]';
 }
 
-// ── Skeleton ─────────────────────────────────────────────────────────────────
+function getTipoEmoji(tipo: string) {
+  const map: Record<string, string> = {
+    taller: '🛠️',
+    conversatorio: '🗣️',
+    feria: '🎪',
+    festival: '🎉',
+    proceso_formacion: '📚',
+    jornada_comunitaria: '🤝',
+    lanzamiento: '🚀',
+    seminario: '🎓',
+    exposicion: '🖼️',
+    presentacion_artistica: '🎭',
+    otro: '🎨',
+  }
+  return map[tipo] ?? '🎨'
+}
+// ── Skeleton ──────────────────────────────────────────────────────────────────
 function SkeletonCard() {
   return (
     <div className="rounded-2xl border border-gray-100 overflow-hidden animate-pulse">
@@ -64,7 +83,7 @@ function AgendaContent() {
   const searchParams = useSearchParams();
 
   const hoy = new Date();
-  const [mes, setMes] = useState(hoy.getMonth());       // 0-indexed
+  const [mes, setMes] = useState(hoy.getMonth());
   const [anio, setAnio] = useState(hoy.getFullYear());
 
   const [eventos, setEventos] = useState<EventoDetalle[]>([]);
@@ -83,12 +102,11 @@ function AgendaContent() {
   const [areas, setAreas] = useState<string[]>([]);
   const [municipios, setMunicipios] = useState<string[]>([]);
 
-  // ── Fetch ──────────────────────────────────────────────────────────────────
+  // ── Fetch ─────────────────────────────────────────────────────────────────
   useEffect(() => {
     async function fetchEventos() {
       setLoading(true);
 
-      // Rango del mes seleccionado
       const primerDia = `${anio}-${String(mes + 1).padStart(2, '0')}-01`;
       const ultimoDia = new Date(anio, mes + 1, 0);
       const ultimoDiaStr = `${anio}-${String(mes + 1).padStart(2, '0')}-${String(ultimoDia.getDate()).padStart(2, '0')}`;
@@ -117,7 +135,6 @@ function AgendaContent() {
         const lista = (data ?? []) as EventoDetalle[];
         setEventos(lista);
 
-        // Construir listas únicas para los filtros
         const areasUnicas = [...new Set(lista.map(e => e.area_artistica).filter(Boolean))] as string[];
         const municipiosUnicos = [...new Set(lista.map(e => e.municipio).filter(Boolean))] as string[];
         setAreas(areasUnicas.sort());
@@ -130,7 +147,7 @@ function AgendaContent() {
     fetchEventos();
   }, [mes, anio]);
 
-  // ── Filtrado local ─────────────────────────────────────────────────────────
+  // ── Filtrado local ────────────────────────────────────────────────────────
   const eventosFiltrados = eventos.filter(e => {
     if (filtroArea !== 'todos' && e.area_artistica !== filtroArea) return false;
     if (filtroMunicipio !== 'todos' && e.municipio !== filtroMunicipio) return false;
@@ -139,7 +156,7 @@ function AgendaContent() {
     return true;
   });
 
-  // ── Navegación de mes ──────────────────────────────────────────────────────
+  // ── Navegación de mes ─────────────────────────────────────────────────────
   function mesAnterior() {
     if (mes === 0) { setMes(11); setAnio(a => a - 1); }
     else setMes(m => m - 1);
@@ -186,35 +203,32 @@ function AgendaContent() {
 
         {/* Filtros en fila */}
         <div className="flex flex-wrap gap-3 items-center">
-          {/* Área artística */}
           {areas.length > 0 && (
             <select
               value={filtroArea}
               onChange={e => setFiltroArea(e.target.value)}
-              className="text-sm border border-gray-200 rounded-lg px-3 py-2 text-[#2a9d8f] focus:outline-none focus:border-[#e63947] bg-white"
+              className="border border-gray-200 rounded-xl px-3 py-2 text-sm text-gray-600 focus:outline-none focus:border-[#2a9d8f]"
             >
               <option value="todos">Todas las áreas</option>
               {areas.map(a => <option key={a} value={a}>{a}</option>)}
             </select>
           )}
 
-          {/* Municipio */}
           {municipios.length > 0 && (
             <select
               value={filtroMunicipio}
               onChange={e => setFiltroMunicipio(e.target.value)}
-              className="text-sm border border-gray-200 rounded-lg px-3 py-2 text-[#2a9d8f] focus:outline-none focus:border-[#e63947] bg-white"
+              className="border border-gray-200 rounded-xl px-3 py-2 text-sm text-gray-600 focus:outline-none focus:border-[#2a9d8f]"
             >
               <option value="todos">Todos los municipios</option>
               {municipios.map(m => <option key={m} value={m}>{m}</option>)}
             </select>
           )}
 
-          {/* Modalidad */}
           <select
             value={filtroModalidad}
             onChange={e => setFiltroModalidad(e.target.value)}
-            className="text-sm border border-gray-200 rounded-lg px-3 py-2 text-[#2a9d8f] focus:outline-none focus:border-[#e63947] bg-white"
+            className="border border-gray-200 rounded-xl px-3 py-2 text-sm text-gray-600 focus:outline-none focus:border-[#2a9d8f]"
           >
             <option value="todos">Todas las modalidades</option>
             <option value="presencial">Presencial</option>
@@ -222,13 +236,12 @@ function AgendaContent() {
             <option value="hibrido">Híbrido</option>
           </select>
 
-          {/* Solo gratuitos */}
-          <label className="flex items-center gap-2 text-sm text-[#6B7280] cursor-pointer select-none ml-auto">
+          <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer ml-auto">
             <input
               type="checkbox"
               checked={soloGratis}
               onChange={e => setSoloGratis(e.target.checked)}
-              className="w-4 h-4 accent-[#e63947]"
+              className="rounded"
             />
             Solo gratuitos
           </label>
@@ -268,11 +281,9 @@ function AgendaContent() {
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 ) : (
-                  <div className="w-full h-full bg-[#2a9d8f] flex items-center justify-center">
-                    <span className="text-white/20 text-6xl font-bold select-none">
-                      {evento.titulo.charAt(0).toUpperCase()}
-                    </span>
-                  </div>
+           <div className="w-full h-full flex items-center justify-center" style={{ backgroundColor: '#0f4c75' }}>
+    <span className="text-6xl">{getTipoEmoji(evento.tipo_evento)}</span>
+  </div>
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
 
@@ -358,7 +369,6 @@ function AgendaContent() {
           ))}
         </div>
       ) : (
-        /* Estado vacío */
         <div className="text-center py-20">
           <div className="w-20 h-20 bg-[#e63947]/10 rounded-full flex items-center justify-center mx-auto mb-5">
             <Calendar className="w-10 h-10 text-[#e63947]" />
@@ -398,7 +408,7 @@ function AgendaContent() {
   );
 }
 
-// ── Página exportada con Suspense (requerido por useSearchParams) ─────────────
+// ── Página exportada con Suspense ─────────────────────────────────────────────
 export default function AgendaCulturalPage() {
   return (
     <PageLayout letter="C" letterPosition="top-right">
