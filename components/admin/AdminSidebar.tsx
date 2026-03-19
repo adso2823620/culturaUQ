@@ -12,7 +12,7 @@ const navItems = [
   { href: '/admin/labter', label: 'Labter', icon: '🎓' },
 ]
 
-const metricasItem = { href: '/admin/metricas', label: 'Métricas', icon: '📈' }
+const metricasItem: { href: string; label: string; icon: string; exact?: boolean } = { href: '/admin/metricas', label: 'Métricas', icon: '📈' }
 
 interface Props {
   role: string
