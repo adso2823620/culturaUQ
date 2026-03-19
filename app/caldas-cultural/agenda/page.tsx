@@ -282,7 +282,7 @@ function AgendaContent() {
                   />
                 ) : (
            <div className="w-full h-full flex items-center justify-center" style={{ backgroundColor: '#0f4c75' }}>
-    <span className="text-6xl">{getTipoEmoji(evento.tipo_evento)}</span>
+    <span className="text-6xl">{getTipoEmoji(evento.tipo_evento ?? '')}</span>
   </div>
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
