@@ -62,9 +62,7 @@ export default function AdminLoginPage() {
               value={email}
               onChange={e => setEmail(e.target.value)}
               required
-              className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2"
-              style={{ focusRingColor: '#2a9d8f' }}
-              placeholder="admin@culturacaldas.org"
+              className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-teal-400"placeholder="admin@culturacaldas.org"
             />
           </div>
 
