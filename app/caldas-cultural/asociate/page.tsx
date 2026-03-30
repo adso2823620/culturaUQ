@@ -2,132 +2,219 @@
 
 import { useState } from 'react';
 import PageLayout from '@/components/PageLayout';
+import Breadcrumb from '@/components/Breadcrumb';
 import InscribeteForm from '@/components/asociate/InscribeteForm';
 import ActualizaInfoForm from '@/components/asociate/ActualizaInfoForm';
 import RegistraEventoForm from '@/components/asociate/RegistraEventoForm';
+import Link from 'next/link';
 import { UserPlus, RefreshCw, CalendarPlus, ChevronRight } from 'lucide-react';
 
 type Tab = 'inscribete' | 'actualiza' | 'eventos';
 
-const TABS = [
+const OPCIONES = [
   {
     id: 'inscribete' as Tab,
     label: 'Inscríbete',
-    sublabel: 'Organización nueva',
-    descripcion: 'Registra tu organización en el directorio cultural de Caldas.',
+    descripcion: 'Registra tu organización en el directorio cultural de Caldas',
     icon: UserPlus,
     accent: '#e63947',
-    accentBg: 'bg-[#e63947]',
-    accentText: 'text-[#e63947]',
+    accentBg: 'rgba(230,57,71,0.08)',
   },
   {
     id: 'actualiza' as Tab,
     label: 'Actualiza tu info',
-    sublabel: 'Ya estás registrado',
-    descripcion: 'Edita tus datos, foto y redes. Solo necesitas tu correo registrado.',
+    descripcion: 'Edita tus datos, foto y redes con verificación por correo',
     icon: RefreshCw,
     accent: '#0f4c75',
-    accentBg: 'bg-[#0f4c75]',
-    accentText: 'text-[#0f4c75]',
+    accentBg: 'rgba(15,76,117,0.08)',
   },
   {
     id: 'eventos' as Tab,
     label: 'Registra un evento',
-    sublabel: 'Agenda cultural',
-    descripcion: 'Publica tus próximos eventos para que aparezcan en la Agenda de Caldas.',
+    descripcion: 'Publica tus próximos eventos en la Agenda Cultural de Caldas',
     icon: CalendarPlus,
     accent: '#2d9b6f',
-    accentBg: 'bg-[#2d9b6f]',
-    accentText: 'text-[#2d9b6f]',
+    accentBg: 'rgba(45,155,111,0.08)',
   },
-] as const;
+]
+
+const TABS_NAV = [
+  { slug: 'agenda', label: 'Agenda Cultural' },
+  { slug: 'conectate', label: 'Conéctate' },
+  { slug: 'asociate', label: 'Asóciate' },
+]
 
 export default function AsociatePage() {
-  const [tab, setTab] = useState<Tab>('inscribete');
-  const activeTab = TABS.find((t) => t.id === tab)!;
+  const [tab, setTab] = useState<Tab | null>(null)
+  const opcionActiva = OPCIONES.find(o => o.id === tab)
 
   return (
     <PageLayout letter="A" letterPosition="top-right">
 
-      {/* ── HERO ────────────────────────────────────────────────────── */}
-      <div className="relative bg-[#2a9d8f] overflow-hidden">
+      {/* Breadcrumb + tabs nav */}
+      <div className="max-w-5xl mx-auto px-6 pt-8">
+        <Breadcrumb crumbs={[
+          { label: 'Inicio', href: '/' },
+          { label: 'Caldas Cultural', href: '/caldas-cultural' },
+          { label: 'Asóciate' },
+        ]} />
+        <div className="flex flex-wrap gap-2 mb-8 p-1 bg-gray-50 rounded-2xl border border-gray-100 w-fit">
+          {TABS_NAV.map(t => (
+            <Link key={t.slug} href={`/caldas-cultural/${t.slug}`}
+              className="px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200"
+              style={{
+                backgroundColor: t.slug === 'asociate' ? '#0f4c75' : 'transparent',
+                color: t.slug === 'asociate' ? 'white' : '#6b7280',
+              }}>
+              {t.label}
+            </Link>
+          ))}
+        </div>
+      </div>
 
-        {/* Patrón puntitos */}
-        <div className="absolute inset-0 opacity-[0.04]"
-          style={{ backgroundImage: `radial-gradient(circle, #ffffff 1px, transparent 1px)`, backgroundSize: '28px 28px' }}
-        />
-        {/* Orbes */}
-        <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-[#e63947]/10 blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-16 -left-16 w-72 h-72 rounded-full bg-[#0f4c75]/10 blur-3xl pointer-events-none" />
-
-        <div className="relative max-w-5xl mx-auto px-6 pt-16 pb-12">
-
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#e63947]/15 border border-[#e63947]/25 rounded-full mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#e63947] animate-pulse" />
-            <span className="text-[#e63947] text-xs tracking-widest font-semibold uppercase">Caldas Cultural</span>
-          </div>
-
-          <h1 className="text-5xl sm:text-6xl font-bold text-white mb-4 leading-tight">Asóciate</h1>
-          <p className="text-white/50 text-base max-w-lg leading-relaxed">
-            Sé parte del directorio cultural de Caldas. Elige qué quieres hacer:
+      {/* Hero suave */}
+      <div className="max-w-5xl mx-auto px-6 pb-6">
+        <div className="mb-2">
+          <span className="inline-block bg-[#e63947]/10 text-[#e63947] text-xs tracking-widest px-4 py-1.5 rounded-full mb-4">
+            CALDAS CULTURAL
+          </span>
+          <h1 className="text-4xl font-bold mb-3" style={{ color: '#0f4c75' }}>
+            Asóciate
+          </h1>
+          <p className="text-gray-500 text-base max-w-lg leading-relaxed">
+            Sé parte del directorio cultural de Caldas. ¿Qué necesitas hacer hoy?
           </p>
+        </div>
+      </div>
 
-          {/* Tarjetas de selección */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-10">
-            {TABS.map((t) => {
-              const Icon     = t.icon;
-              const isActive = tab === t.id;
+      {/* Contenido principal */}
+      <div className="max-w-5xl mx-auto px-6 pb-20">
+        <div className="grid lg:grid-cols-5 gap-6">
+
+          {/* Lista de opciones — columna izquierda */}
+          <div className="lg:col-span-2 flex flex-col gap-3">
+            {OPCIONES.map(opcion => {
+              const Icon = opcion.icon
+              const isActive = tab === opcion.id
               return (
                 <button
-                  key={t.id}
-                  onClick={() => setTab(t.id)}
-                  className={`group relative text-left p-5 rounded-2xl border-2 transition-all duration-300 ${
-                    isActive
-                      ? 'bg-white/10 shadow-lg shadow-black/20'
-                      : 'border-white/10 bg-white/5 hover:border-white/25'
-                  }`}
-                  style={isActive ? { borderColor: t.accent } : undefined}
+                  key={opcion.id}
+                  onClick={() => setTab(opcion.id)}
+                  className="w-full text-left transition-all duration-200 rounded-2xl group"
+                  style={{
+                    background: isActive ? opcion.accentBg : 'white',
+                    border: isActive ? `2px solid ${opcion.accent}` : '1px solid #e5e7eb',
+                    padding: '16px 20px',
+                  }}
                 >
-                  {isActive && (
-                    <span className="absolute top-3 right-3 w-2 h-2 rounded-full"
-                      style={{ backgroundColor: t.accent }} />
-                  )}
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-4 transition-colors ${
-                    isActive ? t.accentBg : 'bg-white/10 group-hover:bg-white/15'
-                  }`}>
-                    <Icon className="w-5 h-5 text-white" />
-                  </div>
-                  <p className={`text-xs font-semibold uppercase tracking-widest mb-1 ${
-                    isActive ? t.accentText : 'text-white/40'
-                  }`}>{t.sublabel}</p>
-                  <p className={`text-base font-bold mb-2 ${
-                    isActive ? 'text-white' : 'text-white/60 group-hover:text-white/80'
-                  }`}>{t.label}</p>
-                  <p className={`text-xs leading-relaxed ${
-                    isActive ? 'text-white/60' : 'text-white/30 group-hover:text-white/45'
-                  }`}>{t.descripcion}</p>
-                  {isActive && (
-                    <div className={`flex items-center gap-1 mt-4 text-xs font-semibold ${t.accentText}`}>
-                      Seleccionado <ChevronRight className="w-3 h-3" />
+                  <div className="flex items-center gap-4">
+                    {/* Ícono */}
+                    <div
+                      className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-colors duration-200"
+                      style={{
+                        backgroundColor: isActive ? opcion.accent : '#f3f4f6',
+                      }}
+                    >
+                      <Icon
+                        className="w-4 h-4"
+                        style={{ color: isActive ? 'white' : '#9ca3af' }}
+                      />
                     </div>
-                  )}
+
+                    {/* Texto */}
+                    <div className="flex-1 min-w-0">
+                      <p
+                        className="text-sm font-semibold leading-none mb-1 transition-colors duration-200"
+                        style={{ color: isActive ? opcion.accent : '#111827' }}
+                      >
+                        {opcion.label}
+                      </p>
+                      <p className="text-xs leading-relaxed" style={{ color: '#6b7280' }}>
+                        {opcion.descripcion}
+                      </p>
+                    </div>
+
+                    {/* Flecha */}
+                    <ChevronRight
+                      className="w-4 h-4 flex-shrink-0 transition-all duration-200"
+                      style={{
+                        color: isActive ? opcion.accent : '#d1d5db',
+                        transform: isActive ? 'translateX(2px)' : 'none',
+                      }}
+                    />
+                  </div>
                 </button>
-              );
+              )
             })}
+
+            {/* Info de ayuda */}
+            <div className="mt-2 p-4 bg-gray-50 rounded-2xl border border-gray-100">
+              <p className="text-xs text-gray-400 leading-relaxed">
+                💡 Tu información quedará pendiente de aprobación antes de aparecer en el directorio público.
+              </p>
+            </div>
+          </div>
+
+          {/* Panel del formulario — columna derecha */}
+          <div className="lg:col-span-3">
+            {!tab ? (
+              /* Estado inicial — ninguna opción seleccionada */
+              <div className="h-full min-h-64 flex flex-col items-center justify-center text-center p-10 bg-white rounded-2xl border border-dashed border-gray-200">
+                <div className="w-16 h-16 rounded-2xl bg-gray-50 flex items-center justify-center mb-4">
+                  <svg className="w-7 h-7 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5" />
+                  </svg>
+                </div>
+                <p className="text-gray-400 text-sm font-medium mb-1">
+                  Selecciona una opción
+                </p>
+                <p className="text-gray-300 text-xs">
+                  Elige qué quieres hacer en el panel de la izquierda
+                </p>
+              </div>
+            ) : (
+              /* Formulario activo */
+              <div
+                className="bg-white rounded-2xl border overflow-hidden"
+                style={{ borderColor: opcionActiva?.accent + '30' }}
+              >
+                {/* Header del formulario */}
+                <div
+                  className="px-6 py-4 border-b flex items-center gap-3"
+                  style={{
+                    backgroundColor: opcionActiva?.accentBg,
+                    borderColor: opcionActiva?.accent + '20',
+                  }}
+                >
+                  {opcionActiva && (
+                    <>
+                      <div
+                        className="w-8 h-8 rounded-lg flex items-center justify-center"
+                        style={{ backgroundColor: opcionActiva.accent }}
+                      >
+                        <opcionActiva.icon className="w-4 h-4 text-white" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold" style={{ color: opcionActiva.accent }}>
+                          {opcionActiva.label}
+                        </p>
+                        <p className="text-xs text-gray-400">{opcionActiva.descripcion}</p>
+                      </div>
+                    </>
+                  )}
+                </div>
+
+                {/* Formulario */}
+                <div>
+                  {tab === 'inscribete' && <InscribeteForm />}
+                  {tab === 'actualiza' && <ActualizaInfoForm />}
+                  {tab === 'eventos' && <RegistraEventoForm />}
+                </div>
+              </div>
+            )}
           </div>
 
         </div>
-
-        {/* Línea de color activo */}
-        <div className="h-1 w-full transition-all duration-500" style={{ backgroundColor: activeTab.accent }} />
-      </div>
-
-      {/* ── CONTENIDO ───────────────────────────────────────────────── */}
-      <div className="bg-gray-50 min-h-screen">
-        {tab === 'inscribete' && <InscribeteForm />}
-        {tab === 'actualiza'  && <ActualizaInfoForm />}
-        {tab === 'eventos'    && <RegistraEventoForm />}
       </div>
 
     </PageLayout>

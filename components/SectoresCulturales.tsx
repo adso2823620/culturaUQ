@@ -2,212 +2,233 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { supabase } from '@/lib/supabase';
 
-// Sectores consolidados con su keyword de búsqueda en Supabase,
-// ícono, color y slug para la URL
 const SECTORES = [
-  {
-    slug: 'musica',
-    label: 'Música',
-    keyword: 'música',
-    emoji: '🎵',
-    gradient: 'from-amber-500 to-orange-500',
-    light: 'bg-amber-50 border-amber-200',
-    text: 'text-amber-700',
-  },
-  {
-    slug: 'teatro',
-    label: 'Teatro',
-    keyword: 'teatro',
-    emoji: '🎭',
-    gradient: 'from-red-500 to-rose-600',
-    light: 'bg-red-50 border-red-200',
-    text: 'text-red-700',
-  },
-  {
-    slug: 'danza',
-    label: 'Danza',
-    keyword: 'danza',
-    emoji: '💃',
-    gradient: 'from-pink-500 to-fuchsia-600',
-    light: 'bg-pink-50 border-pink-200',
-    text: 'text-pink-700',
-  },
-  {
-    slug: 'artesanias',
-    label: 'Artesanías',
-    keyword: 'artesanías',
-    emoji: '🏺',
-    gradient: 'from-yellow-500 to-amber-600',
-    light: 'bg-yellow-50 border-yellow-200',
-    text: 'text-yellow-700',
-  },
-  {
-    slug: 'patrimonio',
-    label: 'Patrimonio',
-    keyword: 'patrimon',
-    emoji: '🏛️',
-    gradient: 'from-stone-500 to-stone-700',
-    light: 'bg-stone-50 border-stone-200',
-    text: 'text-stone-700',
-  },
-  {
-    slug: 'audiovisual',
-    label: 'Audiovisual',
-    keyword: 'audiovisual',
-    emoji: '🎬',
-    gradient: 'from-violet-500 to-purple-700',
-    light: 'bg-violet-50 border-violet-200',
-    text: 'text-violet-700',
-  },
-  {
-    slug: 'artes',
-    label: 'Artes Visuales',
-    keyword: 'artes',
-    emoji: '🎨',
-    gradient: 'from-blue-500 to-indigo-600',
-    light: 'bg-blue-50 border-blue-200',
-    text: 'text-blue-700',
-  },
-  {
-    slug: 'social',
-    label: 'Cultural y Social',
-    keyword: 'social',
-    emoji: '🤝',
-    gradient: 'from-emerald-500 to-teal-600',
-    light: 'bg-emerald-50 border-emerald-200',
-    text: 'text-emerald-700',
-  },
-  {
-    slug: 'educativo',
-    label: 'Educativo',
-    keyword: 'educativ',
-    emoji: '📚',
-    gradient: 'from-cyan-500 to-blue-600',
-    light: 'bg-cyan-50 border-cyan-200',
-    text: 'text-cyan-700',
-  },
-  {
-    slug: 'comunitario',
-    label: 'Comunitario',
-    keyword: 'comunitari',
-    emoji: '🌱',
-    gradient: 'from-lime-500 to-green-600',
-    light: 'bg-lime-50 border-lime-200',
-    text: 'text-lime-700',
-  },
+  { slug: 'musica', label: 'Música', emoji: '🎵', keyword: 'música' },
+  { slug: 'teatro', label: 'Teatro', emoji: '🎭', keyword: 'teatro' },
+  { slug: 'danza', label: 'Danza', emoji: '💃', keyword: 'danza' },
+  { slug: 'artesanias', label: 'Artesanías', emoji: '🏺', keyword: 'artesanías' },
+  { slug: 'patrimonio', label: 'Patrimonio', emoji: '🏛️', keyword: 'patrimon' },
+  { slug: 'audiovisual', label: 'Audiovisual', emoji: '🎬', keyword: 'audiovisual' },
+  { slug: 'artes', label: 'Artes Visuales', emoji: '🎨', keyword: 'artes' },
+  { slug: 'social', label: 'Cultural y Social', emoji: '🤝', keyword: 'social' },
+  { slug: 'educativo', label: 'Educativo', emoji: '📚', keyword: 'educativ' },
+  { slug: 'comunitario', label: 'Comunitario', emoji: '🌱', keyword: 'comunitari' },
 ];
 
-type ConteoMap = Record<string, number>;
+interface Org {
+  id: string
+  razon_social: string
+  municipio: string
+  sector_cultural: string
+  foto_url: string | null
+  tipologia: string | null
+}
 
 export default function SectoresCulturales() {
-  const [conteos, setConteos] = useState<ConteoMap>({});
-  const [total, setTotal]     = useState(0);
-  const [cargando, setCargando] = useState(true);
+  const [total, setTotal] = useState(0)
+  const [destacadas, setDestacadas] = useState<Org[]>([])
+  const [cargando, setCargando] = useState(true)
+  const [contador, setContador] = useState(0)
 
   useEffect(() => {
-    async function fetchConteos() {
-      // Trae sector_cultural de todas las orgs activas (solo ese campo)
+    async function fetchData() {
       const { data, error } = await supabase
         .from('organizaciones_culturales')
-        .select('sector_cultural')
-        .eq('activa', true);
+        .select('id, razon_social, municipio, sector_cultural, foto_url, tipologia')
+        .eq('activa', true)
 
-      if (error || !data) return;
+      if (error || !data) return
 
-      setTotal(data.length);
+      setTotal(data.length)
 
-      // Cuenta cuántas orgs caen en cada sector por keyword
-      const map: ConteoMap = {};
-      for (const sector of SECTORES) {
-        map[sector.slug] = data.filter(
-          (d) => d.sector_cultural?.toLowerCase().includes(sector.keyword.toLowerCase())
-        ).length;
-      }
-      setConteos(map);
-      setCargando(false);
+      const conFoto = data.filter(o => o.foto_url)
+      const sinFoto = data.filter(o => !o.foto_url)
+      const pool = conFoto.length >= 3 ? conFoto : [...conFoto, ...sinFoto]
+      const shuffled = [...pool].sort(() => Math.random() - 0.5)
+      setDestacadas(shuffled.slice(0, 3))
+      setCargando(false)
     }
-    fetchConteos();
-  }, []);
+    fetchData()
+  }, [])
+
+  useEffect(() => {
+    if (total === 0) return
+    let start = 0
+    const duration = 1500
+    const step = total / (duration / 16)
+    const timer = setInterval(() => {
+      start += step
+      if (start >= total) {
+        setContador(total)
+        clearInterval(timer)
+      } else {
+        setContador(Math.floor(start))
+      }
+    }, 16)
+    return () => clearInterval(timer)
+  }, [total])
 
   return (
-    <section className="bg-gray-50 py-20">
-      <div className="max-w-7xl mx-auto px-6">
+    <section
+      className="relative py-24 overflow-hidden"
+      style={{ backgroundColor: '#f8fafb' }}
+    >
+      {/* Patrón de puntos suave */}
+      <div
+        className="absolute inset-0 opacity-40"
+        style={{
+          backgroundImage: 'radial-gradient(circle, #cbd5e1 1px, transparent 1px)',
+          backgroundSize: '28px 28px',
+        }}
+      />
 
-        {/* Encabezado */}
-        <div className="text-center mb-14">
-          <div className="inline-flex items-center gap-2 px-5 py-1.5 bg-[#e63947]/10 rounded-full mb-5">
-            <span className="w-2 h-2 rounded-full bg-[#e63947] animate-pulse" />
-            <span className="text-[#e63947] text-sm tracking-widest font-medium">ORGANIZACIONES CULTURALES</span>
+      {/* Acentos decorativos suaves */}
+      <div
+        className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full opacity-[0.06] blur-3xl"
+        style={{ backgroundColor: '#2a9d8f' }}
+      />
+      <div
+        className="absolute bottom-0 left-0 w-96 h-96 rounded-full opacity-[0.05] blur-3xl"
+        style={{ backgroundColor: '#e63947' }}
+      />
+
+      <div className="relative max-w-7xl mx-auto px-6">
+
+        {/* Header */}
+        <div className="text-center mb-16">
+          <div
+            className="inline-flex items-center gap-2 px-5 py-1.5 rounded-full mb-6"
+            style={{ backgroundColor: 'rgba(42,157,143,0.08)', border: '1px solid rgba(42,157,143,0.2)' }}
+          >
+            <span className="w-2 h-2 rounded-full bg-[#2a9d8f] animate-pulse" />
+            <span className="text-[#2a9d8f] text-sm tracking-widest font-medium">DIRECTORIO CULTURAL</span>
           </div>
-          <h2 className="text-4xl md:text-5xl text-[#2a9d8f] mb-4">
+
+          {/* Número animado */}
+          <div className="mb-4">
+            {cargando ? (
+              <div className="w-48 h-24 bg-gray-100 rounded-2xl animate-pulse mx-auto" />
+            ) : (
+              <div className="flex items-end justify-center gap-3">
+                <span
+                  className="text-8xl md:text-9xl font-black leading-none"
+                  style={{ color: '#2a9d8f' }}
+                >
+                  {contador}
+                </span>
+                <span className="text-2xl font-light text-gray-400 mb-4">orgs.</span>
+              </div>
+            )}
+          </div>
+
+          <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: '#0f4c75' }}>
             El ecosistema cultural de Caldas
           </h2>
-          <p className="text-[#6B7280] text-lg max-w-2xl mx-auto">
-            {cargando ? (
-              <span className="inline-block w-32 h-5 bg-gray-200 rounded animate-pulse" />
-            ) : (
-              <><span className="text-[#e63947] font-bold">{total}</span> organizaciones activas en todo el departamento</>
-            )}
+          <p className="text-gray-500 text-lg max-w-xl mx-auto">
+            Organizaciones activas en todo el departamento, listas para conectar con su comunidad
           </p>
         </div>
 
-        {/* Grid de sectores */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-10">
-          {SECTORES.map((sector) => (
-            <Link
-              key={sector.slug}
-              href={`/organizaciones?sector=${sector.slug}`}
-              className="group relative overflow-hidden rounded-2xl bg-white border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-            >
-              {/* Barra de color arriba */}
-              <div className={`h-1.5 bg-gradient-to-r ${sector.gradient}`} />
-
-              <div className="p-5">
-                {/* Emoji */}
-                <div className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
-                  {sector.emoji}
-                </div>
-
-                {/* Nombre */}
-                <h3 className="text-sm font-semibold text-[#2a9d8f] mb-2 leading-tight">
-                  {sector.label}
-                </h3>
-
-                {/* Conteo */}
-                <div className="flex items-end justify-between">
-                  {cargando ? (
-                    <div className="w-10 h-7 bg-gray-100 rounded animate-pulse" />
+        {/* Cards destacadas */}
+        {!cargando && destacadas.length > 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            {destacadas.map((org, i) => (
+              <Link
+                key={org.id}
+                href="/organizaciones"
+                className="group relative bg-white rounded-2xl overflow-hidden border border-gray-100 hover:border-[#2a9d8f]/30 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+              >
+                {/* Imagen */}
+                <div
+                  className="relative h-44 overflow-hidden"
+                  style={{ backgroundColor: '#e8f4f3' }}
+                >
+                  {org.foto_url ? (
+                    <Image
+                      src={org.foto_url}
+                      alt={org.razon_social}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
                   ) : (
-                    <span className={`text-2xl font-bold ${sector.text}`}>
-                      {conteos[sector.slug] ?? 0}
-                    </span>
+                    <div className="w-full h-full flex items-center justify-center">
+                      <span className="text-6xl font-black" style={{ color: '#2a9d8f', opacity: 0.2 }}>
+                        {org.razon_social.charAt(0)}
+                      </span>
+                    </div>
                   )}
-                  <span className="text-xs text-[#9CA3AF]">orgs.</span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+
+                  {/* Sector badge */}
+                  {org.sector_cultural && (
+                    <div className="absolute top-3 left-3">
+                      <span
+                        className="px-2.5 py-1 rounded-full text-xs font-medium text-white"
+                        style={{ backgroundColor: 'rgba(42,157,143,0.85)' }}
+                      >
+                        {org.sector_cultural}
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Número */}
+                  <div className="absolute bottom-3 right-3 w-7 h-7 rounded-full bg-white/30 backdrop-blur-sm flex items-center justify-center">
+                    <span className="text-white text-xs font-bold">{i + 1}</span>
+                  </div>
                 </div>
 
-                {/* Hover arrow */}
-                <div className="mt-3 text-xs text-[#9CA3AF] group-hover:text-[#e63947] transition-colors flex items-center gap-1">
-                  Ver listado
-                  <span className="group-hover:translate-x-1 transition-transform inline-block">→</span>
+                {/* Info */}
+                <div className="p-5">
+                  <h3
+                    className="font-semibold text-sm leading-snug mb-1 line-clamp-2 group-hover:text-[#2a9d8f] transition-colors"
+                    style={{ color: '#0f4c75' }}
+                  >
+                    {org.razon_social}
+                  </h3>
+                  <p className="text-gray-400 text-xs">
+                    📍 {org.municipio}
+                    {org.tipologia && ` · ${org.tipologia}`}
+                  </p>
                 </div>
-              </div>
+              </Link>
+            ))}
+          </div>
+        )}
+
+        {/* Chips de sectores */}
+        <div className="flex flex-wrap justify-center gap-2 mb-12">
+          {SECTORES.map(s => (
+            <Link
+              key={s.slug}
+              href={`/organizaciones?sector=${s.slug}`}
+              className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 bg-white border border-gray-200 text-gray-500 hover:border-[#2a9d8f]/40 hover:text-[#2a9d8f] hover:bg-[#2a9d8f]/5"
+            >
+              <span>{s.emoji}</span>
+              {s.label}
             </Link>
           ))}
         </div>
 
-        {/* CTA ver todas */}
+        {/* CTA */}
         <div className="text-center">
           <Link
             href="/organizaciones"
-            className="inline-flex items-center gap-2 px-8 py-3 bg-[#2a9d8f] text-white rounded-full hover:bg-[#e63947] transition-colors duration-300 text-sm font-medium"
+            className="inline-flex items-center gap-3 px-10 py-4 rounded-full text-white font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
+            style={{ backgroundColor: '#2a9d8f' }}
           >
-            Ver todas las organizaciones
-            <span>→</span>
+            Explorar directorio completo
+            <span className="text-xl">→</span>
           </Link>
+          <p className="text-gray-400 text-sm mt-3">
+            Busca por municipio, sector o nombre
+          </p>
         </div>
+
       </div>
     </section>
-  );
+  )
 }

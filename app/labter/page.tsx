@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import PageLayout from '@/components/PageLayout';
+import Breadcrumb from '@/components/Breadcrumb';
 import {
   BookOpen, Video, FileText,
   Book, ClipboardList,
@@ -53,10 +54,37 @@ const categorias = [
   },
 ];
 
+const TABS = [
+  { slug: 'capacitaciones', label: 'Capacitaciones' },
+  { slug: 'presentaciones', label: 'Presentaciones' },
+  { slug: 'material-apoyo', label: 'Material de Apoyo' },
+  { slug: 'bibliografia', label: 'Bibliografía' },
+  { slug: 'propuestas', label: 'Propuestas' },
+]
+
 export default function LabterPage() {
   return (
     <PageLayout letter="L" letterPosition="top-right">
       <div className="max-w-6xl mx-auto px-6 py-16">
+
+        {/* Breadcrumb */}
+        <Breadcrumb crumbs={[
+          { label: 'Inicio', href: '/' },
+          { label: 'Labter Cultural' },
+        ]} />
+
+        {/* Tabs */}
+        <div className="flex flex-wrap gap-2 mb-10 p-1 bg-gray-50 rounded-2xl border border-gray-100 w-fit">
+          {TABS.map(tab => (
+            <Link
+              key={tab.slug}
+              href={`/labter/${tab.slug}`}
+              className="px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 text-gray-500 hover:text-[#2a9d8f] hover:bg-white"
+            >
+              {tab.label}
+            </Link>
+          ))}
+        </div>
 
         {/* Hero */}
         <div className="mb-16 text-center">
@@ -76,47 +104,28 @@ export default function LabterPage() {
             <Link
               key={cat.slug}
               href={`/labter/${cat.slug}`}
-              className={`group relative block rounded-2xl border ${cat.border} bg-white overflow-hidden
-                hover:shadow-xl transition-all duration-300 hover:-translate-y-1`}
+              className={`group relative block rounded-2xl border ${cat.border} bg-white overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1`}
             >
-              {/* Fondo degradado sutil */}
               <div className={`absolute inset-0 bg-gradient-to-br ${cat.bg} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-
-              {/* Barra superior de color */}
-              <div
-                className="h-1 w-full transition-all duration-300 group-hover:h-1.5"
-                style={{ backgroundColor: cat.accent }}
-              />
-
+              <div className="h-1 w-full transition-all duration-300 group-hover:h-1.5" style={{ backgroundColor: cat.accent }} />
               <div className="relative p-7">
-                {/* Ícono */}
                 <div
                   className="w-16 h-16 rounded-2xl flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-110"
                   style={{ backgroundColor: `${cat.accent}15`, color: cat.accent }}
                 >
                   {cat.icon}
                 </div>
-
-                {/* Texto */}
-                <h2
-                  className="text-xl font-semibold text-[#2a9d8f] mb-2 group-hover:transition-colors duration-300"
-                  style={{ color: undefined }}
-                >
-                  <span className="group-hover:text-[#e63947] transition-colors duration-300">
+                <h2 className="text-xl font-semibold mb-2">
+                  <span className="group-hover:text-[#e63947] transition-colors duration-300 text-[#2a9d8f]">
                     {cat.title}
                   </span>
                 </h2>
-                <p className="text-[#6B7280] text-sm leading-relaxed">
-                  {cat.description}
-                </p>
-
-                {/* CTA */}
+                <p className="text-[#6B7280] text-sm leading-relaxed">{cat.description}</p>
                 <div
                   className="mt-5 flex items-center gap-1 text-sm font-medium opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-1 group-hover:translate-y-0"
                   style={{ color: cat.accent }}
                 >
-                  Ver recursos
-                  <span className="text-base">→</span>
+                  Ver recursos <span className="text-base">→</span>
                 </div>
               </div>
             </Link>

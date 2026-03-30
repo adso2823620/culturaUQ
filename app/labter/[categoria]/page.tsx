@@ -1,11 +1,12 @@
 'use client';
 
 import { useState, useEffect, use, Suspense } from 'react';
-import { notFound } from 'next/navigation';
+import { notFound, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import PageLayout from '@/components/PageLayout';
 import VideoModal from '@/components/VideoModal';
 import PDFModal from '@/components/PDFModal';
+import Breadcrumb from '@/components/Breadcrumb';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import {
@@ -18,6 +19,14 @@ import { supabase, type Capacitacion, type CapacitacionArchivo } from '@/lib/sup
 type CapacitacionConArchivos = Capacitacion & {
   archivos: CapacitacionArchivo[];
 };
+
+const TABS = [
+  { slug: 'capacitaciones', label: 'Capacitaciones', icon: <Video className="w-4 h-4" /> },
+  { slug: 'presentaciones', label: 'Presentaciones', icon: <FileText className="w-4 h-4" /> },
+  { slug: 'material-apoyo', label: 'Material de Apoyo', icon: <BookOpen className="w-4 h-4" /> },
+  { slug: 'bibliografia', label: 'Bibliografía', icon: <Book className="w-4 h-4" /> },
+  { slug: 'propuestas', label: 'Propuestas', icon: <ClipboardList className="w-4 h-4" /> },
+]
 
 const categoriasConfig: Record<string, {
   title: string;
@@ -117,6 +126,7 @@ function CardIndependiente({
 }
 
 function CategoriaContent({ categoria }: { categoria: string }) {
+  const router = useRouter()
   const config = categoriasConfig[categoria];
   if (!config) notFound();
 
@@ -129,35 +139,23 @@ function CategoriaContent({ categoria }: { categoria: string }) {
   useEffect(() => {
     async function fetchDatos() {
       setCargando(true);
-
       const { data: caps, error: errorCaps } = await supabase
         .from('capacitaciones')
         .select('*')
         .eq('activa', true)
         .order('fecha', { ascending: false });
 
-      if (errorCaps || !caps) {
-        console.error('Error cargando capacitaciones:', errorCaps?.message);
-        setCargando(false);
-        return;
-      }
+      if (errorCaps || !caps) { setCargando(false); return; }
 
       let query = supabase
         .from('capacitacion_archivos')
         .select('*')
         .order('orden', { ascending: true });
 
-      if (config.tipo) {
-        query = query.eq('tipo', config.tipo);
-      }
+      if (config.tipo) query = query.eq('tipo', config.tipo);
 
       const { data: archivos, error: errorArchivos } = await query;
-
-      if (errorArchivos) {
-        console.error('Error cargando archivos:', errorArchivos.message);
-        setCargando(false);
-        return;
-      }
+      if (errorArchivos) { setCargando(false); return; }
 
       const todosArchivos = archivos ?? [];
       const archivosIndependientes = todosArchivos.filter(a => a.capacitacion_id === null);
@@ -174,7 +172,6 @@ function CategoriaContent({ categoria }: { categoria: string }) {
       setIndependientes(archivosIndependientes);
       setCargando(false);
     }
-
     fetchDatos();
   }, [categoria, config.tipo]);
 
@@ -183,8 +180,36 @@ function CategoriaContent({ categoria }: { categoria: string }) {
   return (
     <div className="max-w-6xl mx-auto px-6 py-12">
 
+      {/* Breadcrumb */}
+      <Breadcrumb crumbs={[
+        { label: 'Inicio', href: '/' },
+        { label: 'Labter Cultural', href: '/labter' },
+        { label: config.title },
+      ]} />
+
+      {/* Tabs de navegación entre categorías */}
+      <div className="flex flex-wrap gap-2 mb-8 p-1 bg-gray-50 rounded-2xl border border-gray-100">
+        {TABS.map(tab => {
+          const isActive = tab.slug === categoria
+          return (
+            <button
+              key={tab.slug}
+              onClick={() => router.push(`/labter/${tab.slug}`)}
+              className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200"
+              style={{
+                backgroundColor: isActive ? '#2a9d8f' : 'transparent',
+                color: isActive ? 'white' : '#6b7280',
+              }}
+            >
+              {tab.icon}
+              {tab.label}
+            </button>
+          )
+        })}
+      </div>
+
       {/* Hero */}
-      <div className="relative mb-14 rounded-3xl overflow-hidden h-[280px]">
+      <div className="relative mb-10 rounded-3xl overflow-hidden h-[200px]">
         <Image
           src={config.image}
           alt={config.title}
@@ -193,17 +218,17 @@ function CategoriaContent({ categoria }: { categoria: string }) {
           sizes="(max-width: 1200px) 100vw, 1200px"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#2a9d8f]/90 via-[#1E3A8A]/70 to-transparent flex items-center">
-          <div className="px-12 text-white">
-            <div className="flex items-center gap-4 mb-3">
-              <div className="w-14 h-14 bg-[#e63947]/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-[#e63947] border border-[#e63947]/30">
+          <div className="px-10 text-white">
+            <div className="flex items-center gap-4 mb-2">
+              <div className="w-12 h-12 bg-[#e63947]/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-[#e63947] border border-[#e63947]/30">
                 {config.icon}
               </div>
               <div>
-                <p className="text-[#FB923C] text-sm tracking-widest mb-1">LABTER CULTURAL</p>
-                <h1 className="text-4xl font-bold">{config.title}</h1>
+                <p className="text-[#FB923C] text-xs tracking-widest mb-0.5">LABTER CULTURAL</p>
+                <h1 className="text-3xl font-bold">{config.title}</h1>
               </div>
             </div>
-            <p className="text-gray-200 text-lg max-w-2xl">{config.description}</p>
+            <p className="text-gray-200 text-sm max-w-xl">{config.description}</p>
           </div>
         </div>
       </div>
@@ -230,11 +255,11 @@ function CategoriaContent({ categoria }: { categoria: string }) {
       {!cargando && (
         <div className="space-y-10">
 
-          {/* 1. Items vinculados a capacitaciones — PRIMERO */}
+          {/* Items vinculados a capacitaciones */}
           {capacitaciones.length > 0 && (
             <div>
               {independientes.length > 0 && (
-                <h2 className="text-lg font-semibold text-[#2a9d8f] mb-4">
+                <h2 className="text-lg font-semibold mb-4" style={{ color: '#2a9d8f' }}>
                   Por capacitación
                 </h2>
               )}
@@ -342,11 +367,11 @@ function CategoriaContent({ categoria }: { categoria: string }) {
             </div>
           )}
 
-          {/* 2. Items independientes — AL FINAL */}
+          {/* Items independientes */}
           {independientes.length > 0 && (
             <div>
               {capacitaciones.length > 0 && (
-                <h2 className="text-lg font-semibold text-[#2a9d8f] mb-4">
+                <h2 className="text-lg font-semibold mb-4" style={{ color: '#2a9d8f' }}>
                   Recursos generales
                 </h2>
               )}
@@ -376,20 +401,11 @@ function CategoriaContent({ categoria }: { categoria: string }) {
         </div>
       )}
 
-      {/* Modales */}
       {videoActivo && (
-        <VideoModal
-          url={videoActivo.url}
-          titulo={videoActivo.titulo}
-          onClose={() => setVideoActivo(null)}
-        />
+        <VideoModal url={videoActivo.url} titulo={videoActivo.titulo} onClose={() => setVideoActivo(null)} />
       )}
       {pdfActivo && (
-        <PDFModal
-          url={pdfActivo.url}
-          titulo={pdfActivo.titulo}
-          onClose={() => setPdfActivo(null)}
-        />
+        <PDFModal url={pdfActivo.url} titulo={pdfActivo.titulo} onClose={() => setPdfActivo(null)} />
       )}
     </div>
   );

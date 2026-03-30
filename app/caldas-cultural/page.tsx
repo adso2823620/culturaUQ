@@ -1,6 +1,13 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import PageLayout from '@/components/PageLayout';
+import Breadcrumb from '@/components/Breadcrumb';
+
+const TABS = [
+  { slug: 'agenda', label: 'Agenda Cultural' },
+  { slug: 'conectate', label: 'Conéctate' },
+  { slug: 'asociate', label: 'Asóciate' },
+]
 
 const secciones = [
   {
@@ -46,7 +53,26 @@ export default function CaldasCulturalPage() {
     <PageLayout letter="CC" letterPosition="top-right" bgImage="imgfondo.png">
       <div className="max-w-6xl mx-auto px-6 py-16">
 
-        {/* ── Hero — mismo patrón Labter ── */}
+        {/* Breadcrumb */}
+        <Breadcrumb crumbs={[
+          { label: 'Inicio', href: '/' },
+          { label: 'Caldas Cultural' },
+        ]} />
+
+        {/* Tabs de submodulos */}
+        <div className="flex flex-wrap gap-2 mb-10 p-1 bg-gray-50 rounded-2xl border border-gray-100 w-fit">
+          {TABS.map(tab => (
+            <Link
+              key={tab.slug}
+              href={`/caldas-cultural/${tab.slug}`}
+              className="px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 text-gray-500 hover:text-[#2a9d8f] hover:bg-white"
+            >
+              {tab.label}
+            </Link>
+          ))}
+        </div>
+
+        {/* Hero */}
         <div className="mb-16 text-center">
           <span className="inline-block bg-[#e63947]/10 text-[#e63947] text-xs tracking-widest px-4 py-1.5 rounded-full mb-4">
             CALENDARIO COLABORATIVO
@@ -58,22 +84,18 @@ export default function CaldasCulturalPage() {
           </p>
         </div>
 
-        {/* ── Grid de secciones ── */}
+        {/* Grid de secciones */}
         <div className="grid md:grid-cols-3 gap-6">
           {secciones.map((sec) => (
             <Link
               key={sec.slug}
               href={`/caldas-cultural/${sec.slug}`}
-              className="group relative block rounded-2xl border border-gray-100 bg-white overflow-hidden
-                hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+              className="group relative block rounded-2xl border border-gray-100 bg-white overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
             >
-              {/* Barra de color superior — mismo patrón Labter */}
               <div
                 className="h-1 w-full transition-all duration-300 group-hover:h-1.5"
                 style={{ backgroundColor: sec.accent }}
               />
-
-              {/* Imagen con overlay */}
               <div className="relative h-48 overflow-hidden">
                 <Image
                   src={sec.image}
@@ -86,31 +108,22 @@ export default function CaldasCulturalPage() {
                   className="absolute inset-0"
                   style={{ background: `linear-gradient(to top, ${sec.accent}cc 0%, ${sec.accent}44 50%, transparent 100%)` }}
                 />
-                {/* Ícono */}
-                <div
-                  className="absolute top-4 right-4 w-10 h-10 rounded-xl flex items-center justify-center text-white border border-white/30 bg-white/15 backdrop-blur-sm"
-                >
+                <div className="absolute top-4 right-4 w-10 h-10 rounded-xl flex items-center justify-center text-white border border-white/30 bg-white/15 backdrop-blur-sm">
                   {sec.icon}
                 </div>
               </div>
-
-              {/* Texto */}
               <div className="p-6">
-                <h2 className="text-lg font-semibold text-[#2a9d8f] mb-2 group-hover:transition-colors duration-300">
+                <h2 className="text-lg font-semibold text-[#2a9d8f] mb-2">
                   <span className="group-hover:text-[#e63947] transition-colors duration-300">
                     {sec.title}
                   </span>
                 </h2>
-                <p className="text-[#6B7280] text-sm leading-relaxed">
-                  {sec.description}
-                </p>
-                {/* CTA — mismo patrón Labter */}
+                <p className="text-[#6B7280] text-sm leading-relaxed">{sec.description}</p>
                 <div
                   className="mt-4 flex items-center gap-1 text-sm font-medium opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-1 group-hover:translate-y-0"
                   style={{ color: sec.accent }}
                 >
-                  Ir a {sec.title}
-                  <span className="text-base">→</span>
+                  Ir a {sec.title} <span className="text-base">→</span>
                 </div>
               </div>
             </Link>

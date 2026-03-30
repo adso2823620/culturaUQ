@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { createBrowserClient } from '@supabase/ssr'
 
-const navItems = [
+const navItems: { href: string; label: string; icon: string; exact?: boolean }[] = [
   { href: '/admin', label: 'Dashboard', icon: '📊', exact: true },
   { href: '/admin/solicitudes', label: 'Solicitudes', icon: '📋' },
   { href: '/admin/eventos', label: 'Eventos', icon: '🎭' },
@@ -12,8 +12,7 @@ const navItems = [
   { href: '/admin/labter', label: 'Labter', icon: '🎓' },
 ]
 
-const metricasItem = { href: '/admin/metricas', label: 'Métricas', icon: '📈' }
-
+const metricasItem: { href: string; label: string; icon: string; exact?: boolean } = { href: '/admin/metricas', label: 'Métricas', icon: '📈' }
 interface Props {
   role: string
   userEmail: string
