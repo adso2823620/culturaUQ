@@ -288,7 +288,7 @@ export default function HomePageNext() {
                 <Link 
                   key={slide.id}
                   href={slide.route}
-                  className="absolute w-[500px] h-[650px] cursor-pointer group"
+                  className="absolute w-[420px] h-[500px] cursor-pointer group"
                   style={style as React.CSSProperties}
                 >
                   <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl group-hover:shadow-[0_25px_50px_-12px_rgba(244,121,32,0.4)] transition-all duration-500">
