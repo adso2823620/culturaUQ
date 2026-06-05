@@ -41,7 +41,7 @@ export default function HomePageNext() {
       subtitle: "FORMACIÓN",
       description: "Fortalece tus habilidades en el sector cultural con nuestros programas de formación especializados",
       //image: "https://images.unsplash.com/photo-1759532047744-6b5f1b15d52f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xvbWJpYSUyMGN1bHR1cmFsJTIwZmVzdGl2YWx8ZW58MXx8fHwxNzYyNTM3NzYwfDA&ixlib=rb-4.1.0&q=80&w=1080",
-      image: '/catedral.jpg',
+      image: '/-1.jpg',
       category: "Formación",
       color: "from-orange-600/20 to-orange-400/20",
       route: "/labter"
@@ -51,7 +51,9 @@ export default function HomePageNext() {
       title: "CALDAS CULTURAL",
       subtitle: "CALENDARIO COLABORATIVO",
       description: "Descubre y participa en los eventos culturales de Caldas en tiempo real",
-      image: "https://images.unsplash.com/photo-1755509464545-b217d484eb5d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjdWx0dXJhbCUyMGNhbGVuZGFyJTIwZXZlbnRzfGVufDF8fHx8MTc2MjUzNzc2MXww&ixlib=rb-4.1.0&q=80&w=1080",
+      /*image: "https://images.unsplash.com/photo-1755509464545-b217d484eb5d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjdWx0dXJhbCUyMGNhbGVuZGFyJTIwZXZlbnRzfGVufDF8fHx8MTc2MjUzNzc2MXww&ixlib=rb-4.1.0&q=80&w=1080",
+      */
+     image: '/1.jpg',
       category: "Calendario",
       color: "from-blue-600/20 to-blue-400/20",
       route: "/caldas-cultural"
@@ -61,8 +63,9 @@ export default function HomePageNext() {
       title: "PARTICIPA Y POSTULA",
       subtitle: "PORTAL DE CONVOCATORIAS",
       description: "Accede a las convocatorias culturales y postula tus proyectos creativos",
-      image: "https://images.unsplash.com/photo-1614341769411-4f23f701e3e5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xvbWJpYW4lMjB0cmFkaXRpb25hbCUyMGRhbmNlfGVufDF8fHx8MTc2MjUzNzc2MXww&ixlib=rb-4.1.0&q=80&w=1080",
-      category: "Convocatorias",
+     // image: "https://images.unsplash.com/photo-1614341769411-4f23f701e3e5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xvbWJpYW4lMjB0cmFkaXRpb25hbCUyMGRhbmNlfGVufDF8fHx8MTc2MjUzNzc2MXww&ixlib=rb-4.1.0&q=80&w=1080",
+     image: '/3.jpg', 
+     category: "Convocatorias",
       color: "from-orange-500/20 to-blue-500/20",
       route: "/convocatorias"
     },
@@ -72,7 +75,7 @@ export default function HomePageNext() {
       subtitle: "SISTEMA DE INFORMACIÓN",
       description: "Información completa sobre la oferta cultural de Manizales y Caldas",
       //image: "https://images.unsplash.com/photo-1542995719-322a54d791ac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjdWx0dXJhbCUyMGluZm9ybWF0aW9uJTIwc3lzdGVtfGVufDF8fHx8MTc2MjUzNzc2MXww&ixlib=rb-4.1.0&q=80&w=1080",
-      image: '/pt.jpg',
+      image: '/0.jpg',
       category: "Información",
       color: "from-blue-600/20 to-orange-600/20",
       route: "/conexion-cultural"

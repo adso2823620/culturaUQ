@@ -12,6 +12,7 @@ import {
   CheckCircle2, ChevronRight, ChevronLeft, Mail, KeyRound,
   Building2, MapPin, Share2, Upload, X, RefreshCw, ArrowRight,
 } from 'lucide-react';
+import MunicipioInput from '@/components/MunicipioInput';
 
 // ── Opciones ───────────────────────────────────────────────────────────
 const SECTORES = [
@@ -27,12 +28,7 @@ const TIPOLOGIAS = [
   'Música', 'Patrimonio Cultural', 'Cinematografía y Medios Audiovisuales',
   'Cultura Popular y Tradicional', 'Otro',
 ];
-const MUNICIPIOS = [
-  'Manizales', 'Chinchiná', 'Neira', 'Palestina', 'Villamaría',
-  'Aranzazu', 'Filadelfia', 'La Merced', 'Manzanares', 'Marquetalia',
-  'Marulanda', 'Pácora', 'Pensilvania', 'Riosucio', 'Risaralda',
-  'Salamina', 'Samaná', 'San José', 'Supía', 'Victoria', 'Viterbo',
-];
+
 
 // ── Tipo exacto según columnas reales de la BD ─────────────────────────
 type OrgForm = {
@@ -497,10 +493,11 @@ export default function ActualizaInfoForm() {
               <h3 className="text-base font-semibold text-[#2a9d8f] pb-3 border-b border-gray-100">Ubicación y Contacto</h3>
               <div>
                 <Label className="text-sm font-medium text-gray-700">Municipio *</Label>
-                <Select value={form.municipio} onValueChange={setSelect('municipio')}>
-                  <SelectTrigger className="mt-1.5 rounded-xl"><SelectValue placeholder="Selecciona el municipio" /></SelectTrigger>
-                  <SelectContent>{MUNICIPIOS.map((m) => <SelectItem key={m} value={m}>{m}</SelectItem>)}</SelectContent>
-                </Select>
+            <MunicipioInput
+  value={form.municipio}
+  onChange={(v) => setForm(prev => ({ ...prev, municipio: v }))}
+  className="mt-1.5 rounded-xl"
+/>
               </div>
               <div>
                 <Label htmlFor="u-dir" className="text-sm font-medium text-gray-700">Dirección</Label>

@@ -13,6 +13,7 @@ import {
   User, Calendar, MapPin, Users, Building2,
   Upload, X, ArrowRight, Info,
 } from 'lucide-react';
+import MunicipioInput from '@/components/MunicipioInput';
 
 // ── Opciones ──────────────────────────────────────────────────────────
 const TIPOS_EVENTO = [
@@ -35,12 +36,7 @@ const AREAS_ARTISTICAS = [
   'Cultura comunitaria', 'Multidisciplinar', 'Otro',
 ];
 
-const MUNICIPIOS = [
-  'Manizales', 'Chinchiná', 'Neira', 'Palestina', 'Villamaría',
-  'Aranzazu', 'Filadelfia', 'La Merced', 'Manzanares', 'Marquetalia',
-  'Marulanda', 'Pácora', 'Pensilvania', 'Riosucio', 'Risaralda',
-  'Salamina', 'Samaná', 'San José', 'Supía', 'Victoria', 'Viterbo',
-];
+
 
 const TIPOS_ACCESO = [
   { value: 'gratuito',           label: 'Gratuito'                   },
@@ -441,10 +437,11 @@ export default function RegistraEventoForm() {
               {(form.modalidad === 'presencial' || form.modalidad === 'hibrido') && <>
                 <div>
                   <Label className="text-sm font-medium text-gray-700">Municipio</Label>
-                  <Select value={form.municipio} onValueChange={setSelect('municipio')}>
-                    <SelectTrigger className="mt-1.5 rounded-xl"><SelectValue placeholder="Selecciona el municipio" /></SelectTrigger>
-                    <SelectContent>{MUNICIPIOS.map((m) => <SelectItem key={m} value={m}>{m}</SelectItem>)}</SelectContent>
-                  </Select>
+                <MunicipioInput
+  value={form.municipio}
+  onChange={(v) => setForm(prev => ({ ...prev, municipio: v }))}
+  className="mt-1.5 rounded-xl"
+/>
                 </div>
                 <div>
                   <Label htmlFor="e-lugar" className="text-sm font-medium text-gray-700">Lugar del evento</Label>

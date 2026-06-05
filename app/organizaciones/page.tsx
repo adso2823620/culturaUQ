@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { supabase } from '@/lib/supabase';
 import PageLayout from '@/components/PageLayout';
 import { Search, MapPin, Phone, Instagram, Facebook, Youtube, Mail, ChevronLeft, ChevronRight, X } from 'lucide-react';
-
+import { MUNICIPIOS_CALDAS } from '@/lib/constants/municipios';
 // ── Tipo local con foto_url ───────────────────────────────────────
 // (incluye foto_url que agregamos con ALTER TABLE)
 type Organizacion = {
@@ -44,11 +44,6 @@ const SECTORES_OPCIONES = [
   { slug: 'comunitario', label: 'Comunitario',          keyword: 'comunitari' },
 ];
 
-const MUNICIPIOS = [
-  'Todos', 'Manizales', 'Riosucio', 'La Dorada', 'Santa Rosa de Cabal',
-  'Quinchia', 'Chinchiná', 'Villamaria', 'Pensilvania', 'Salamina',
-  'Supía', 'Norcasia', 'Palestina', 'Victoria',
-];
 
 const POR_PAGINA = 15;
 
@@ -255,12 +250,21 @@ function OrganizacionesContent() {
                 className="w-full pl-9 pr-4 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#e63947]/30"
               />
             </div>
-            <select value={municipio} onChange={(e) => setMunicipio(e.target.value)}
-              className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#e63947]/30 text-[#374151]">
-              {MUNICIPIOS.map((m) => (
-                <option key={m} value={m}>{m === 'Todos' ? '📍 Todos los municipios' : m}</option>
-              ))}
-            </select>
+       <div className="relative">
+  <input
+    list="municipios-list"
+    value={municipio === 'Todos' ? '' : municipio}
+    onChange={(e) => setMunicipio(e.target.value || 'Todos')}
+    placeholder="📍 Todos los municipios"
+    autoComplete="off"
+    className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#e63947]/30 text-[#374151]"
+  />
+  <datalist id="municipios-list">
+    {MUNICIPIOS_CALDAS.map((m) => (
+      <option key={m} value={m} />
+    ))}
+  </datalist>
+</div>
             <select value={sector}
               onChange={(e) => { setSector(e.target.value); router.push(`/organizaciones?sector=${e.target.value}`); }}
               className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#e63947]/30 text-[#374151]">

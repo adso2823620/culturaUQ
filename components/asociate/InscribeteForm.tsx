@@ -9,7 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { supabase } from '@/lib/supabase';
 import { CheckCircle2, ChevronRight, ChevronLeft, Building2, MapPin, Share2, Upload, X } from 'lucide-react';
-
+import MunicipioInput from '@/components/MunicipioInput';
 // ── Opciones ──────────────────────────────────────────────────────────
 const SECTORES = [
   'Música', 'Teatro', 'Danza', 'Artesanías', 'Patrimonio',
@@ -24,12 +24,7 @@ const TIPOLOGIAS = [
   'Música', 'Patrimonio Cultural', 'Cinematografía y Medios Audiovisuales',
   'Cultura Popular y Tradicional', 'Otro',
 ];
-const MUNICIPIOS = [
-  'Manizales', 'Chinchiná', 'Neira', 'Palestina', 'Villamaría',
-  'Aranzazu', 'Filadelfia', 'La Merced', 'Manzanares', 'Marquetalia',
-  'Marulanda', 'Pácora', 'Pensilvania', 'Riosucio', 'Risaralda',
-  'Salamina', 'Samaná', 'San José', 'Supía', 'Victoria', 'Viterbo',
-];
+
 
 type FormData = {
   razon_social: string;
@@ -250,10 +245,10 @@ export default function InscribeteForm() {
               </h3>
               <div>
                 <Label>Municipio *</Label>
-                <Select value={form.municipio} onValueChange={setSelect('municipio')}>
-                  <SelectTrigger><SelectValue placeholder="Selecciona el municipio" /></SelectTrigger>
-                  <SelectContent>{MUNICIPIOS.map((m) => <SelectItem key={m} value={m}>{m}</SelectItem>)}</SelectContent>
-                </Select>
+               <MunicipioInput
+  value={form.municipio}
+  onChange={(v) => setForm(prev => ({ ...prev, municipio: v }))}
+/>
               </div>
               <div>
                 <Label htmlFor="direccion">Dirección</Label>
