@@ -7,7 +7,7 @@ import ConditionalNavigation from '@/components/ConditionalNavigation'
 
 export const metadata = {
   title: {
-    default: 'Conexión Cultural — PLataforma Cultural',
+    default: 'Conexión Cultural — Plataforma Cultural',
     template: '%s | Conexión Cultural',
   },
   description: 'Plataforma cultural del departamento de Caldas. Directorio de organizaciones, agenda de eventos, formación y convocatorias culturales.',
