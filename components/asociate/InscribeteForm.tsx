@@ -147,7 +147,7 @@ export default function InscribeteForm() {
         <h2 className="text-4xl mb-4 text-[#2a9d8f]">¡Solicitud Enviada!</h2>
         <p className="text-lg text-[#6B7280] leading-relaxed max-w-md mx-auto mb-8">
           Tu organización ha sido registrada y está pendiente de aprobación.
-          El equipo de Cultura Caldas revisará la información y te contactará
+          El equipo de Conexión Cultural revisará la información y te contactará
           al correo <strong className="text-[#2a9d8f]">{form.correo}</strong>.
         </p>
         <Button onClick={() => { setForm(initialForm); setStep(1); setSubmitted(false); setFotoPreview(null); }}>

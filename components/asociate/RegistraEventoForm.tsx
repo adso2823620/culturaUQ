@@ -272,7 +272,7 @@ export default function RegistraEventoForm() {
       </p>
       <div className="flex items-start gap-2.5 p-4 bg-blue-50 border border-blue-100 rounded-xl text-sm text-blue-700 text-left mb-8">
         <Info className="w-4 h-4 mt-0.5 shrink-0" />
-        <span>El equipo de Cultura Caldas revisará la información. Te contactaremos a <strong>{form.correo_contacto}</strong> si necesitamos algo.</span>
+        <span>El equipo de Conexión Cultural revisará la información. Te contactaremos a <strong>{form.correo_contacto}</strong> si necesitamos algo.</span>
       </div>
       <Button variant="outline"
         onClick={() => { setForm(INITIAL); setStep(1); setSubmitted(false); setFotoPreview(null); }}

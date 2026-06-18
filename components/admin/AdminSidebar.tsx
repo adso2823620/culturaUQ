@@ -55,7 +55,7 @@ export default function AdminSidebar({ role, userEmail }: Props) {
             C
           </div>
           <div>
-            <p className="text-white font-bold text-sm">Cultura Caldas</p>
+            <p className="text-white font-bold text-sm">Conexión Cultural</p>
             <p className="text-white/50 text-xs">Panel Admin</p>
           </div>
         </div>

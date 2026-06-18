@@ -61,12 +61,12 @@ const getBaseTemplate = (title: string, content: string): string => `
 <body>
   <div class="container">
     <div class="header">
-      <div class="header-title">CULTURA CALDAS</div>
+      <div class="header-title">CONEXION CULTURAL</div>
       <div class="header-sub">PLATAFORMA CULTURAL DEL DEPARTAMENTO</div>
     </div>
     ${content}
     <div class="footer">
-      <div class="footer-title">Cultura Caldas</div>
+      <div class="footer-title">Conexión Cultural</div>
       <div class="footer-text">Fundación de Caldas</div>
       <div class="footer-text">Manizales, Caldas — Colombia</div>
       <div class="footer-note">Este es un correo automático, por favor no responder.</div>
@@ -299,14 +299,14 @@ serve(async (req) => {
         break;
 
       case "codigo_verificacion":
-        subject = `🔐 Tu código de verificación — Cultura Caldas`;
+        subject = `🔐 Tu código de verificación — Conexión Cultural`;
         html    = getCodigoVerificacionTemplate(data);
         break;
 
       case "magic_link":
         subject = data.accion === "evento"
-          ? "🎭 Tu enlace para registrar un evento — Cultura Caldas"
-          : "🔗 Tu enlace para actualizar tu información — Cultura Caldas";
+          ? "🎭 Tu enlace para registrar un evento — Conexión Cultural"
+          : "🔗 Tu enlace para actualizar tu información — Conexión Cultural";
         html = getMagicLinkTemplate(data);
         break;
 
@@ -320,7 +320,7 @@ serve(async (req) => {
     console.log(`📧 Enviando [${type}] a: ${to}`);
 
     const info = await transporter.sendMail({
-      from: `Cultura Caldas <${GMAIL_USER}>`,
+      from: `Conexión Cultural <${GMAIL_USER}>`,
       to,
       subject,
       html,
