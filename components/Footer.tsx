@@ -58,7 +58,6 @@ export default function Footer() {
                 <p className="text-white font-semibold text-base leading-none">
                   <span className="text-[#e63947]">Cultura</span> Caldas
                 </p>
-                <p className="text-white/60 text-xs mt-0.5">Fundación de Caldas</p>
               </div>
             </div>
             <p className="text-white/65 text-sm leading-relaxed mb-5 max-w-xs">
@@ -133,8 +132,8 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
           <p className="text-white/45 text-xs">
-            © {new Date().getFullYear()} Cultura Caldas · Fundación de Caldas
-          </p>
+            {new Date().getFullYear()} Cultura Caldas · Un aporte de: <span style={{ fontWeight: 'bold',fontStyle: 'italic'}}>Universidad del Quindío</span></p>
+
           <div className="flex items-center gap-4">
             <p className="text-white/45 text-xs">
               Manizales, Colombia
