@@ -48,7 +48,7 @@ export default function AdminLoginPage() {
           <h1 className="text-2xl font-bold" style={{ color: '#0f4c75' }}>
             Panel Administrativo
           </h1>
-          <p className="text-gray-500 text-sm mt-1">Cultura Caldas</p>
+          <p className="text-gray-500 text-sm mt-1">Conexión Cultural</p>
         </div>
 
         {/* Formulario */}
