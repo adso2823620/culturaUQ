@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { createBrowserClient } from '@supabase/ssr'
 import { useRouter } from 'next/navigation'
+import { Music, BookOpen, Users, Mic2, Globe, Star, Calendar } from 'lucide-react'
 
 interface Evento {
   id: string
@@ -66,6 +67,24 @@ const tipoEventoLabel: Record<string, string> = {
   otro: 'Otro',
 }
 
+function getTipoIcon(tipo: string) {
+  const props = { className: 'w-5 h-5 text-white' }
+  const map: Record<string, React.ReactNode> = {
+    taller: <BookOpen {...props} />,
+    conversatorio: <Users {...props} />,
+    feria: <Star {...props} />,
+    festival: <Music {...props} />,
+    proceso_formacion: <BookOpen {...props} />,
+    jornada_comunitaria: <Users {...props} />,
+    lanzamiento: <Star {...props} />,
+    seminario: <Mic2 {...props} />,
+    exposicion: <Globe {...props} />,
+    presentacion_artistica: <Music {...props} />,
+    otro: <Calendar {...props} />,
+  }
+  return map[tipo] ?? <Calendar {...props} />
+}
+
 export default function EventosClient({ eventos }: Props) {
   const router = useRouter()
   const [loadingId, setLoadingId] = useState<string | null>(null)
@@ -97,6 +116,23 @@ export default function EventosClient({ eventos }: Props) {
 
     if (error) {
       alert('Error: ' + error.message)
+    } else {
+      setDetalle(null)
+      router.refresh()
+    }
+    setLoadingId(null)
+  }
+
+  async function eliminarEvento(id: string) {
+    if (!confirm('¿Eliminar este evento permanentemente? Esta acción no se puede deshacer.')) return
+    setLoadingId(id)
+    const { error } = await supabase
+      .from('eventos_culturales')
+      .delete()
+      .eq('id', id)
+
+    if (error) {
+      alert('Error al eliminar: ' + error.message)
     } else {
       setDetalle(null)
       router.refresh()
@@ -147,10 +183,10 @@ export default function EventosClient({ eventos }: Props) {
                   />
                 ) : (
                   <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center text-white font-bold text-lg flex-shrink-0"
+                    className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
                     style={{ backgroundColor: '#0f4c75' }}
                   >
-                    🎭
+                    {getTipoIcon(e.tipo_evento)}
                   </div>
                 )}
                 <div className="min-w-0">
@@ -208,6 +244,13 @@ export default function EventosClient({ eventos }: Props) {
                     </button>
                   </>
                 )}
+                <button
+                  onClick={() => eliminarEvento(e.id)}
+                  disabled={loadingId === e.id}
+                  className="px-4 py-2 rounded-xl text-sm font-medium bg-red-50 hover:bg-red-100 text-red-500 transition-colors disabled:opacity-50"
+                >
+                  {loadingId === e.id ? '...' : '🗑️'}
+                </button>
               </div>
             </div>
           ))}
@@ -227,12 +270,20 @@ export default function EventosClient({ eventos }: Props) {
           >
             {/* Header */}
             <div className="p-6 border-b flex items-center justify-between sticky top-0 bg-white z-10">
-              <h2 className="font-bold text-lg" style={{ color: '#0f4c75' }}>
-                {detalle.titulo}
-              </h2>
+              <div className="flex items-center gap-3">
+                <div
+                  className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                  style={{ backgroundColor: '#0f4c75' }}
+                >
+                  {getTipoIcon(detalle.tipo_evento)}
+                </div>
+                <h2 className="font-bold text-lg" style={{ color: '#0f4c75' }}>
+                  {detalle.titulo}
+                </h2>
+              </div>
               <button
                 onClick={() => setDetalle(null)}
-                className="text-gray-400 hover:text-gray-600 text-xl"
+                className="text-gray-400 hover:text-gray-600 text-xl ml-4"
               >
                 ✕
               </button>
@@ -356,26 +407,35 @@ export default function EventosClient({ eventos }: Props) {
             </div>
 
             {/* Acciones modal */}
-            {detalle.estado === 'pendiente' && (
-              <div className="p-6 border-t flex gap-3 sticky bottom-0 bg-white">
-                <button
-                  onClick={() => cambiarEstado(detalle.id, 'aprobado')}
-                  disabled={loadingId === detalle.id}
-                  className="flex-1 py-2.5 rounded-xl text-white font-semibold text-sm disabled:opacity-50"
-                  style={{ backgroundColor: '#2a9d8f' }}
-                >
-                  {loadingId === detalle.id ? 'Procesando...' : '✓ Aprobar evento'}
-                </button>
-                <button
-                  onClick={() => cambiarEstado(detalle.id, 'rechazado')}
-                  disabled={loadingId === detalle.id}
-                  className="flex-1 py-2.5 rounded-xl text-white font-semibold text-sm disabled:opacity-50"
-                  style={{ backgroundColor: '#e63947' }}
-                >
-                  {loadingId === detalle.id ? 'Procesando...' : '✗ Rechazar evento'}
-                </button>
-              </div>
-            )}
+            <div className="p-6 border-t flex gap-3 sticky bottom-0 bg-white">
+              {detalle.estado === 'pendiente' && (
+                <>
+                  <button
+                    onClick={() => cambiarEstado(detalle.id, 'aprobado')}
+                    disabled={loadingId === detalle.id}
+                    className="flex-1 py-2.5 rounded-xl text-white font-semibold text-sm disabled:opacity-50"
+                    style={{ backgroundColor: '#2a9d8f' }}
+                  >
+                    {loadingId === detalle.id ? 'Procesando...' : '✓ Aprobar evento'}
+                  </button>
+                  <button
+                    onClick={() => cambiarEstado(detalle.id, 'rechazado')}
+                    disabled={loadingId === detalle.id}
+                    className="flex-1 py-2.5 rounded-xl text-white font-semibold text-sm disabled:opacity-50"
+                    style={{ backgroundColor: '#e63947' }}
+                  >
+                    {loadingId === detalle.id ? 'Procesando...' : '✗ Rechazar evento'}
+                  </button>
+                </>
+              )}
+              <button
+                onClick={() => eliminarEvento(detalle.id)}
+                disabled={loadingId === detalle.id}
+                className="px-6 py-2.5 rounded-xl font-semibold text-sm bg-red-50 hover:bg-red-100 text-red-500 disabled:opacity-50 transition-colors"
+              >
+                {loadingId === detalle.id ? 'Eliminando...' : '🗑️ Eliminar'}
+              </button>
+            </div>
           </div>
         </div>
       )}

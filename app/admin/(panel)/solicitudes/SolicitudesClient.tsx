@@ -74,6 +74,23 @@ export default function SolicitudesClient({ solicitudes }: Props) {
     setLoadingId(null)
   }
 
+  async function eliminarSolicitud(id: string) {
+    if (!confirm('¿Eliminar esta solicitud permanentemente? Esta acción no se puede deshacer.')) return
+    setLoadingId(id)
+    const { error } = await supabase
+      .from('solicitudes_organizacion')
+      .delete()
+      .eq('id', id)
+
+    if (error) {
+      alert('Error al eliminar: ' + error.message)
+    } else {
+      setDetalle(null)
+      router.refresh()
+    }
+    setLoadingId(null)
+  }
+
   return (
     <>
       {/* Filtros */}
@@ -97,7 +114,9 @@ export default function SolicitudesClient({ solicitudes }: Props) {
       {filtradas.length === 0 ? (
         <div className="bg-white rounded-2xl p-12 text-center shadow-sm">
           <p className="text-4xl mb-3">📭</p>
-          <p className="text-gray-500">No hay solicitudes {filtro !== 'todos' ? `con estado "${filtro}"` : ''}</p>
+          <p className="text-gray-500">
+            No hay solicitudes {filtro !== 'todos' ? `con estado "${filtro}"` : ''}
+          </p>
         </div>
       ) : (
         <div className="space-y-3">
@@ -117,7 +136,11 @@ export default function SolicitudesClient({ solicitudes }: Props) {
                 <div className="min-w-0">
                   <p className="font-semibold text-gray-800 truncate">{s.razon_social}</p>
                   <p className="text-sm text-gray-500">{s.municipio} · {s.sector_cultural}</p>
-                  <p className="text-xs text-gray-400">{new Date(s.creado_en).toLocaleDateString('es-CO', { day: '2-digit', month: 'short', year: 'numeric' })}</p>
+                  <p className="text-xs text-gray-400">
+                    {new Date(s.creado_en).toLocaleDateString('es-CO', {
+                      day: '2-digit', month: 'short', year: 'numeric'
+                    })}
+                  </p>
                 </div>
               </div>
 
@@ -160,6 +183,13 @@ export default function SolicitudesClient({ solicitudes }: Props) {
                     </button>
                   </>
                 )}
+                <button
+                  onClick={() => eliminarSolicitud(s.id)}
+                  disabled={loadingId === s.id}
+                  className="px-4 py-2 rounded-xl text-sm font-medium bg-red-50 hover:bg-red-100 text-red-500 transition-colors disabled:opacity-50"
+                >
+                  {loadingId === s.id ? '...' : '🗑️'}
+                </button>
               </div>
             </div>
           ))}
@@ -182,7 +212,12 @@ export default function SolicitudesClient({ solicitudes }: Props) {
               <h2 className="font-bold text-lg" style={{ color: '#0f4c75' }}>
                 {detalle.razon_social}
               </h2>
-              <button onClick={() => setDetalle(null)} className="text-gray-400 hover:text-gray-600 text-xl">✕</button>
+              <button
+                onClick={() => setDetalle(null)}
+                className="text-gray-400 hover:text-gray-600 text-xl"
+              >
+                ✕
+              </button>
             </div>
 
             {/* Foto */}
@@ -220,26 +255,35 @@ export default function SolicitudesClient({ solicitudes }: Props) {
             </div>
 
             {/* Acciones modal */}
-            {detalle.estado === 'pendiente' && (
-              <div className="p-6 border-t flex gap-3">
-                <button
-                  onClick={() => cambiarEstado(detalle.id, 'aprobado')}
-                  disabled={loadingId === detalle.id}
-                  className="flex-1 py-2.5 rounded-xl text-white font-semibold text-sm disabled:opacity-50"
-                  style={{ backgroundColor: '#2a9d8f' }}
-                >
-                  {loadingId === detalle.id ? 'Procesando...' : '✓ Aprobar organización'}
-                </button>
-                <button
-                  onClick={() => cambiarEstado(detalle.id, 'rechazado')}
-                  disabled={loadingId === detalle.id}
-                  className="flex-1 py-2.5 rounded-xl text-white font-semibold text-sm disabled:opacity-50"
-                  style={{ backgroundColor: '#e63947' }}
-                >
-                  {loadingId === detalle.id ? 'Procesando...' : '✗ Rechazar'}
-                </button>
-              </div>
-            )}
+            <div className="p-6 border-t flex gap-3">
+              {detalle.estado === 'pendiente' && (
+                <>
+                  <button
+                    onClick={() => cambiarEstado(detalle.id, 'aprobado')}
+                    disabled={loadingId === detalle.id}
+                    className="flex-1 py-2.5 rounded-xl text-white font-semibold text-sm disabled:opacity-50"
+                    style={{ backgroundColor: '#2a9d8f' }}
+                  >
+                    {loadingId === detalle.id ? 'Procesando...' : '✓ Aprobar organización'}
+                  </button>
+                  <button
+                    onClick={() => cambiarEstado(detalle.id, 'rechazado')}
+                    disabled={loadingId === detalle.id}
+                    className="flex-1 py-2.5 rounded-xl text-white font-semibold text-sm disabled:opacity-50"
+                    style={{ backgroundColor: '#e63947' }}
+                  >
+                    {loadingId === detalle.id ? 'Procesando...' : '✗ Rechazar'}
+                  </button>
+                </>
+              )}
+              <button
+                onClick={() => eliminarSolicitud(detalle.id)}
+                disabled={loadingId === detalle.id}
+                className="px-6 py-2.5 rounded-xl font-semibold text-sm bg-red-50 hover:bg-red-100 text-red-500 disabled:opacity-50 transition-colors"
+              >
+                {loadingId === detalle.id ? 'Eliminando...' : '🗑️ Eliminar'}
+              </button>
+            </div>
           </div>
         </div>
       )}

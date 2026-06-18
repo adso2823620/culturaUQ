@@ -73,6 +73,22 @@ export default function OrganizacionesClient({
     setLoadingId(null)
   }
 
+  async function eliminarOrganizacion(id: string, nombre: string) {
+    if (!confirm(`¿Eliminar "${nombre}" permanentemente? Se eliminarán también todos sus datos. Esta acción no se puede deshacer.`)) return
+    setLoadingId(id)
+    const { error } = await supabase
+      .from('organizaciones_culturales')
+      .delete()
+      .eq('id', id)
+
+    if (error) {
+      alert('Error al eliminar: ' + error.message)
+    } else {
+      router.refresh()
+    }
+    setLoadingId(null)
+  }
+
   return (
     <>
       {/* Barra búsqueda + filtros */}
@@ -84,7 +100,6 @@ export default function OrganizacionesClient({
             value={busqueda}
             onChange={e => setBusqueda(e.target.value)}
             className="flex-1 min-w-0 border border-gray-200 rounded-xl px-4 py-2 text-sm focus:outline-none"
-            style={{ borderColor: '#e2e8f0' }}
           />
           <button
             type="submit"
@@ -104,7 +119,6 @@ export default function OrganizacionesClient({
           )}
         </form>
 
-        {/* Filtro estado */}
         <div className="flex gap-2 flex-shrink-0">
           {(['todos', 'activas', 'inactivas'] as const).map(f => (
             <button
@@ -197,6 +211,13 @@ export default function OrganizacionesClient({
                   style={{ backgroundColor: o.activa ? '#e63947' : '#2a9d8f' }}
                 >
                   {loadingId === o.id ? '...' : o.activa ? 'Desactivar' : 'Activar'}
+                </button>
+                <button
+                  onClick={() => eliminarOrganizacion(o.id, o.razon_social)}
+                  disabled={loadingId === o.id}
+                  className="px-4 py-2 rounded-xl text-sm font-medium bg-red-50 hover:bg-red-100 text-red-500 transition-colors disabled:opacity-50"
+                >
+                  {loadingId === o.id ? '...' : '🗑️'}
                 </button>
               </div>
             </div>

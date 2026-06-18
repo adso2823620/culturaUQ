@@ -7,13 +7,13 @@ import ConditionalNavigation from '@/components/ConditionalNavigation'
 
 export const metadata = {
   title: {
-    default: 'Cultura Caldas — PLataforma Cultural',
-    template: '%s | Cultura Caldas',
+    default: 'Conexión Cultural — PLataforma Cultural',
+    template: '%s | Conexión Cultural',
   },
   description: 'Plataforma cultural del departamento de Caldas. Directorio de organizaciones, agenda de eventos, formación y convocatorias culturales.',
   metadataBase: new URL('https://cultura.fundacioncaldas.org'), // cambia cuando tengas el dominio
   openGraph: {
-    siteName: 'Cultura Caldas',
+    siteName: 'Conexión Cultural',
     locale: 'es_CO',
   },
 };
