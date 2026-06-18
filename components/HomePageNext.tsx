@@ -218,7 +218,7 @@ export default function HomePageNext() {
       <div className="relative z-50 glass-effect-orange border-b border-orange-300/20">
         <div className="flex items-center justify-between px-8 py-6">
           <div className="text-2xl text-white">
-            <span className="text-[#e63947]">Cultura</span> Caldas
+            <span className="text-[#e63947]">Conexión</span> Cultural
           </div>
           <nav className="hidden md:flex space-x-8">
             <Link 

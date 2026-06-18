@@ -56,7 +56,7 @@ export default function Footer() {
               </div>
               <div>
                 <p className="text-white font-semibold text-base leading-none">
-                  <span className="text-[#e63947]">Cultura</span> Caldas
+                  <span className="text-[#e63947]">Conexión</span> Cultural
                 </p>
               </div>
             </div>
@@ -132,7 +132,7 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
           <p className="text-white/45 text-xs">
-            {new Date().getFullYear()} Cultura Caldas · Un aporte de: <span style={{ fontWeight: 'bold',fontStyle: 'italic'}}>Universidad del Quindío</span></p>
+            {new Date().getFullYear()} Conexión Cultural · Un aporte de: <span style={{ fontWeight: 'bold',fontStyle: 'italic'}}>Universidad del Quindío</span></p>
 
           <div className="flex items-center gap-4">
             <p className="text-white/45 text-xs">
